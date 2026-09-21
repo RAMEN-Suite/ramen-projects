@@ -1,0 +1,112 @@
+#editor {
+  /* -------- EDITION ------------------------------------------------------------------------------------------------------------ */
+
+  [data-annotation-type='em'] {
+    font-style: italic;
+  }
+
+  [data-annotation-type='strong'] {
+    font-weight: bold;
+  }
+
+  [data-annotation-type='smallcaps'] {
+    font-variant: small-caps;
+  }
+
+  [data-annotation-type='sup'] {
+    position: relative;
+    top: -0.5em;
+    font-size: 80%;
+  }
+
+  [data-annotation-type='spaced'] {
+    letter-spacing: 5px;
+  }
+
+  [data-annotation-type='link'] {
+    color: hsl(200, 88%, 43%);
+  }
+
+  /* -------- ENTITIES ------------------------------------------------------------------------------------------------------------ */
+
+  [data-annotation-type='person'] {
+    text-decoration: underline;
+    text-decoration-color: hsl(358, 83%, 68%);
+    text-decoration-thickness: 2px;
+  }
+
+  [data-annotation-type='place'] {
+    text-decoration: underline;
+    text-decoration-color: hsl(212, 93%, 54%);
+    text-decoration-thickness: 2px;
+  }
+
+  [data-annotation-type='thing'] {
+    text-decoration: underline;
+    text-decoration-color: hsl(45, 90%, 60%);
+    text-decoration-thickness: 2px;
+  }
+
+  [data-annotation-type='role'] {
+    text-decoration: underline;
+    text-decoration-color: hsl(298, 61%, 41%);
+    text-decoration-thickness: 2px;
+  }
+
+  [data-annotation-type='event'] {
+    text-decoration: underline;
+    text-decoration-color: hsl(134, 61%, 41%);
+    text-decoration-thickness: 2px;
+  }
+
+  /* -------- PROJECT ------------------------------------------------------------------------------------------------------------ */
+
+  [data-annotation-type='commentary'] {
+    background-color: #e3dbcc99;
+    opacity: 0.9;
+  }
+}
+
+.annotation-type-icon-em {
+  background-image: url('https://raw.githubusercontent.com/THM-Graphs/atag-editor/refs/heads/main/client/public/icons/emphasised.svg');
+}
+
+.annotation-type-icon-strong {
+  background-image: url('https://raw.githubusercontent.com/THM-Graphs/ATAG-Editor-Guidlines/refs/heads/main/icons/bold.svg');
+}
+
+.annotation-type-icon-smallcaps {
+  background-image: url('https://raw.githubusercontent.com/THM-Graphs/ATAG-Editor-Guidlines/refs/heads/main/icons/smallcaps.svg');
+}
+
+.annotation-type-icon-sup {
+  background-image: url('https://raw.githubusercontent.com/THM-Graphs/atag-editor/refs/heads/main/client/public/icons/nonLinear.svg');
+}
+
+.annotation-type-icon-spaced {
+  background-image: url('https://raw.githubusercontent.com/THM-Graphs/ATAG-Editor-Guidlines/refs/heads/main/icons/spacedText.svg');
+}
+
+.annotation-type-icon-person {
+  background-image: url('https://raw.githubusercontent.com/THM-Graphs/ATAG-Editor-Guidlines/refs/heads/main/icons/user-line.svg');
+}
+
+.annotation-type-icon-place {
+  background-image: url('https://raw.githubusercontent.com/THM-Graphs/ATAG-Editor-Guidlines/refs/heads/main/icons/map-pin-3-line.svg');
+}
+
+.annotation-type-icon-thing {
+  background-image: url('https://raw.githubusercontent.com/THM-Graphs/ATAG-Editor-Guidlines/refs/heads/main/icons/box-3-line.svg');
+}
+
+.annotation-type-icon-role {
+  background-image: url('https://raw.githubusercontent.com/THM-Graphs/ATAG-Editor-Guidlines/refs/heads/main/icons/award-line.svg');
+}
+
+.annotation-type-icon-event {
+  background-image: url('https://raw.githubusercontent.com/THM-Graphs/ATAG-Editor-Guidlines/refs/heads/main/icons/calendar-event-line.svg');
+}
+
+.annotation-type-icon-commentary {
+  background-image: url('https://raw.githubusercontent.com/THM-Graphs/atag-editor/refs/heads/main/client/public/icons/commentary.svg');
+}

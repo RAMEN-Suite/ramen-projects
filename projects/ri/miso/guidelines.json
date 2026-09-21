@@ -1,0 +1,351 @@
+{
+  "texts": {
+    "additionalLabels": [
+      "Title",
+      "Identifier",
+      "Date",
+      "PlaceOfIssue",
+      "Summary",
+      "OriginalDate",
+      "VersoNote",
+      "Witnesses",
+      "Incipit",
+      "Clerk",
+      "Recipient",
+      "Chancellor",
+      "ArchivalHistory",
+      "Literature",
+      "Commentary",
+      "Annotations",
+      "Footnotes"
+    ]
+  },
+  "collections": {
+    "properties": {
+      "system": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "editable": true,
+          "visible": false
+        }
+      ],
+      "base": []
+    },
+    "types": [
+      {
+        "additionalLabel": "Regesta",
+        "level": "primary",
+        "properties": [
+          {
+            "name": "department",
+            "type": "string",
+            "required": true,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "volume",
+            "type": "string",
+            "required": true,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "regestaNumber",
+            "type": "string",
+            "required": true,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "startDate",
+            "type": "date",
+            "required": true,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "endDate",
+            "type": "date",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "placeOfIssue",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "required": false,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "annotations": {
+          "types": [
+            {
+              "type": "nennung",
+              "category": "none",
+              "defaultSelected": true,
+              "isZeroPoint": false,
+              "hasEntities": true,
+              "hasAdditionalTexts": true
+            },
+            {
+              "type": "PLACE_OF_ISSUE",
+              "category": "none",
+              "defaultSelected": true,
+              "isZeroPoint": false,
+              "hasEntities": true,
+              "hasAdditionalTexts": true
+            },
+            {
+              "type": "austOrt",
+              "category": "none",
+              "defaultSelected": true,
+              "isZeroPoint": false,
+              "hasEntities": true,
+              "hasAdditionalTexts": true
+            }
+          ],
+          "properties": [
+            {
+              "name": "type",
+              "type": "string",
+              "required": true,
+              "editable": false,
+              "visible": true
+            }
+          ],
+          "entities": [],
+          "additionalTexts": []
+        }
+      },
+      {
+        "additionalLabel": "Volume",
+        "level": "secondary",
+        "properties": []
+      },
+      {
+        "additionalLabel": "Department",
+        "level": "secondary",
+        "properties": []
+      }
+    ],
+    "annotations": {
+      "properties": {
+        "system": [],
+        "base": []
+      },
+      "types": [],
+      "entities": [],
+      "additionalTexts": []
+    }
+  },
+  "annotations": {
+    "types": [
+      {
+        "type": "em",
+        "isBlock": false,
+        "category": "edition",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": true,
+        "properties": [],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "strong",
+        "isBlock": false,
+        "category": "edition",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": true,
+        "properties": [],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "smallcaps",
+        "isBlock": false,
+        "category": "edition",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": true,
+        "properties": [],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "sup",
+        "isBlock": false,
+        "category": "edition",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": true,
+        "properties": [],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "spaced",
+        "isBlock": false,
+        "category": "edition",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": true,
+        "properties": [],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "link",
+        "isBlock": false,
+        "category": "edition",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": true,
+        "properties": [
+          {
+            "name": "uri",
+            "type": "string",
+            "required": true,
+            "editable": true,
+            "visible": true
+          }
+        ],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "commentary",
+        "isBlock": false,
+        "category": "project",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasAdditionalTexts": true,
+        "properties": [],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "person",
+        "isBlock": false,
+        "category": "entities",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasEntities": true,
+        "hasAdditionalTexts": false,
+        "properties": [],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "place",
+        "isBlock": false,
+        "category": "entities",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasEntities": true,
+        "hasAdditionalTexts": false,
+        "properties": [],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "thing",
+        "isBlock": false,
+        "category": "entities",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasEntities": true,
+        "hasAdditionalTexts": false,
+        "properties": [],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "role",
+        "isBlock": false,
+        "category": "entities",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasEntities": true,
+        "hasAdditionalTexts": false,
+        "properties": [],
+        "role": "inline",
+        "behaviour": "range"
+      },
+      {
+        "type": "event",
+        "isBlock": false,
+        "category": "entities",
+        "defaultSelected": true,
+        "isZeroPoint": false,
+        "hasEntities": true,
+        "hasAdditionalTexts": false,
+        "properties": [],
+        "role": "inline",
+        "behaviour": "range"
+      }
+    ],
+    "properties": {
+      "system": [
+        {
+          "name": "type",
+          "type": "string",
+          "required": true,
+          "editable": false,
+          "visible": true
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "required": true,
+          "editable": false,
+          "visible": true
+        }
+      ],
+      "base": [
+        {
+          "name": "originalText",
+          "type": "string",
+          "required": false,
+          "editable": true,
+          "visible": true
+        }
+      ]
+    },
+    "entities": [
+      {
+        "category": "thing",
+        "nodeLabel": "Thing"
+      },
+      {
+        "category": "person",
+        "nodeLabel": "Person"
+      },
+      {
+        "category": "place",
+        "nodeLabel": "Place"
+      },
+      {
+        "category": "event",
+        "nodeLabel": "Event"
+      },
+      {
+        "category": "role",
+        "nodeLabel": "Role"
+      }
+    ],
+    "additionalTexts": []
+  }
+}
