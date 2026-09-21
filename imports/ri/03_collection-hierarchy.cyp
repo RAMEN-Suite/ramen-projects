@@ -420,7 +420,7 @@ CALL apoc.periodic.iterate(
     WITH cluster
     UNWIND cluster AS x
 
-    OPTIONAL MATCH (x)<-[:REFERS_TO]-(:Annotation)<-[:HAS_ANNOTATION]-(r)
+    OPTIONAL MATCH (r)<-[:REFERS_TO]-(:Annotation)<-[:HAS_ANNOTATION]-(x)
     WHERE r:Regesta OR (r:Collection AND toLower(coalesce(r.type,"")) = "regesta")
 
     RETURN apoc.coll.toSet(collect(DISTINCT r)) AS regestaCols
@@ -428,7 +428,7 @@ CALL apoc.periodic.iterate(
 
   UNWIND regestaCols AS rc
      // 3) Existierende APPEARS_IN Annotation prüfen
-  OPTIONAL MATCH (n)<-[:REFERS_TO]-(existing:Annotation {type:"ri:appearsIn"})<-[:HAS_ANNOTATION]-(rc)
+  OPTIONAL MATCH (rc)<-[:REFERS_TO]-(existing:Annotation {type:"ri:appearsIn"})<-[:HAS_ANNOTATION]-(n)
   WITH n, rc, existing
   WHERE existing IS NULL
 
@@ -438,8 +438,8 @@ CALL apoc.periodic.iterate(
     uuid: randomUUID()
   })
 
-  MERGE (n)<-[:REFERS_TO]-(a)
-  MERGE (rc)-[:HAS_ANNOTATION]->(a)
+  MERGE (rc)<-[:REFERS_TO]-(a)
+  MERGE (n)-[:HAS_ANNOTATION]->(a)
 ',
 {batchSize: 200, parallel: false}
 );

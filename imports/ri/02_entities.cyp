@@ -205,7 +205,7 @@ MATCH (i:Entity {id: entityId})
 MATCH (r:Regesta)
 WHERE r.identifier STARTS WITH "RI VI,"
 AND r.regestaNumber = regestaNumber
-CREATE (r)-[:HAS_ANNOTATION]->(a:Annotation { label: 'ri:appearsIn', type: 'ri:appearsIn', role: relType })-[:REFERS_TO]->(i)
+CREATE (i)-[:HAS_ANNOTATION]->(a:Annotation { label: 'ri:appearsIn', type: 'ri:appearsIn', role: relType })-[:REFERS_TO]->(r)
 SET a.label = typeMap[relType],
 a.sourceType = sourceType,
 a.regestaNumber = regestaNumber
@@ -327,7 +327,7 @@ OR r.identifier STARTS WITH "[RI XIII]"
 OR r.identifier STARTS WITH "Chmel "
 WITH wdata,e,r,number
 // WHERE number.type = "nennung"
-CREATE (r)-[:HAS_ANNOTATION]->(a:Annotation { label: 'ri:appearsIn', type: 'ri:appearsIn', role: number.type, uuid: randomUUID() })-[:REFERS_TO]->(e)
+CREATE (e)-[:HAS_ANNOTATION]->(a:Annotation { label: 'ri:appearsIn', type: 'ri:appearsIn', role: number.type, uuid: randomUUID() })-[:REFERS_TO]->(r)
 RETURN count(a);
 
 // Indexeinträge mit neo4j-Koordinaten der Ausstellungsorte versehen
