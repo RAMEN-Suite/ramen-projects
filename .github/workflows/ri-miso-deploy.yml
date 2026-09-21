@@ -1,4 +1,4 @@
-name: deploy sbwi miso files
+name: deploy ri miso files
 
 on:
   push:

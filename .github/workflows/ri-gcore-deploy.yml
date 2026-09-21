@@ -1,4 +1,4 @@
-name: deploy sbwi gcore files
+name: deploy ri gcore files
 
 on:
   push:

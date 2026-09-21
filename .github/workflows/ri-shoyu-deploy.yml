@@ -1,4 +1,4 @@
-name: deploy sbwi shoyu files
+name: deploy ri shoyu files
 
 on:
   push:
