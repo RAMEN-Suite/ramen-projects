@@ -187,3 +187,26 @@
     background-color: hsla(0, 0%, 60%, 0.25);
   }
 }
+
+.annotation-type-icon-persName {
+  background-image: url('https://raw.githubusercontent.com/THM-Graphs/atag-editor/refs/heads/main/client/public/icons/person.svg');
+}
+
+.annotation-type-icon-placeName {
+  background-image: url('https://raw.githubusercontent.com/THM-Graphs/atag-editor/refs/heads/main/client/public/icons/place.svg');
+}
+
+.annotation-type-icon-orgName {
+  background-image: url("data:image/svg+xml,%3Csvg width='197px' height='197px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg' stroke='%2345924e' stroke-width='0.00024000000000000003'%3E%3Cg id='SVGRepo_bgCarrier' stroke-width='0'%3E%3C/g%3E%3Cg id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'%3E%3C/g%3E%3Cg id='SVGRepo_iconCarrier'%3E%3Cpath d='M17 15H19V17H17V15Z' fill='%23589254'%3E%3C/path%3E%3Cpath d='M19 11H17V13H19V11Z' fill='%23589254'%3E%3C/path%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M13 7H23V21H1V3H13V7ZM8 5H11V7H8V5ZM11 19V17H8V19H11ZM11 15V13H8V15H11ZM11 11V9H8V11H11ZM21 19V9H13V11H15V13H13V15H15V17H13V19H21ZM3 19V17H6V19H3ZM3 15H6V13H3V15ZM6 11V9H3V11H6ZM3 7H6V5H3V7Z' fill='%23589254'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+}
+.annotation-type-icon-rs-term {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='SVGRepo_bgCarrier' stroke-width='0'%3E%3C/g%3E%3Cg id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'%3E%3C/g%3E%3Cg id='SVGRepo_iconCarrier'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M16 8L8 0H0V8L8 16L16 8ZM4.5 6C5.32843 6 6 5.32843 6 4.5C6 3.67157 5.32843 3 4.5 3C3.67157 3 3 3.67157 3 4.5C3 5.32843 3.67157 6 4.5 6Z' fill='%23e8a530'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+}
+
+.annotation-type-icon-sent {
+  background-image: url('https://raw.githubusercontent.com/THM-Graphs/atag-editor/refs/heads/main/client/public/icons/sentPerson.svg');
+}
+
+.annotation-type-icon-received {
+  background-image: url('https://raw.githubusercontent.com/THM-Graphs/atag-editor/refs/heads/main/client/public/icons/receivedPerson.svg');
+}
