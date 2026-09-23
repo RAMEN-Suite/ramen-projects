@@ -57,7 +57,6 @@
               "category": "project",
               "defaultSelected": true,
               "isZeroPoint": false,
-              "hasAdditionalTexts": false,
               "properties": [
                 {
                   "name": "dateType",
@@ -460,7 +459,6 @@
         "category": "edition",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": true,
         "properties": [
           {
             "name": "place",
@@ -480,7 +478,6 @@
         "category": "edition",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": true,
         "properties": [
           {
             "name": "rendition",
@@ -500,7 +497,6 @@
         "category": "edition",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": false,
         "properties": [
           {
             "name": "del",
@@ -519,7 +515,6 @@
         "category": "edition",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": true,
         "properties": [
           {
             "name": "certainty",
@@ -554,7 +549,6 @@
         "category": "edition",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": true,
         "properties": [
           {
             "name": "reason",
@@ -582,7 +576,6 @@
         "category": "edition",
         "defaultSelected": true,
         "isZeroPoint": true,
-        "hasAdditionalTexts": false,
         "properties": [
           {
             "name": "reason",
@@ -617,7 +610,6 @@
         "category": "edition",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": false,
         "properties": [
           {
             "name": "reason",
@@ -645,7 +637,6 @@
         "category": "edition",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": false,
         "properties": [
           {
             "name": "expansion",
@@ -664,7 +655,6 @@
         "category": "edition",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": false,
         "properties": [],
         "role": "inline",
         "behaviour": "range"
@@ -675,7 +665,6 @@
         "category": "edition",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": false,
         "properties": [],
         "role": "inline",
         "behaviour": "range"
@@ -686,7 +675,6 @@
         "category": "edition",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": false,
         "properties": [],
         "role": "inline",
         "behaviour": "range"
@@ -697,7 +685,6 @@
         "category": "edition",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": false,
         "properties": [
           {
             "name": "cert",
@@ -717,7 +704,6 @@
         "category": "edition",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": false,
         "properties": [
           {
             "name": "regularisation",
@@ -736,7 +722,6 @@
         "category": "edition",
         "defaultSelected": true,
         "isZeroPoint": true,
-        "hasAdditionalTexts": true,
         "properties": [
           {
             "name": "function",
@@ -755,7 +740,6 @@
         "category": "edition",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": false,
         "properties": [
           {
             "name": "rendition",
@@ -774,7 +758,6 @@
         "category": "edition",
         "defaultSelected": true,
         "isZeroPoint": true,
-        "hasAdditionalTexts": false,
         "properties": [
           {
             "name": "ref",
@@ -793,7 +776,6 @@
         "category": "layout",
         "defaultSelected": true,
         "isZeroPoint": true,
-        "hasAdditionalTexts": false,
         "properties": [
           {
             "name": "n",
@@ -833,7 +815,6 @@
         "category": "layout",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": false,
         "properties": [
           {
             "name": "place",
@@ -854,8 +835,6 @@
         "defaultSelected": true,
         "isZeroPoint": false,
         "hasEntities": true,
-        "entityNodes": ["Person"],
-        "hasAdditionalTexts": true,
         "properties": [],
         "role": "inline",
         "behaviour": "range"
@@ -867,8 +846,6 @@
         "defaultSelected": true,
         "isZeroPoint": false,
         "hasEntities": true,
-        "entityNodes": ["Place"],
-        "hasAdditionalTexts": true,
         "properties": [],
         "role": "inline",
         "behaviour": "range"
@@ -880,8 +857,6 @@
         "defaultSelected": true,
         "isZeroPoint": false,
         "hasEntities": true,
-        "entityNodes": ["Organisation"],
-        "hasAdditionalTexts": true,
         "properties": [],
         "role": "inline",
         "behaviour": "range"
@@ -893,8 +868,6 @@
         "defaultSelected": true,
         "isZeroPoint": false,
         "hasEntities": true,
-        "entityNodes": ["Term"],
-        "hasAdditionalTexts": true,
         "properties": [],
         "role": "inline",
         "behaviour": "range"
@@ -906,8 +879,6 @@
         "defaultSelected": true,
         "isZeroPoint": false,
         "hasEntities": true,
-        "entityNodes": ["BibleVerse"],
-        "hasAdditionalTexts": true,
         "properties": [],
         "role": "inline",
         "behaviour": "range"
@@ -918,7 +889,6 @@
         "category": "sources",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": true,
         "properties": [
           {
             "name": "sameAs",
@@ -943,7 +913,6 @@
         "category": "sources",
         "defaultSelected": true,
         "isZeroPoint": true,
-        "hasAdditionalTexts": false,
         "properties": [
           {
             "name": "target",
@@ -962,7 +931,6 @@
         "category": "sources",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": true,
         "properties": [
           {
             "name": "target",
@@ -981,7 +949,6 @@
         "category": "sources",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": true,
         "properties": [],
         "role": "inline",
         "behaviour": "range"
@@ -992,7 +959,6 @@
         "category": "project",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": true,
         "properties": [
           {
             "name": "type",
@@ -1034,7 +1000,6 @@
         "category": "project",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": true,
         "properties": [],
         "role": "inline",
         "behaviour": "range"
@@ -1045,7 +1010,6 @@
         "category": "project",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": true,
         "properties": [],
         "role": "inline",
         "behaviour": "range"
@@ -1056,7 +1020,6 @@
         "category": "project",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": false,
         "properties": [
           {
             "name": "identifier",
@@ -1089,7 +1052,6 @@
         "category": "project",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": false,
         "properties": [
           {
             "name": "label",
@@ -1108,7 +1070,6 @@
         "category": "project",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": false,
         "properties": [
           {
             "name": "kind",
@@ -1134,7 +1095,6 @@
         "category": "project",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": false,
         "properties": [],
         "role": "inline",
         "behaviour": "range"

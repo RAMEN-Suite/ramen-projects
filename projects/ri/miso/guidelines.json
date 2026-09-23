@@ -95,24 +95,21 @@
               "category": "none",
               "defaultSelected": true,
               "isZeroPoint": false,
-              "hasEntities": true,
-              "hasAdditionalTexts": true
+              "hasEntities": true
             },
             {
               "type": "PLACE_OF_ISSUE",
               "category": "none",
               "defaultSelected": true,
               "isZeroPoint": false,
-              "hasEntities": true,
-              "hasAdditionalTexts": true
+              "hasEntities": true
             },
             {
               "type": "austOrt",
               "category": "none",
               "defaultSelected": true,
               "isZeroPoint": false,
-              "hasEntities": true,
-              "hasAdditionalTexts": true
+              "hasEntities": true
             }
           ],
           "properties": [
@@ -157,7 +154,6 @@
         "category": "edition",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": true,
         "properties": [],
         "role": "inline",
         "behaviour": "range"
@@ -168,7 +164,6 @@
         "category": "edition",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": true,
         "properties": [],
         "role": "inline",
         "behaviour": "range"
@@ -179,7 +174,6 @@
         "category": "edition",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": true,
         "properties": [],
         "role": "inline",
         "behaviour": "range"
@@ -190,7 +184,6 @@
         "category": "edition",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": true,
         "properties": [],
         "role": "inline",
         "behaviour": "range"
@@ -201,7 +194,6 @@
         "category": "edition",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": true,
         "properties": [],
         "role": "inline",
         "behaviour": "range"
@@ -212,7 +204,6 @@
         "category": "edition",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": true,
         "properties": [
           {
             "name": "uri",
@@ -231,7 +222,6 @@
         "category": "project",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "hasAdditionalTexts": true,
         "properties": [],
         "role": "inline",
         "behaviour": "range"
@@ -243,7 +233,6 @@
         "defaultSelected": true,
         "isZeroPoint": false,
         "hasEntities": true,
-        "hasAdditionalTexts": false,
         "properties": [],
         "role": "inline",
         "behaviour": "range"
@@ -255,7 +244,6 @@
         "defaultSelected": true,
         "isZeroPoint": false,
         "hasEntities": true,
-        "hasAdditionalTexts": false,
         "properties": [],
         "role": "inline",
         "behaviour": "range"
@@ -267,7 +255,6 @@
         "defaultSelected": true,
         "isZeroPoint": false,
         "hasEntities": true,
-        "hasAdditionalTexts": false,
         "properties": [],
         "role": "inline",
         "behaviour": "range"
@@ -279,7 +266,6 @@
         "defaultSelected": true,
         "isZeroPoint": false,
         "hasEntities": true,
-        "hasAdditionalTexts": false,
         "properties": [],
         "role": "inline",
         "behaviour": "range"
@@ -291,7 +277,6 @@
         "defaultSelected": true,
         "isZeroPoint": false,
         "hasEntities": true,
-        "hasAdditionalTexts": false,
         "properties": [],
         "role": "inline",
         "behaviour": "range"
@@ -304,25 +289,17 @@
           "type": "string",
           "required": true,
           "editable": false,
-          "visible": true
+          "visible": false
         },
         {
           "name": "text",
           "type": "string",
           "required": true,
           "editable": false,
-          "visible": true
+          "visible": false
         }
       ],
-      "base": [
-        {
-          "name": "originalText",
-          "type": "string",
-          "required": false,
-          "editable": true,
-          "visible": true
-        }
-      ]
+      "base": []
     },
     "entities": [
       {
