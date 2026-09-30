@@ -91,21 +91,60 @@
         "annotations": {
           "types": [
             {
-              "type": "nennung",
+              "type": "ri:literature",
               "category": "none",
               "defaultSelected": true,
               "isZeroPoint": false,
-              "hasEntities": true
+              "hasEntities": true,
+              "properties": [
+                {
+                  "name": "url",
+                  "type": "string",
+                  "required": true,
+                  "editable": true,
+                  "visible": true
+                },
+                {
+                  "name": "url_title",
+                  "type": "string",
+                  "required": false,
+                  "editable": true,
+                  "visible": true
+                },
+                {
+                  "name": "url_label",
+                  "type": "string",
+                  "required": false,
+                  "editable": true,
+                  "visible": true
+                }
+              ]
             },
             {
-              "type": "PLACE_OF_ISSUE",
+              "type": "ri:externalLink",
               "category": "none",
               "defaultSelected": true,
               "isZeroPoint": false,
-              "hasEntities": true
+              "hasEntities": true,
+              "properties": [
+                {
+                  "name": "url",
+                  "type": "string",
+                  "required": true,
+                  "editable": true,
+                  "visible": true
+                },
+                {
+                  "name": "url_title",
+                  "type": "string",
+                  "required": false,
+                  "editable": true,
+                  "visible": true
+                }
+              ]
             },
             {
-              "type": "austOrt",
+              "type": "ri:placeOfIssue",
               "category": "none",
               "defaultSelected": true,
               "isZeroPoint": false,
@@ -141,7 +180,15 @@
         "system": [],
         "base": []
       },
-      "types": [],
+      "types": [
+        {
+          "type": "next",
+          "category": "none",
+          "defaultSelected": true,
+          "isZeroPoint": false,
+          "hasEntities": true
+        }
+      ],
       "entities": [],
       "additionalTexts": []
     }
