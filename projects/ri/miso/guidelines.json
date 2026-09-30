@@ -41,21 +41,21 @@
           {
             "name": "department",
             "type": "string",
-            "required": true,
+            "required": false,
             "editable": true,
-            "visible": true
+            "visible": false
           },
           {
             "name": "volume",
             "type": "string",
-            "required": true,
+            "required": false,
             "editable": true,
-            "visible": true
+            "visible": false
           },
           {
             "name": "regestaNumber",
             "type": "string",
-            "required": true,
+            "required": false,
             "editable": true,
             "visible": true
           },
@@ -118,7 +118,7 @@
               "type": "string",
               "required": true,
               "editable": false,
-              "visible": true
+              "visible": false
             }
           ],
           "entities": [],
