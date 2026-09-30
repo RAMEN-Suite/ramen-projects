@@ -260,3 +260,25 @@ ref.url_title=link[2]
 MERGE (r)-[:HAS_ANNOTATION]->(ref)
 } IN TRANSACTIONS OF 1000 ROWS;
 
+// xml tag cleanup
+CALL apoc.periodic.iterate(
+    "
+    MATCH (:Regesta)<-[:PART_OF]-(t:Text)
+    RETURN t
+    ",
+    "
+    WITH t,
+        CASE WHEN t.text IS NOT NULL AND t.htmlText IS NULL
+            THEN t.text 
+            ELSE null 
+        END AS newHtmlText
+
+    SET t.htmlText = COALESCE(t.htmlText, newHtmlText)
+    SET t.text = CASE WHEN newHtmlText IS NOT NULL THEN NULL ELSE t.text END
+    WITH t
+    CALL atag.text.import.html(t, 'htmlText', 'Annotation', 'text', 'HAS_ANNOTATION') 
+    YIELD node
+    RETURN count(node) AS dummy
+    ",
+    {batchSize: 500, parallel: false}
+);
