@@ -106,7 +106,16 @@
       "id": "kryQZ70u50Z94rYE",
       "name": "Person",
       "superTypes": ["lW611f30a2ky4276g3l8N:n7Vb2Qx0Lm9P3sT6yK1h"],
-      "attributes": [],
+      "attributes": [
+        {
+          "name": "comment",
+          "typeId": "String",
+          "bounds": {
+            "lowerBound": 1,
+            "upperBound": 1
+          }
+        }
+      ],
       "constraints": [],
       "ext": {}
     },
