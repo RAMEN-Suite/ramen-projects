@@ -269,7 +269,15 @@
         "category": "project",
         "defaultSelected": true,
         "isZeroPoint": false,
-        "properties": [],
+        "properties": [
+          {
+            "name": "note",
+            "type": "string",
+            "required": true,
+            "editable": true,
+            "visible": true
+          }
+        ],
         "role": "inline",
         "behaviour": "range"
       },
