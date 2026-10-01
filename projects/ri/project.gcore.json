@@ -157,24 +157,6 @@
     },
     {
       "kind": "GNode",
-      "id": "IJqtazGhBwf28NVI",
-      "name": "Annotation",
-      "superTypes": ["lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3"],
-      "attributes": [
-        {
-          "name": "value",
-          "typeId": "String",
-          "bounds": {
-            "lowerBound": 0,
-            "upperBound": 1
-          }
-        }
-      ],
-      "constraints": [],
-      "ext": {}
-    },
-    {
-      "kind": "GNode",
       "id": "n4UrM2Et2hGRZzgF",
       "name": "TextAnnotation",
       "superTypes": ["lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3"],
