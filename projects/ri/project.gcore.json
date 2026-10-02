@@ -168,6 +168,22 @@
             "lowerBound": 0,
             "upperBound": 1
           }
+        },
+        {
+          "name": "startDate",
+          "typeId": "String",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          }
+        },
+        {
+          "name": "endDate",
+          "typeId": "String",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": 1
+          }
         }
       ],
       "constraints": [],
