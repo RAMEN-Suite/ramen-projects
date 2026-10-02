@@ -157,6 +157,15 @@
     },
     {
       "kind": "GNode",
+      "id": "Qm7K2xV9Lp4ZdN1R",
+      "name": "Role",
+      "superTypes": ["lW611f30a2ky4276g3l8N:n7Vb2Qx0Lm9P3sT6yK1h"],
+      "attributes": [],
+      "constraints": [],
+      "ext": {}
+    },
+    {
+      "kind": "GNode",
       "id": "IJqtazGhBwf28NVI",
       "name": "Annotation",
       "superTypes": ["lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3"],
