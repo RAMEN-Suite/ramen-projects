@@ -7,7 +7,7 @@
       "system": [
         {
           "name": "label",
-          "type": "string",
+          "type": "String",
           "required": true,
           "editable": true,
           "visible": false
@@ -33,21 +33,21 @@
         "properties": [
           {
             "name": "editor",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "status",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "xmlDownload",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -64,7 +64,7 @@
               "properties": [
                 {
                   "name": "dateType",
-                  "type": "string",
+                  "type": "String",
                   "options": ["point", "imprecise", "range"],
                   "required": false,
                   "editable": true,
@@ -72,14 +72,14 @@
                 },
                 {
                   "name": "dateStart",
-                  "type": "date",
+                  "type": "Date",
                   "required": false,
                   "editable": true,
                   "visible": true
                 },
                 {
                   "name": "dateEnd",
-                  "type": "date",
+                  "type": "Date",
                   "required": false,
                   "editable": true,
                   "visible": true
@@ -87,7 +87,7 @@
                 {
                   "name": "dateCertainty",
                   "options": ["high", "low"],
-                  "type": "string",
+                  "type": "String",
                   "required": false,
                   "editable": true,
                   "visible": true
@@ -101,7 +101,7 @@
               "properties": [
                 {
                   "name": "dateType",
-                  "type": "string",
+                  "type": "String",
                   "options": ["point", "imprecise"],
                   "required": false,
                   "editable": true,
@@ -109,14 +109,14 @@
                 },
                 {
                   "name": "dateStart",
-                  "type": "date",
+                  "type": "Date",
                   "required": false,
                   "editable": true,
                   "visible": true
                 },
                 {
                   "name": "dateEnd",
-                  "type": "date",
+                  "type": "Date",
                   "required": false,
                   "editable": true,
                   "visible": true
@@ -124,7 +124,7 @@
                 {
                   "name": "dateCertainty",
                   "options": ["high", "low"],
-                  "type": "string",
+                  "type": "String",
                   "required": false,
                   "editable": true,
                   "visible": true
@@ -156,21 +156,21 @@
         "properties": [
           {
             "name": "editor",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "status",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "xmlDownload",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -189,21 +189,21 @@
         "properties": [
           {
             "name": "editor",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "status",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "xmlDownload",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -222,70 +222,70 @@
         "properties": [
           {
             "name": "isReference",
-            "type": "boolean",
+            "type": "Boolean",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "textType",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "textGenre",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "language",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "archive",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "shelfmark",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "printSourceName",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "printSourceUrl",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "funder",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "license",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -344,7 +344,7 @@
         "properties": [
           {
             "name": "rendition",
-            "type": "string",
+            "type": "String",
             "options": ["#et"],
             "required": false,
             "editable": true,
@@ -365,7 +365,7 @@
         "properties": [
           {
             "name": "lang",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -409,14 +409,14 @@
         "properties": [
           {
             "name": "cols",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "rows",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -472,7 +472,7 @@
         "properties": [
           {
             "name": "lang",
-            "type": "string",
+            "type": "String",
             "options": ["lat"],
             "required": false,
             "editable": true,
@@ -495,7 +495,7 @@
         "properties": [
           {
             "name": "lang",
-            "type": "string",
+            "type": "String",
             "options": ["deu", "fra", "lat", "ita"],
             "required": false,
             "editable": true,
@@ -560,7 +560,7 @@
         "properties": [
           {
             "name": "hand",
-            "type": "string",
+            "type": "String",
             "options": ["#author", "#addressee", "#unknown"],
             "required": false,
             "editable": true,
@@ -568,7 +568,7 @@
           },
           {
             "name": "place",
-            "type": "string",
+            "type": "String",
             "options": ["mTop", "mBottom", "left", "right", "mInline"],
             "required": false,
             "editable": true,
@@ -605,7 +605,7 @@
         "properties": [
           {
             "name": "rendition",
-            "type": "string",
+            "type": "String",
             "options": ["#right"],
             "required": false,
             "editable": true,
@@ -670,7 +670,7 @@
         "properties": [
           {
             "name": "lang",
-            "type": "string",
+            "type": "String",
             "options": ["grc", "lat"],
             "required": false,
             "editable": true,
@@ -693,7 +693,7 @@
         "properties": [
           {
             "name": "n",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -799,14 +799,14 @@
         "properties": [
           {
             "name": "cols",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "rows",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -828,7 +828,7 @@
         "properties": [
           {
             "name": "place",
-            "type": "string",
+            "type": "String",
             "options": ["superlinear", "sublinear", "intralinear", "left", "right", "mBottom", "across"],
             "required": false,
             "editable": true,
@@ -847,7 +847,7 @@
         "properties": [
           {
             "name": "rendition",
-            "type": "string",
+            "type": "String",
             "options": ["#s", "#erased", "#ow"],
             "required": false,
             "editable": true,
@@ -866,7 +866,7 @@
         "properties": [
           {
             "name": "del",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -884,7 +884,7 @@
         "properties": [
           {
             "name": "certainty",
-            "type": "string",
+            "type": "String",
             "options": ["high", "low"],
             "required": false,
             "editable": true,
@@ -892,14 +892,14 @@
           },
           {
             "name": "correction",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "isDeleted",
-            "type": "string",
+            "type": "String",
             "options": ["true", "false"],
             "required": false,
             "editable": true,
@@ -918,7 +918,7 @@
         "properties": [
           {
             "name": "reason",
-            "type": "string",
+            "type": "String",
             "options": ["illegible", "covered"],
             "required": false,
             "editable": true,
@@ -926,7 +926,7 @@
           },
           {
             "name": "cert",
-            "type": "string",
+            "type": "String",
             "options": ["high", "low"],
             "required": false,
             "editable": true,
@@ -945,7 +945,7 @@
         "properties": [
           {
             "name": "reason",
-            "type": "string",
+            "type": "String",
             "options": ["illegible", "lost", "empty", "covered"],
             "required": false,
             "editable": true,
@@ -953,7 +953,7 @@
           },
           {
             "name": "unit",
-            "type": "string",
+            "type": "String",
             "options": ["chars", "words", "lines", "pages"],
             "required": false,
             "editable": true,
@@ -961,7 +961,7 @@
           },
           {
             "name": "quantity",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -979,7 +979,7 @@
         "properties": [
           {
             "name": "reason",
-            "type": "string",
+            "type": "String",
             "options": ["covered", "damage"],
             "required": false,
             "editable": true,
@@ -987,7 +987,7 @@
           },
           {
             "name": "cert",
-            "type": "string",
+            "type": "String",
             "options": ["high", "low"],
             "required": false,
             "editable": true,
@@ -1006,7 +1006,7 @@
         "properties": [
           {
             "name": "expansion",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -1054,7 +1054,7 @@
         "properties": [
           {
             "name": "cert",
-            "type": "string",
+            "type": "String",
             "options": ["high", "low"],
             "required": false,
             "editable": true,
@@ -1073,7 +1073,7 @@
         "properties": [
           {
             "name": "regularisation",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -1091,7 +1091,7 @@
         "properties": [
           {
             "name": "rendition",
-            "type": "string",
+            "type": "String",
             "options": ["#b", "#i", "#u", "#g", "#k", "#k #g", "#aq", "#fr", "#sup", "#sub"],
             "required": false,
             "editable": true,
@@ -1110,7 +1110,7 @@
         "properties": [
           {
             "name": "lang",
-            "type": "string",
+            "type": "String",
             "options": ["deu", "lat", "grc", "fra", "ita", "spa", "eng", "pol", "heb", "rus", "nld", "ara-Latn"],
             "required": false,
             "editable": true,
@@ -1129,7 +1129,7 @@
         "properties": [
           {
             "name": "function",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -1147,14 +1147,14 @@
         "properties": [
           {
             "name": "when",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "calendar",
-            "type": "string",
+            "type": "String",
             "options": ["#Gregorian", "#Julian"],
             "required": false,
             "editable": true,
@@ -1162,7 +1162,7 @@
           },
           {
             "name": "cert",
-            "type": "string",
+            "type": "String",
             "options": ["high", "low"],
             "required": false,
             "editable": true,
@@ -1170,14 +1170,14 @@
           },
           {
             "name": "from",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "to",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -1195,21 +1195,21 @@
         "properties": [
           {
             "name": "n",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "url",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "facs",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -1227,7 +1227,7 @@
         "properties": [
           {
             "name": "n",
-            "type": "string",
+            "type": "String",
             "options": ["1", "2", "b"],
             "required": false,
             "editable": true,
@@ -1266,7 +1266,7 @@
         "properties": [
           {
             "name": "place",
-            "type": "string",
+            "type": "String",
             "options": ["top", "bottom", "topLeft", "topRight", "bottomLeft", "bottomRight"],
             "required": false,
             "editable": true,
@@ -1286,7 +1286,7 @@
         "properties": [
           {
             "name": "key",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -1305,7 +1305,7 @@
         "properties": [
           {
             "name": "key",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -1324,7 +1324,7 @@
         "properties": [
           {
             "name": "key",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -1343,7 +1343,7 @@
         "properties": [
           {
             "name": "key",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -1362,7 +1362,7 @@
         "properties": [
           {
             "name": "key",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -1381,7 +1381,7 @@
         "properties": [
           {
             "name": "key",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -1400,7 +1400,7 @@
         "properties": [
           {
             "name": "key",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -1419,7 +1419,7 @@
         "properties": [
           {
             "name": "key",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -1437,7 +1437,7 @@
         "properties": [
           {
             "name": "sameAs",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -1455,7 +1455,7 @@
         "properties": [
           {
             "name": "unit",
-            "type": "string",
+            "type": "String",
             "options": ["pages"],
             "required": false,
             "editable": true,
@@ -1474,7 +1474,7 @@
         "properties": [
           {
             "name": "target",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -1492,7 +1492,7 @@
         "properties": [
           {
             "name": "target",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -1510,7 +1510,7 @@
         "properties": [
           {
             "name": "id",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -1528,7 +1528,7 @@
         "properties": [
           {
             "name": "key",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -1546,7 +1546,7 @@
         "properties": [
           {
             "name": "type",
-            "type": "string",
+            "type": "String",
             "options": ["marginal", "footnote", "endnote", "interlinear"],
             "required": false,
             "editable": true,
@@ -1554,7 +1554,7 @@
           },
           {
             "name": "place",
-            "type": "string",
+            "type": "String",
             "options": ["mTop", "mTop left", "mTop right", "mBottom", "left", "right", "mInline"],
             "required": false,
             "editable": true,
@@ -1562,7 +1562,7 @@
           },
           {
             "name": "hand",
-            "type": "string",
+            "type": "String",
             "options": ["#author", "#addressee", "#unknown", "#Kuyper"],
             "required": false,
             "editable": true,
@@ -1570,14 +1570,14 @@
           },
           {
             "name": "id",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "n",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -1595,7 +1595,7 @@
         "properties": [
           {
             "name": "key",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -1623,14 +1623,14 @@
         "properties": [
           {
             "name": "ref",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "identifier",
-            "type": "string",
+            "type": "String",
             "options": ["gndId", "wikidataId", "geoId", "simbadId", "sbdbId", "emloId"],
             "required": false,
             "editable": true,
@@ -1638,7 +1638,7 @@
           },
           {
             "name": "url",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -1656,28 +1656,28 @@
         "properties": [
           {
             "name": "value",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "forename",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "label",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "surname",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -1701,14 +1701,14 @@
       "system": [
         {
           "name": "type",
-          "type": "string",
+          "type": "String",
           "required": true,
           "editable": false,
           "visible": false
         },
         {
           "name": "text",
-          "type": "string",
+          "type": "String",
           "required": true,
           "editable": false,
           "visible": false

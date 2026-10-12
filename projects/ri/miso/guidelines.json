@@ -25,7 +25,7 @@
       "system": [
         {
           "name": "label",
-          "type": "string",
+          "type": "String",
           "required": true,
           "editable": true,
           "visible": false
@@ -40,49 +40,49 @@
         "properties": [
           {
             "name": "department",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": false
           },
           {
             "name": "volume",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": false
           },
           {
             "name": "regestaNumber",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "startDate",
-            "type": "date",
+            "type": "Date",
             "required": true,
             "editable": true,
             "visible": true
           },
           {
             "name": "endDate",
-            "type": "date",
+            "type": "Date",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "placeOfIssue",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
           },
           {
             "name": "status",
-            "type": "string",
+            "type": "String",
             "required": false,
             "editable": true,
             "visible": true
@@ -99,21 +99,21 @@
               "properties": [
                 {
                   "name": "url",
-                  "type": "string",
+                  "type": "String",
                   "required": true,
                   "editable": true,
                   "visible": true
                 },
                 {
                   "name": "url_title",
-                  "type": "string",
+                  "type": "String",
                   "required": false,
                   "editable": true,
                   "visible": true
                 },
                 {
                   "name": "url_label",
-                  "type": "string",
+                  "type": "String",
                   "required": false,
                   "editable": true,
                   "visible": true
@@ -129,14 +129,14 @@
               "properties": [
                 {
                   "name": "url",
-                  "type": "string",
+                  "type": "String",
                   "required": true,
                   "editable": true,
                   "visible": true
                 },
                 {
                   "name": "url_title",
-                  "type": "string",
+                  "type": "String",
                   "required": false,
                   "editable": true,
                   "visible": true
@@ -154,7 +154,7 @@
           "properties": [
             {
               "name": "type",
-              "type": "string",
+              "type": "String",
               "required": true,
               "editable": false,
               "visible": false
@@ -254,7 +254,7 @@
         "properties": [
           {
             "name": "uri",
-            "type": "string",
+            "type": "String",
             "required": true,
             "editable": true,
             "visible": true
@@ -272,7 +272,7 @@
         "properties": [
           {
             "name": "note",
-            "type": "string",
+            "type": "String",
             "required": true,
             "editable": true,
             "visible": true
@@ -341,14 +341,14 @@
       "system": [
         {
           "name": "type",
-          "type": "string",
+          "type": "String",
           "required": true,
           "editable": false,
           "visible": false
         },
         {
           "name": "text",
-          "type": "string",
+          "type": "String",
           "required": true,
           "editable": false,
           "visible": false
