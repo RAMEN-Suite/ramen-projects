@@ -1,25 +1,4 @@
 {
-  "texts": {
-    "additionalLabels": [
-      "Title",
-      "Identifier",
-      "Date",
-      "PlaceOfIssue",
-      "Summary",
-      "OriginalDate",
-      "VersoNote",
-      "Witnesses",
-      "Incipit",
-      "Clerk",
-      "Recipient",
-      "Chancellor",
-      "ArchivalHistory",
-      "Literature",
-      "Commentary",
-      "Annotations",
-      "Footnotes"
-    ]
-  },
   "collections": {
     "properties": {
       "system": [
@@ -36,7 +15,6 @@
     "types": [
       {
         "additionalLabel": "Regesta",
-        "level": "primary",
         "properties": [
           {
             "name": "department",
@@ -92,9 +70,6 @@
           "types": [
             {
               "type": "ri:literature",
-              "category": "none",
-              "defaultSelected": true,
-              "isZeroPoint": false,
               "hasEntities": true,
               "properties": [
                 {
@@ -118,13 +93,15 @@
                   "editable": true,
                   "visible": true
                 }
-              ]
+              ],
+              "miso": {
+                "group": "none",
+                "controls": {},
+                "editing": { "extent": "range" }
+              }
             },
             {
               "type": "ri:externalLink",
-              "category": "none",
-              "defaultSelected": true,
-              "isZeroPoint": false,
               "hasEntities": true,
               "properties": [
                 {
@@ -141,14 +118,21 @@
                   "editable": true,
                   "visible": true
                 }
-              ]
+              ],
+              "miso": {
+                "group": "none",
+                "controls": {},
+                "editing": { "extent": "range" }
+              }
             },
             {
               "type": "ri:placeOfIssue",
-              "category": "none",
-              "defaultSelected": true,
-              "isZeroPoint": false,
-              "hasEntities": true
+              "hasEntities": true,
+              "miso": {
+                "group": "none",
+                "controls": {},
+                "editing": { "extent": "range" }
+              }
             }
           ],
           "properties": [
@@ -159,20 +143,27 @@
               "editable": false,
               "visible": false
             }
-          ],
-          "entities": [],
-          "additionalTexts": []
-        }
+          ]
+        },
+        "miso": {}
       },
       {
         "additionalLabel": "Volume",
-        "level": "secondary",
-        "properties": []
+        "annotations": {
+          "types": [],
+          "properties": []
+        },
+        "properties": [],
+        "miso": {}
       },
       {
         "additionalLabel": "Department",
-        "level": "secondary",
-        "properties": []
+        "annotations": {
+          "types": [],
+          "properties": []
+        },
+        "properties": [],
+        "miso": {}
       }
     ],
     "annotations": {
@@ -183,201 +174,373 @@
       "types": [
         {
           "type": "next",
-          "category": "none",
-          "defaultSelected": true,
-          "isZeroPoint": false,
-          "hasEntities": true
+          "hasEntities": true,
+          "miso": {
+            "group": "none",
+            "controls": {},
+            "editing": { "extent": "range" }
+          }
         }
-      ],
-      "entities": [],
-      "additionalTexts": []
+      ]
     }
   },
-  "annotations": {
+  "contents": {
     "types": [
-      {
-        "type": "em",
-        "isBlock": false,
-        "category": "edition",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "properties": [],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "strong",
-        "isBlock": false,
-        "category": "edition",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "properties": [],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "smallcaps",
-        "isBlock": false,
-        "category": "edition",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "properties": [],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "sup",
-        "isBlock": false,
-        "category": "edition",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "properties": [],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "spaced",
-        "isBlock": false,
-        "category": "edition",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "properties": [],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "link",
-        "isBlock": false,
-        "category": "edition",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "properties": [
-          {
-            "name": "uri",
-            "type": "String",
-            "required": true,
-            "editable": true,
-            "visible": true
-          }
-        ],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "commentary",
-        "isBlock": false,
-        "category": "project",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "properties": [
-          {
-            "name": "note",
-            "type": "String",
-            "required": true,
-            "editable": true,
-            "visible": true
-          }
-        ],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "person",
-        "isBlock": false,
-        "category": "entities",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasEntities": true,
-        "properties": [],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "place",
-        "isBlock": false,
-        "category": "entities",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasEntities": true,
-        "properties": [],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "thing",
-        "isBlock": false,
-        "category": "entities",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasEntities": true,
-        "properties": [],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "role",
-        "isBlock": false,
-        "category": "entities",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasEntities": true,
-        "properties": [],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "event",
-        "isBlock": false,
-        "category": "entities",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasEntities": true,
-        "properties": [],
-        "role": "inline",
-        "behaviour": "range"
-      }
+      { "additionalLabel": "Title", "miso": { "medium": "text" } },
+      { "additionalLabel": "Identifier", "miso": { "medium": "text" } },
+      { "additionalLabel": "Date", "miso": { "medium": "text" } },
+      { "additionalLabel": "PlaceOfIssue", "miso": { "medium": "text" } },
+      { "additionalLabel": "Summary", "miso": { "medium": "text" } },
+      { "additionalLabel": "OriginalDate", "miso": { "medium": "text" } },
+      { "additionalLabel": "VersoNote", "miso": { "medium": "text" } },
+      { "additionalLabel": "Witnesses", "miso": { "medium": "text" } },
+      { "additionalLabel": "Incipit", "miso": { "medium": "text" } },
+      { "additionalLabel": "Clerk", "miso": { "medium": "text" } },
+      { "additionalLabel": "Recipient", "miso": { "medium": "text" } },
+      { "additionalLabel": "Chancellor", "miso": { "medium": "text" } },
+      { "additionalLabel": "ArchivalHistory", "miso": { "medium": "text" } },
+      { "additionalLabel": "Literature", "miso": { "medium": "text" } },
+      { "additionalLabel": "Commentary", "miso": { "medium": "text" } },
+      { "additionalLabel": "Annotations", "miso": { "medium": "text" } },
+      { "additionalLabel": "Footnotes", "miso": { "medium": "text" } }
     ],
-    "properties": {
-      "system": [
+    "annotations": {
+      "types": [
         {
-          "name": "type",
-          "type": "String",
-          "required": true,
-          "editable": false,
-          "visible": false
+          "type": "p",
+          "properties": [],
+          "miso": {
+            "group": "structure",
+            "controls": {},
+            "editing": { "native": { "type": "paragraph" } }
+          }
         },
         {
-          "name": "text",
-          "type": "String",
-          "required": true,
-          "editable": false,
-          "visible": false
+          "type": "head",
+          "properties": [],
+          "miso": {
+            "group": "structure",
+            "controls": {},
+            "editing": { "native": { "type": "heading" } }
+          }
+        },
+        {
+          "type": "lb",
+          "properties": [],
+          "miso": {
+            "group": "structure",
+            "controls": {},
+            "editing": { "native": { "type": "hardBreak" } }
+          }
+        },
+        {
+          "type": "table",
+          "properties": [],
+          "miso": {
+            "group": "structure",
+            "controls": {},
+            "editing": { "native": { "type": "table" } }
+          }
+        },
+        {
+          "type": "row",
+          "properties": [],
+          "miso": {
+            "group": "structure",
+            "controls": {},
+            "editing": { "native": { "type": "tableRow" } }
+          }
+        },
+        {
+          "type": "cell",
+          "properties": [],
+          "miso": {
+            "group": "structure",
+            "controls": {},
+            "editing": { "native": { "type": "tableCell", "attributes": { "colspan": "cols", "rowspan": "rows" } } }
+          }
+        },
+        {
+          "type": "list",
+          "properties": [],
+          "miso": {
+            "group": "structure",
+            "controls": {},
+            "editing": { "native": { "type": "bulletList" } }
+          }
+        },
+        {
+          "type": "item",
+          "properties": [],
+          "miso": {
+            "group": "structure",
+            "controls": {},
+            "editing": { "native": { "type": "listItem" } }
+          }
+        },
+        {
+          "type": "em",
+          "properties": [],
+          "miso": {
+            "group": "edition",
+            "controls": {},
+            "editing": { "extent": "range", "representation": "inline" },
+            "appearance": {
+              "icon": {
+                "kind": "url",
+                "url": "https://raw.githubusercontent.com/THM-Graphs/atag-editor/refs/heads/main/client/public/icons/emphasised.svg"
+              },
+              "highlight": { "kind": "properties", "fontStyle": "italic" }
+            }
+          }
+        },
+        {
+          "type": "strong",
+          "properties": [],
+          "miso": {
+            "group": "edition",
+            "controls": {},
+            "editing": { "extent": "range", "representation": "inline" },
+            "appearance": {
+              "icon": {
+                "kind": "url",
+                "url": "https://raw.githubusercontent.com/THM-Graphs/ATAG-Editor-Guidlines/refs/heads/main/icons/bold.svg"
+              },
+              "highlight": { "kind": "properties", "fontWeight": "bold" }
+            }
+          }
+        },
+        {
+          "type": "smallcaps",
+          "properties": [],
+          "miso": {
+            "group": "edition",
+            "controls": {},
+            "editing": { "extent": "range", "representation": "inline" },
+            "appearance": {
+              "icon": {
+                "kind": "url",
+                "url": "https://raw.githubusercontent.com/THM-Graphs/ATAG-Editor-Guidlines/refs/heads/main/icons/smallcaps.svg"
+              },
+              "highlight": { "kind": "properties", "fontVariant": "small-caps" }
+            }
+          }
+        },
+        {
+          "type": "sup",
+          "properties": [],
+          "miso": {
+            "group": "edition",
+            "controls": {},
+            "editing": { "extent": "range", "representation": "inline" },
+            "appearance": {
+              "icon": {
+                "kind": "url",
+                "url": "https://raw.githubusercontent.com/THM-Graphs/atag-editor/refs/heads/main/client/public/icons/nonLinear.svg"
+              },
+              "highlight": { "kind": "properties", "verticalAlign": "super", "fontSize": "80%" }
+            }
+          }
+        },
+        {
+          "type": "spaced",
+          "properties": [],
+          "miso": {
+            "group": "edition",
+            "controls": {},
+            "editing": { "extent": "range", "representation": "inline" },
+            "appearance": {
+              "icon": {
+                "kind": "url",
+                "url": "https://raw.githubusercontent.com/THM-Graphs/ATAG-Editor-Guidlines/refs/heads/main/icons/spacedText.svg"
+              }
+            }
+          }
+        },
+        {
+          "type": "link",
+          "properties": [
+            {
+              "name": "uri",
+              "type": "String",
+              "required": true,
+              "editable": true,
+              "visible": true
+            }
+          ],
+          "miso": {
+            "group": "edition",
+            "controls": {},
+            "editing": { "extent": "range", "representation": "inline" },
+            "appearance": {
+              "icon": { "kind": "lucide", "name": "link" },
+              "highlight": { "kind": "properties", "color": "hsl(200, 88%, 43%)" }
+            }
+          }
+        },
+        {
+          "type": "commentary",
+          "properties": [
+            {
+              "name": "note",
+              "type": "String",
+              "required": true,
+              "editable": true,
+              "visible": true
+            }
+          ],
+          "miso": {
+            "group": "project",
+            "controls": {},
+            "editing": { "extent": "range", "representation": "inline" },
+            "appearance": {
+              "icon": {
+                "kind": "url",
+                "url": "https://raw.githubusercontent.com/THM-Graphs/atag-editor/refs/heads/main/client/public/icons/commentary.svg"
+              },
+              "highlight": { "kind": "properties", "backgroundColor": "#e3dbcc99" }
+            }
+          }
+        },
+        {
+          "type": "person",
+          "hasEntities": true,
+          "properties": [],
+          "miso": {
+            "group": "entities",
+            "controls": {},
+            "editing": { "extent": "range", "representation": "inline" },
+            "appearance": {
+              "icon": {
+                "kind": "url",
+                "url": "https://raw.githubusercontent.com/THM-Graphs/ATAG-Editor-Guidlines/refs/heads/main/icons/user-line.svg"
+              },
+              "highlight": {
+                "kind": "properties",
+                "textDecorationLine": "underline",
+                "textDecorationColor": "hsl(358, 83%, 68%)",
+                "textDecorationThickness": "2px"
+              }
+            }
+          }
+        },
+        {
+          "type": "place",
+          "hasEntities": true,
+          "properties": [],
+          "miso": {
+            "group": "entities",
+            "controls": {},
+            "editing": { "extent": "range", "representation": "inline" },
+            "appearance": {
+              "icon": {
+                "kind": "url",
+                "url": "https://raw.githubusercontent.com/THM-Graphs/ATAG-Editor-Guidlines/refs/heads/main/icons/map-pin-3-line.svg"
+              },
+              "highlight": {
+                "kind": "properties",
+                "textDecorationLine": "underline",
+                "textDecorationColor": "hsl(212, 93%, 54%)",
+                "textDecorationThickness": "2px"
+              }
+            }
+          }
+        },
+        {
+          "type": "thing",
+          "hasEntities": true,
+          "properties": [],
+          "miso": {
+            "group": "entities",
+            "controls": {},
+            "editing": { "extent": "range", "representation": "inline" },
+            "appearance": {
+              "icon": {
+                "kind": "url",
+                "url": "https://raw.githubusercontent.com/THM-Graphs/ATAG-Editor-Guidlines/refs/heads/main/icons/box-3-line.svg"
+              },
+              "highlight": {
+                "kind": "properties",
+                "textDecorationLine": "underline",
+                "textDecorationColor": "hsl(45, 90%, 60%)",
+                "textDecorationThickness": "2px"
+              }
+            }
+          }
+        },
+        {
+          "type": "role",
+          "hasEntities": true,
+          "properties": [],
+          "miso": {
+            "group": "entities",
+            "controls": {},
+            "editing": { "extent": "range", "representation": "inline" },
+            "appearance": {
+              "icon": {
+                "kind": "url",
+                "url": "https://raw.githubusercontent.com/THM-Graphs/ATAG-Editor-Guidlines/refs/heads/main/icons/award-line.svg"
+              },
+              "highlight": {
+                "kind": "properties",
+                "textDecorationLine": "underline",
+                "textDecorationColor": "hsl(298, 61%, 41%)",
+                "textDecorationThickness": "2px"
+              }
+            }
+          }
+        },
+        {
+          "type": "event",
+          "hasEntities": true,
+          "properties": [],
+          "miso": {
+            "group": "entities",
+            "controls": {},
+            "editing": { "extent": "range", "representation": "inline" },
+            "appearance": {
+              "icon": {
+                "kind": "url",
+                "url": "https://raw.githubusercontent.com/THM-Graphs/ATAG-Editor-Guidlines/refs/heads/main/icons/calendar-event-line.svg"
+              },
+              "highlight": {
+                "kind": "properties",
+                "textDecorationLine": "underline",
+                "textDecorationColor": "hsl(134, 61%, 41%)",
+                "textDecorationThickness": "2px"
+              }
+            }
+          }
         }
       ],
-      "base": []
-    },
-    "entities": [
-      {
-        "category": "thing",
-        "nodeLabel": "Thing"
-      },
-      {
-        "category": "person",
-        "nodeLabel": "Person"
-      },
-      {
-        "category": "place",
-        "nodeLabel": "Place"
-      },
-      {
-        "category": "event",
-        "nodeLabel": "Event"
-      },
-      {
-        "category": "role",
-        "nodeLabel": "Role"
+      "properties": {
+        "system": [
+          {
+            "name": "type",
+            "type": "String",
+            "required": true,
+            "editable": false,
+            "visible": false
+          },
+          {
+            "name": "text",
+            "type": "String",
+            "required": true,
+            "editable": false,
+            "visible": false
+          }
+        ],
+        "base": []
       }
-    ],
-    "additionalTexts": []
+    }
+  },
+  "entities": {
+    "types": [
+      { "additionalLabel": "Thing", "miso": {} },
+      { "additionalLabel": "Person", "miso": {} },
+      { "additionalLabel": "Place", "miso": {} },
+      { "additionalLabel": "Event", "miso": {} },
+      { "additionalLabel": "Role", "miso": {} }
+    ]
   }
 }
