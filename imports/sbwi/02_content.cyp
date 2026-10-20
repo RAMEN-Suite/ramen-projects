@@ -1,15 +1,23 @@
 // [STEP C01] Import corpora and corpus hierarchy
 CALL apoc.load.json(
-  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/sections.json'
+  // FIX: load local data instead of GitLab
+  'file:///ramen/sections.json'
 )
 YIELD value AS json
 
 CALL (json) {
-  UNWIND json.nodes AS sourceNode
+  // FIX: keep node order to resolve duplicate labels in C10b
+  UNWIND range(0, size(json.nodes) - 1) AS sourceOrder
+
+  WITH
+    json.nodes[sourceOrder] AS sourceNode,
+    sourceOrder
 
   CREATE (corpus:Corpus:Collection {
-    uuid: sourceNode.uuid,
-    label: sourceNode.label
+    // FIX: source IDs are stored as guid
+    uuid: sourceNode.guid,
+    label: sourceNode.label,
+    sourceOrder: sourceOrder
   })
 
   RETURN count(corpus) AS importedCorpora
@@ -39,7 +47,8 @@ RETURN
 // [STEP C02] Import letters, documents and figures
 :auto
 CALL apoc.load.json(
-  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json',
+  // FIX: load local data instead of GitLab
+  'file:///ramen/letters.json',
   '$.record[*]',
   {
     pathOptions: []
@@ -49,10 +58,11 @@ YIELD value AS record
 
 WITH record
 WHERE record.metadata.generalMetadataIsPresent = true
+  // FIX: source IDs are stored as guid
   AND trim(
     coalesce(
       toString(
-        record.metadata.generalMetadata.attributes.uuid
+        record.metadata.generalMetadata.attributes.guid
       ),
       ''
     )
@@ -63,23 +73,30 @@ CALL (record) {
     record.metadata.generalMetadata AS generalMetadata,
     record.metadata.communication AS communication
 
+  // FIX: source IDs are stored as guid
   MERGE (resource:Collection {
-    uuid: generalMetadata.attributes.uuid
+    uuid: generalMetadata.attributes.guid
   })
 
   SET resource += apoc.map.clean(
     apoc.map.merge(
-      apoc.convert.toMap(generalMetadata.attributes),
+      // FIX: do not copy guid as property
+      apoc.map.removeKeys(
+        apoc.convert.toMap(generalMetadata.attributes),
+        ['guid']
+      ),
       {
-        xmlDownload: communication.attributes.xmlDownload
+        // FIX: download URL is stored as download
+        xmlDownload: communication.attributes.download
       }
     ),
     [],
     ['', null]
   )
 
+  // FIX: resource type is stored as doctype
   FOREACH (_ IN CASE
-    WHEN generalMetadata.nodeLabel = 'Letter'
+    WHEN toLower(generalMetadata.attributes.doctype) = 'letter'
     THEN [1]
     ELSE []
   END |
@@ -87,7 +104,7 @@ CALL (record) {
   )
 
   FOREACH (_ IN CASE
-    WHEN generalMetadata.nodeLabel = 'Document'
+    WHEN toLower(generalMetadata.attributes.doctype) = 'document'
     THEN [1]
     ELSE []
   END |
@@ -95,7 +112,7 @@ CALL (record) {
   )
 
   FOREACH (_ IN CASE
-    WHEN generalMetadata.nodeLabel = 'Figure'
+    WHEN toLower(generalMetadata.attributes.doctype) = 'image'
     THEN [1]
     ELSE []
   END |
@@ -109,7 +126,8 @@ RETURN count(*) AS processedResourceRecords;
 // [STEP C03] Create all variants listed by their parent resources
 :auto
 CALL apoc.load.json(
-  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json',
+  // FIX: load local data instead of GitLab
+  'file:///ramen/letters.json',
   '$.record[*]',
   {
     pathOptions: []
@@ -119,23 +137,30 @@ YIELD value AS record
 
 WITH record
 WHERE record.metadata.generalMetadataIsPresent = true
+  // FIX: source IDs are stored as guid
   AND trim(
     coalesce(
       toString(
-        record.metadata.generalMetadata.attributes.uuid
+        record.metadata.generalMetadata.attributes.guid
       ),
       ''
     )
   ) <> ''
 
 WITH
-  record.metadata.generalMetadata.attributes.uuid AS resourceUuid,
-  coalesce(
-    apoc.convert.toList(
-      record.metadata.generalMetadata.variants
-    ),
-    []
-  ) AS variantUuids
+  // FIX: source IDs are stored as guid
+  record.metadata.generalMetadata.attributes.guid AS resourceUuid,
+  // FIX: variants are listed as HAS_TEXT relations
+  [
+    relation IN coalesce(
+      apoc.convert.toList(
+        record.metadata.generalMetadata.outgoingRelations.relation
+      ),
+      []
+    )
+    WHERE relation.relationType = 'HAS_TEXT'
+    | relation.guid
+  ] AS variantUuids
 
 UNWIND variantUuids AS variantUuid
 
@@ -170,7 +195,8 @@ RETURN count(*) AS processedVariantRelations;
 // [STEP C04] Import metadata for every variant record
 :auto
 CALL apoc.load.json(
-  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json',
+  // FIX: load local data instead of GitLab
+  'file:///ramen/letters.json',
   '$.record[*]',
   {
     pathOptions: []
@@ -181,20 +207,43 @@ YIELD value AS record
 WITH
   record.metadata.variantMetadata.attributes AS variantAttributes
 
+// FIX: source IDs are stored as guid
 WHERE trim(
   coalesce(
-    toString(variantAttributes.uuid),
+    toString(variantAttributes.guid),
     ''
   )
 ) <> ''
 
 CALL (variantAttributes) {
+  // FIX: source IDs are stored as guid
   MERGE (variant:Variant:Collection {
-    uuid: variantAttributes.uuid
+    uuid: variantAttributes.guid
   })
 
+  WITH
+    variant,
+    // FIX: do not copy guid as property
+    apoc.map.removeKeys(
+      apoc.convert.toMap(variantAttributes),
+      ['guid']
+    ) AS attributes
+
+  // FIX: drop metadata prefix from variant properties
   SET variant += apoc.map.clean(
-    apoc.convert.toMap(variantAttributes),
+    apoc.map.fromPairs([
+      key IN keys(attributes) |
+      [
+        CASE
+          WHEN key STARTS WITH 'metadata'
+            AND size(key) > 8
+          THEN toLower(substring(key, 8, 1)) + substring(key, 9)
+
+          ELSE key
+        END,
+        attributes[key]
+      ]
+    ]),
     [],
     ['', null]
   )
@@ -206,7 +255,8 @@ RETURN count(*) AS processedVariantRecords;
 // [STEP C05] Import abstracts with texts and annotations
 :auto
 CALL apoc.load.json(
-  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json',
+  // FIX: load local data instead of GitLab
+  'file:///ramen/letters.json',
   '$.record[*]',
   {
     pathOptions: []
@@ -216,8 +266,9 @@ YIELD value AS record
 
 WITH record
 WHERE record.metadata.generalMetadataIsPresent = true
-  AND record.metadata.generalMetadata.nodeLabel = 'Letter'
-  AND record.metadata.variantMetadata.attributes.isReference = true
+  // FIX: filter on doctype and metadataIsReference
+  AND toLower(record.metadata.generalMetadata.attributes.doctype) = 'letter'
+  AND record.metadata.variantMetadata.attributes.metadataIsReference = true
   AND trim(
     coalesce(
       toString(record.texts.abstract.text),
@@ -226,8 +277,9 @@ WHERE record.metadata.generalMetadataIsPresent = true
   ) <> ''
 
 CALL (record) {
+  // FIX: source IDs are stored as guid
   MATCH (letter:Letter:Collection {
-    uuid: record.metadata.generalMetadata.attributes.uuid
+    uuid: record.metadata.generalMetadata.attributes.guid
   })
 
   WITH
@@ -245,10 +297,11 @@ CALL (record) {
   CREATE (abstractCollection)-[:PART_OF]->(letter)
 
   CREATE (textNode:Text:Content {
+    // FIX: source IDs are stored as guid
     uuid: CASE
-      WHEN abstract.uuid IS NOT NULL
-        AND trim(toString(abstract.uuid)) <> ''
-      THEN trim(toString(abstract.uuid))
+      WHEN abstract.guid IS NOT NULL
+        AND trim(toString(abstract.guid)) <> ''
+      THEN trim(toString(abstract.guid))
 
       ELSE randomUUID()
     END,
@@ -278,10 +331,11 @@ CALL (record) {
     ) AS attributes
 
   MERGE (annotation:Annotation {
+    // FIX: source IDs are stored as guid
     uuid: CASE
-      WHEN property.uuid IS NOT NULL
-        AND trim(toString(property.uuid)) <> ''
-      THEN trim(toString(property.uuid))
+      WHEN property.guid IS NOT NULL
+        AND trim(toString(property.guid)) <> ''
+      THEN trim(toString(property.guid))
 
       ELSE randomUUID()
     END
@@ -340,7 +394,8 @@ RETURN count(*) AS processedAbstractRecords;
 // [STEP C06] Import variant main texts and annotations
 :auto
 CALL apoc.load.json(
-  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json',
+  // FIX: load local data instead of GitLab
+  'file:///ramen/letters.json',
   '$.record[*]',
   {
     pathOptions: []
@@ -349,7 +404,8 @@ CALL apoc.load.json(
 YIELD value AS record
 
 WITH
-  record.metadata.variantMetadata.attributes.uuid AS variantUuid,
+  // FIX: source IDs are stored as guid
+  record.metadata.variantMetadata.attributes.guid AS variantUuid,
   record.texts.variant.main_text AS mainText
 
 WHERE trim(
@@ -370,10 +426,11 @@ CALL (
   })
 
   CREATE (textNode:Text:Content {
+    // FIX: source IDs are stored as guid
     uuid: CASE
-      WHEN mainText.uuid IS NOT NULL
-        AND trim(toString(mainText.uuid)) <> ''
-      THEN trim(toString(mainText.uuid))
+      WHEN mainText.guid IS NOT NULL
+        AND trim(toString(mainText.guid)) <> ''
+      THEN trim(toString(mainText.guid))
 
       ELSE randomUUID()
     END
@@ -408,10 +465,11 @@ CALL (
     ) AS attributes
 
   CREATE (annotation:Annotation {
+    // FIX: source IDs are stored as guid
     uuid: CASE
-      WHEN property.uuid IS NOT NULL
-        AND trim(toString(property.uuid)) <> ''
-      THEN trim(toString(property.uuid))
+      WHEN property.guid IS NOT NULL
+        AND trim(toString(property.guid)) <> ''
+      THEN trim(toString(property.guid))
 
       ELSE randomUUID()
     END
@@ -472,7 +530,8 @@ RETURN count(*) AS processedMainTexts;
 // [STEP C07] Import variant editorial notes as annotations
 :auto
 CALL apoc.load.json(
-  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json',
+  // FIX: load local data instead of GitLab
+  'file:///ramen/letters.json',
   '$.record[*]',
   {
     pathOptions: []
@@ -481,7 +540,8 @@ CALL apoc.load.json(
 YIELD value AS record
 
 WITH
-  record.metadata.variantMetadata.attributes.uuid AS variantUuid,
+  // FIX: source IDs are stored as guid
+  record.metadata.variantMetadata.attributes.guid AS variantUuid,
   record.texts.note AS note
 
 WHERE trim(
@@ -506,10 +566,11 @@ CALL (
   })
 
   CREATE (editorialAnnotation:Annotation {
+    // FIX: source IDs are stored as guid
     uuid: CASE
-      WHEN note.uuid IS NOT NULL
-        AND trim(toString(note.uuid)) <> ''
-      THEN trim(toString(note.uuid))
+      WHEN note.guid IS NOT NULL
+        AND trim(toString(note.guid)) <> ''
+      THEN trim(toString(note.guid))
 
       ELSE randomUUID()
     END,
@@ -548,10 +609,11 @@ CALL (
     ) AS attributes
 
   CREATE (annotation:Annotation {
+    // FIX: source IDs are stored as guid
     uuid: CASE
-      WHEN property.uuid IS NOT NULL
-        AND trim(toString(property.uuid)) <> ''
-      THEN trim(toString(property.uuid))
+      WHEN property.guid IS NOT NULL
+        AND trim(toString(property.guid)) <> ''
+      THEN trim(toString(property.guid))
 
       ELSE randomUUID()
     END
@@ -612,7 +674,8 @@ RETURN count(*) AS processedEditorialNotes;
 // [STEP C08] Import editorial comments and their annotations
 :auto
 CALL apoc.load.json(
-  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json',
+  // FIX: load local data instead of GitLab
+  'file:///ramen/letters.json',
   '$.record[*]',
   {
     pathOptions: []
@@ -628,16 +691,18 @@ UNWIND coalesce(
 ) AS comment
 
 WITH comment
+// FIX: source IDs are stored as guid
 WHERE trim(
   coalesce(
-    toString(comment.uuid),
+    toString(comment.guid),
     ''
   )
 ) <> ''
 
 CALL (comment) {
+  // FIX: source IDs are stored as guid
   MERGE (commentText:Text:Content {
-    uuid: comment.uuid
+    uuid: comment.guid
   })
 
   SET commentText += apoc.map.clean(
@@ -667,10 +732,11 @@ CALL (comment) {
     ) AS attributes
 
   MERGE (annotation:Annotation {
+    // FIX: source IDs are stored as guid
     uuid: CASE
-      WHEN property.uuid IS NOT NULL
-        AND trim(toString(property.uuid)) <> ''
-      THEN trim(toString(property.uuid))
+      WHEN property.guid IS NOT NULL
+        AND trim(toString(property.guid)) <> ''
+      THEN trim(toString(property.guid))
 
       ELSE randomUUID()
     END
@@ -727,77 +793,80 @@ RETURN count(*) AS processedEditorialComments;
 
 
 // [STEP C09] Import corpus introductions
+// FIX: old corpus UUIDs replaced by current guids
 UNWIND [
   {
-    corpusUuid: 'ed_f13a5020-2370-4d65-917c-325ca9e77f31',
+    corpusUuid: 'ed_a4ec9069-16da-4851-ac90-6916da085135',
     file: 'Lubieniecki.json'
   },
   {
-    corpusUuid: 'ed_8084d019-3192-4c14-9b8e-9892e912590b',
+    corpusUuid: 'ed_36c44f66-dea9-4f5b-844f-66dea92f5b7d',
     file: 'Lubieniecki_Hevelius.json'
   },
   {
-    corpusUuid: 'ed_81d51ae1-2f85-4e86-8f7e-b758a583d9bb',
+    corpusUuid: 'ed_183e3dbe-e5b5-40c3-be3d-bee5b5b0c390',
     file: 'Lubieniecki_Schletzer.json'
   },
   {
-    corpusUuid: 'ed_3cf2a7c4-ce7d-4689-a8b0-bc137e67850b',
+    corpusUuid: 'ed_8855b58d-e7d0-4552-95b5-8de7d0555265',
     file: 'Lubieniecki_Roetlin.json'
   },
   {
-    corpusUuid: 'ed_76e6bd33-3064-44e9-a7be-1c0d8dbf6b0e',
+    corpusUuid: 'ed_f406dd92-a698-4290-86dd-92a69842904b',
     file: 'Lubieniecki_Reyher.json'
   },
   {
-    corpusUuid: 'ed_440bdca6-3003-446d-86ee-27a40c9f548b',
+    corpusUuid: 'ed_76276d64-5f3a-42a9-a76d-645f3ab2a920',
     file: 'Lubieniecki_Grau.json'
   },
+  // FIX: Guericke der Ältere (dae) -> GdA (assumed)
   {
-    corpusUuid: 'ed_73889c07-4c54-4a95-ba8e-0191c9b9e733',
+    corpusUuid: 'ed_396aed05-8a79-4ba1-aaed-058a79bba196',
     file: 'Lubieniecki_Guericke_dae.json'
   },
+  // FIX: Guericke der Jüngere (dj) -> GdJ (assumed)
   {
-    corpusUuid: 'ed_df0c6771-1543-4668-8c88-92ca07068cf1',
+    corpusUuid: 'ed_c76bd63c-c7af-403e-abd6-3cc7afb03e5b',
     file: 'Lubieniecki_Guericke_dj.json'
   },
   {
-    corpusUuid: 'ed_9d36824f-209a-427e-ad30-e3c33551ede2',
+    corpusUuid: 'ed_5d465242-2720-43f9-8652-42272033f98d',
     file: 'Lubieniecki_Sivers.json'
   },
   {
-    corpusUuid: 'ed_e1538210-f69d-4a0f-81f1-9fb5b0f42af3',
+    corpusUuid: 'ed_bb14f453-686a-4bf7-94f4-53686a3bf748',
     file: 'Lubieniecki_Stegmann_dj.json'
   },
   {
-    corpusUuid: 'ed_e8f8738c-0db7-44ea-aca3-bc111a0257b7',
+    corpusUuid: 'ed_aed5e9ed-ed43-48a9-95e9-eded4318a995',
     file: 'Lubieniecki_Rautenstein.json'
   },
   {
-    corpusUuid: 'ed_2b69678b-9bf0-4ad8-8a66-77e1b4318af1',
+    corpusUuid: 'ed_95856cc0-b775-4c8e-856c-c0b7751c8e14',
     file: 'Lubieniecki_Placentinus.json'
   },
   {
-    corpusUuid: 'ed_c5f314ab-1366-4eb4-94df-46b03baba1f7',
+    corpusUuid: 'ed_00e05f36-34b9-43be-a05f-3634b943be6b',
     file: 'Lubieniecki_Mueller.json'
   },
   {
-    corpusUuid: 'ed_6954e10e-9907-4ba9-afab-2ce2db8b99c9',
+    corpusUuid: 'ed_16bdcae7-05d3-4b92-bdca-e705d36b92ca',
     file: 'Lubieniecki_Olearius.json'
   },
   {
-    corpusUuid: 'ed_3f9303b4-aa4b-4ce7-b896-107c782364ab',
+    corpusUuid: 'ed_109de9b1-4981-4ad0-9de9-b14981fad0c4',
     file: 'Lubieniecki_Riccioli.json'
   },
   {
-    corpusUuid: 'ed_5ea511d4-9a0d-42e9-b20f-65629f670cb6',
+    corpusUuid: 'ed_36ed4fae-d507-49b0-ad4f-aed50719b065',
     file: 'Lubieniecki_Boulliau.json'
   },
   {
-    corpusUuid: 'ed_cad0bf7d-7511-44ac-a743-32815e95013d',
+    corpusUuid: 'ed_00dd26cd-7dc1-490e-9d26-cd7dc1190eca',
     file: 'Ruarus_Kirchmann.json'
   },
   {
-    corpusUuid: 'ed_566a51cb-a561-490f-83e2-0786f9f0fec8',
+    corpusUuid: 'ed_869e70ed-e4d9-4b1a-9e70-ede4d9cb1afb',
     file: 'Ruarus_Peuschel.json'
   }
 ] AS source
@@ -907,7 +976,8 @@ RETURN
 // [STEP C09] Import correspondence annotations
 :auto
 CALL apoc.load.json(
-  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json',
+  // FIX: load local data instead of GitLab
+  'file:///ramen/letters.json',
   '$.record[*]',
   {
     pathOptions: []
@@ -917,8 +987,9 @@ YIELD value AS record
 
 WITH record
 WHERE record.metadata.generalMetadataIsPresent = true
-  AND record.metadata.generalMetadata.nodeLabel = 'Letter'
-  AND record.metadata.variantMetadata.attributes.isReference = true
+  // FIX: filter on doctype and metadataIsReference
+  AND toLower(record.metadata.generalMetadata.attributes.doctype) = 'letter'
+  AND record.metadata.variantMetadata.attributes.metadataIsReference = true
 
 UNWIND coalesce(
   apoc.convert.toList(
@@ -928,8 +999,9 @@ UNWIND coalesce(
 ) AS action
 
 CALL (record, action) {
+  // FIX: source IDs are stored as guid
   MATCH (letter:Letter:Collection {
-    uuid: record.metadata.generalMetadata.attributes.uuid
+    uuid: record.metadata.generalMetadata.attributes.guid
   })
 
   WITH
@@ -938,27 +1010,32 @@ CALL (record, action) {
     apoc.convert.toMap(action.attributes) AS attributes
 
   MERGE (annotation:Annotation {
+    // FIX: source IDs are stored as guid
     uuid: CASE
-      WHEN action.uuid IS NOT NULL
-        AND trim(toString(action.uuid)) <> ''
-      THEN trim(toString(action.uuid))
+      WHEN action.guid IS NOT NULL
+        AND trim(toString(action.guid)) <> ''
+      THEN trim(toString(action.guid))
 
-      WHEN attributes.uuid IS NOT NULL
-        AND trim(toString(attributes.uuid)) <> ''
-      THEN trim(toString(attributes.uuid))
+      WHEN attributes.guid IS NOT NULL
+        AND trim(toString(attributes.guid)) <> ''
+      THEN trim(toString(attributes.guid))
 
       ELSE randomUUID()
     END
   })
 
   SET annotation += apoc.map.clean(
+    // FIX: do not copy guid as property
     apoc.map.removeKeys(
       attributes,
-      ['uuid']
+      ['guid']
     ),
     [],
     ['', null]
   )
+
+  // FIX: correspondence type is stored on the action
+  SET annotation.type = toLower(action.type)
 
   MERGE (letter)-[:HAS_ANNOTATION]->(
     annotation
@@ -975,8 +1052,9 @@ CALL (record, action) {
     []
   ) AS relation
 
+  // FIX: source IDs are stored as guid
   MATCH (target:Entity {
-    uuid: relation.uuid
+    uuid: relation.guid
   })
 
   CALL apoc.create.relationship(
@@ -993,10 +1071,27 @@ CALL (record, action) {
 RETURN count(*) AS processedCorrespondenceActions;
 
 
-// [STEP C10] Connect letters only to their particulars
+// [STEP C10a] Mark corpus roots as start of folder paths
+// FIX: sections.json lacks sub-corpus and letter edges, derive them from folder paths
+MATCH (root:Corpus:Collection)
+WHERE EXISTS {
+  MATCH (:Corpus:Collection)-[:PART_OF]->(root)
+}
+  AND NOT EXISTS {
+  MATCH (root)-[:PART_OF]->(:Corpus:Collection)
+}
+
+SET root.sourcePath = ''
+
+RETURN count(root) AS markedCorpusRoots;
+
+
+// [STEP C10b] Build corpus hierarchy from letter folder paths
+// FIX: sections.json lacks sub-corpus and letter edges, derive them from folder paths
 :auto
 CALL apoc.load.json(
-  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json',
+  // FIX: load local data instead of GitLab
+  'file:///ramen/letters.json',
   '$.record[*]',
   {
     pathOptions: []
@@ -1006,53 +1101,131 @@ YIELD value AS record
 
 WITH record
 WHERE record.metadata.generalMetadataIsPresent = true
-  AND record.metadata.generalMetadata.nodeLabel = 'Letter'
-  AND record.metadata.variantMetadata.attributes.isReference = true
+  // FIX: filter on doctype and metadataIsReference
+  AND toLower(record.metadata.generalMetadata.attributes.doctype) = 'letter'
+  AND record.metadata.variantMetadata.attributes.metadataIsReference = true
+  AND record.file CONTAINS '/'
 
-UNWIND coalesce(
-  apoc.convert.toList(
-    record.metadata.communication.outgoingRelations.relation
-  ),
-  []
-) AS relation
+WITH split(record.file, '/') AS parts
+
+WITH parts[0..size(parts) - 1] AS folders
+
+UNWIND range(1, size(folders)) AS depth
+
+WITH DISTINCT folders[0..depth] AS folderPath
+
+ORDER BY size(folderPath)
+
+CALL (folderPath) {
+  WITH
+    folderPath,
+    reduce(
+      path = '',
+      folder IN folderPath[0..size(folderPath) - 1] | path + '/' + folder
+    ) AS parentPath,
+    reduce(
+      path = '',
+      folder IN folderPath | path + '/' + folder
+    ) AS childPath
+
+  MATCH (parent:Corpus:Collection {
+    sourcePath: parentPath
+  })
+
+  MATCH (child:Corpus:Collection {
+    label: last(folderPath)
+  })
+  WHERE child.sourceOrder > parent.sourceOrder
+    AND child.sourcePath IS NULL
+    AND (
+      EXISTS {
+        MATCH (child)-[:PART_OF]->(parent)
+      }
+      OR NOT EXISTS {
+        MATCH (child)-[:PART_OF]->(:Corpus:Collection)
+      }
+    )
+
+  WITH
+    parent,
+    child,
+    childPath
+  ORDER BY child.sourceOrder
+  LIMIT 1
+
+  MERGE (child)-[:PART_OF]->(parent)
+
+  SET child.sourcePath = childPath
+} IN TRANSACTIONS OF 1 ROWS
+
+RETURN count(*) AS processedFolderPaths;
+
+
+// [STEP C10c] Connect letters to their folder corpus
+// FIX: sections.json lacks sub-corpus and letter edges, derive them from folder paths
+:auto
+CALL apoc.load.json(
+  // FIX: load local data instead of GitLab
+  'file:///ramen/letters.json',
+  '$.record[*]',
+  {
+    pathOptions: []
+  }
+)
+YIELD value AS record
+
+WITH record
+WHERE record.metadata.generalMetadataIsPresent = true
+  // FIX: filter on doctype and metadataIsReference
+  AND toLower(record.metadata.generalMetadata.attributes.doctype) = 'letter'
+  AND record.metadata.variantMetadata.attributes.metadataIsReference = true
+  AND record.file CONTAINS '/'
 
 WITH
   record,
-  relation
-WHERE relation.relationType = 'PART_OF'
-  AND relation.targetNodeType = 'Corpus'
-  AND trim(
-    coalesce(
-      toString(relation.uuid),
-      ''
-    )
-  ) <> ''
+  split(record.file, '/') AS parts
 
-MATCH (particular:Corpus:Collection {
-  uuid: relation.uuid
-})
+WITH
+  record,
+  reduce(
+    path = '',
+    folder IN parts[0..size(parts) - 1] | path + '/' + folder
+  ) AS folderPath
 
-WHERE NOT EXISTS {
-  MATCH (:Corpus:Collection)-[:PART_OF]->(
-    particular
-  )
-}
-
-CALL (record, particular) {
+CALL (record, folderPath) {
+  // FIX: source IDs are stored as guid
   MATCH (letter:Letter:Collection {
-    uuid: record.metadata.generalMetadata.attributes.uuid
+    uuid: record.metadata.generalMetadata.attributes.guid
   })
 
-  MERGE (letter)-[:PART_OF]->(particular)
+  MATCH (corpus:Corpus:Collection {
+    sourcePath: folderPath
+  })
+
+  MERGE (letter)-[:PART_OF]->(corpus)
 } IN TRANSACTIONS OF 250 ROWS
 
-RETURN count(*) AS processedParticularRelations;
+RETURN count(*) AS processedLetterRecords;
+
+
+// [STEP C10d] Remove temporary corpus path information
+// FIX: sections.json lacks sub-corpus and letter edges, derive them from folder paths
+MATCH (corpus:Corpus:Collection)
+WHERE corpus.sourceOrder IS NOT NULL
+   OR corpus.sourcePath IS NOT NULL
+
+REMOVE
+  corpus.sourceOrder,
+  corpus.sourcePath
+
+RETURN count(corpus) AS cleanedCorpora;
 
 
 // [STEP C11] Import attachment collections
 :auto
 CALL apoc.load.json(
-  'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json',
+  // FIX: load local data instead of GitLab
+  'file:///ramen/letters.json',
   '$.record[*]',
   {
     pathOptions: []
@@ -1062,21 +1235,28 @@ YIELD value AS record
 
 WITH
   record,
-  coalesce(
-    apoc.convert.toList(
-      record.metadata.communication.attachments
-    ),
-    []
-  ) AS attachmentUuids
+  // FIX: attachments are listed as HAS_ATTACHMENT relations
+  [
+    relation IN coalesce(
+      apoc.convert.toList(
+        record.metadata.communication.outgoingRelations.relation
+      ),
+      []
+    )
+    WHERE relation.relationType = 'HAS_ATTACHMENT'
+    | relation.guid
+  ] AS attachmentUuids
 
 WHERE record.metadata.generalMetadataIsPresent = true
-  AND record.metadata.generalMetadata.nodeLabel = 'Letter'
-  AND record.metadata.variantMetadata.attributes.isReference = true
+  // FIX: filter on doctype and metadataIsReference
+  AND toLower(record.metadata.generalMetadata.attributes.doctype) = 'letter'
+  AND record.metadata.variantMetadata.attributes.metadataIsReference = true
   AND size(attachmentUuids) > 0
 
 CALL (record, attachmentUuids) {
+  // FIX: source IDs are stored as guid
   MATCH (letter:Letter:Collection {
-    uuid: record.metadata.generalMetadata.attributes.uuid
+    uuid: record.metadata.generalMetadata.attributes.guid
   })
 
   CREATE (attachmentGroup:Attachment:Collection {
