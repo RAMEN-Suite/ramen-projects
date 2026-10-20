@@ -8,9 +8,9 @@ on:
       - tori
       - miso
     paths:
-      - "projects/abbw/**.gcore.json"
-      - "projects/gcore.json"
-      - ".github/workflows/abbw-gcore-deploy.yml"
+      - 'projects/abbw/**.gcore.json'
+      - 'projects/gcore.json'
+      - '.github/workflows/abbw-gcore-deploy.yml'
   workflow_dispatch:
 
 concurrency:
@@ -19,43 +19,42 @@ concurrency:
 
 permissions: {}
 
-env:
-  MAIN_ENVIRONMENTS: '["abbw"]'
-
 jobs:
   setup:
-    name: Determine environments
+    name: Determine the target
     runs-on: ubuntu-latest
     outputs:
-      environments: ${{ steps.set-matrix.outputs.environments }}
+      environment: ${{ steps.target.outputs.environment }}
+      prefix: ${{ steps.target.outputs.prefix }}
+      restart: ${{ steps.target.outputs.restart }}
     env:
       GITHUB_REF: ${{ github.ref }}
     steps:
-      - id: set-matrix
+      - id: target
         run: |
-          if [ "$GITHUB_REF" = "refs/heads/main" ]; then
-            printf 'environments=%s\n' "$MAIN_ENVIRONMENTS" >> "$GITHUB_OUTPUT"
-          elif [ "$GITHUB_REF" = "refs/heads/dev" ]; then
-            printf 'environments=["sbwi"]' >> "$GITHUB_OUTPUT"
-          elif [ "$GITHUB_REF" = "refs/heads/tori" ]; then
-            echo 'environments=["dev-tori"]' >> "$GITHUB_OUTPUT"
-          elif [ "$GITHUB_REF" = "refs/heads/miso" ]; then
-            printf 'environments=["dev-miso"]' >> "$GITHUB_OUTPUT"
-          else
-            echo 'environments=[]' >> "$GITHUB_OUTPUT"
-          fi
+          environment="" prefix="" restart=""
+          case "$GITHUB_REF" in
+            refs/heads/main) environment=antjebrons restart="ed/tori ed/miso" ;;
+            refs/heads/dev) environment=staging restart="dev/tori dev/miso" ;;
+            refs/heads/shoyu | refs/heads/tori | refs/heads/miso)
+              tool="${GITHUB_REF#refs/heads/}"
+              environment=development prefix="$tool/"
+              case "$tool" in tori) restart=tori/tori ;; miso) restart=miso/miso ;; esac
+              ;;
+          esac
+          {
+            echo "environment=$environment"
+            echo "prefix=$prefix"
+            echo "restart=$restart"
+          } >> "$GITHUB_OUTPUT"
   sync:
     needs: setup
-    if: needs.setup.outputs.environments != '[]'
-    name: sync with (${{ matrix.environment }})
+    if: needs.setup.outputs.environment != ''
+    name: sync with (${{ needs.setup.outputs.environment }})
     runs-on: ubuntu-latest
-    environment: ${{ matrix.environment }}
+    environment: ${{ needs.setup.outputs.environment }}
     permissions:
       contents: read # required for actions/checkout to fetch repo contents if this repo is private
-    strategy:
-      fail-fast: false
-      matrix:
-        environment: ${{ fromJson(needs.setup.outputs.environments) }}
     steps:
       - name: Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
@@ -64,7 +63,7 @@ jobs:
       - name: Install SSH Key
         env:
           KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
-          PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          PRIVATE_KEY: ${{ secrets.SSH_RSYNC_KEY }}
           HOST: ${{ secrets.SSH_HOST }}
           USER: ${{ secrets.SSH_USER }}
         run: |
@@ -84,34 +83,26 @@ jobs:
         working-directory: projects
         env:
           USER: ${{ secrets.SSH_USER }}
-        run: rsync -z --mkpath gcore.json "$USER"@staging:gcore/
+          PREFIX: ${{ needs.setup.outputs.prefix }}
+        run: rsync -z --mkpath gcore.json "$USER"@staging:"$PREFIX"gcore/
       - name: Copy project files to remote
         working-directory: projects/abbw
         env:
           USER: ${{ secrets.SSH_USER }}
-        run: rsync -z --mkpath ramen.gcore.json project.gcore.json "$USER"@staging:gcore/
+          PREFIX: ${{ needs.setup.outputs.prefix }}
+        run: rsync -z --mkpath ramen.gcore.json project.gcore.json "$USER"@staging:"$PREFIX"gcore/
   restart:
     needs: [setup, sync]
-    if: needs.setup.outputs.environments != '[]'
-    name: Restart (${{ matrix.environment }}) - Server
+    if: needs.setup.outputs.restart != ''
+    name: Restart (${{ needs.setup.outputs.environment }}) - Server
     runs-on: ubuntu-latest
-    environment: ${{ matrix.environment }}
-    permissions:
-      contents: read # required for actions/checkout to fetch repo contents if this repo is private
-      packages: read # required to pull images
-    strategy:
-      fail-fast: false
-      matrix:
-        environment: ${{ fromJson(needs.setup.outputs.environments) }}
+    environment: ${{ needs.setup.outputs.environment }}
+    permissions: {}
     steps:
-      - name: Checkout
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
-        with:
-          persist-credentials: false
       - name: Install SSH Key
         env:
           KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
-          PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY_RESTART }}
+          PRIVATE_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
           HOST: ${{ secrets.SSH_HOST }}
           USER: ${{ secrets.SSH_USER }}
         run: |
@@ -127,7 +118,10 @@ jobs:
             User $USER
             IdentityFile ~/.ssh/staging.key
           END
-      - name: Restart Container
+      - name: Restart the servers that read gcore
+        env:
+          RESTART: ${{ needs.setup.outputs.restart }}
         run: |
-          ssh staging "restart ed/tori server"
-          ssh staging "restart ed/miso server"
+          for stack in $RESTART; do
+            ssh -n staging restart "$stack" server
+          done

@@ -7,8 +7,8 @@ on:
       - dev
       - miso
     paths:
-      - "projects/sbwi/miso/**"
-      - ".github/workflows/sbwi-miso-deploy.yml"
+      - 'projects/sbwi/miso/**'
+      - '.github/workflows/sbwi-miso-deploy.yml'
   workflow_dispatch:
 
 concurrency:
@@ -17,41 +17,42 @@ concurrency:
 
 permissions: {}
 
-env:
-  MAIN_ENVIRONMENTS: "[]"
-
 jobs:
   setup:
-    name: Determine environments
+    name: Determine the target
     runs-on: ubuntu-latest
     outputs:
-      environments: ${{ steps.set-matrix.outputs.environments }}
+      environment: ${{ steps.target.outputs.environment }}
+      prefix: ${{ steps.target.outputs.prefix }}
+      restart: ${{ steps.target.outputs.restart }}
     env:
       GITHUB_REF: ${{ github.ref }}
     steps:
-      - id: set-matrix
+      - id: target
         run: |
-          if [ "$GITHUB_REF" = "refs/heads/main" ]; then
-            printf 'environments=%s\n' "$MAIN_ENVIRONMENTS" >> "$GITHUB_OUTPUT"
-          elif [ "$GITHUB_REF" = "refs/heads/dev" ]; then
-            printf 'environments=["sbwi"]' >> "$GITHUB_OUTPUT"
-          elif [ "$GITHUB_REF" = "refs/heads/miso" ]; then
-            echo 'environments=["dev-miso"]' >> "$GITHUB_OUTPUT"
-          else
-            echo 'environments=[]' >> "$GITHUB_OUTPUT"
-          fi
-  deploy:
+          environment="" prefix="" restart=""
+          case "$GITHUB_REF" in
+            refs/heads/main) environment=sbwi restart="" ;;
+            refs/heads/dev) environment=staging restart="" ;;
+            refs/heads/shoyu | refs/heads/tori | refs/heads/miso)
+              tool="${GITHUB_REF#refs/heads/}"
+              environment=development prefix="$tool/"
+              case "$tool" in  esac
+              ;;
+          esac
+          {
+            echo "environment=$environment"
+            echo "prefix=$prefix"
+            echo "restart=$restart"
+          } >> "$GITHUB_OUTPUT"
+  sync:
     needs: setup
-    if: needs.setup.outputs.environments != '[]'
-    name: deploy (${{ matrix.environment }})
+    if: needs.setup.outputs.environment != ''
+    name: sync with (${{ needs.setup.outputs.environment }})
     runs-on: ubuntu-latest
-    environment: ${{ matrix.environment }}
+    environment: ${{ needs.setup.outputs.environment }}
     permissions:
       contents: read # required for actions/checkout to fetch repo contents if this repo is private
-    strategy:
-      fail-fast: false
-      matrix:
-        environment: ${{ fromJson(needs.setup.outputs.environments) }}
     steps:
       - name: Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
@@ -60,7 +61,7 @@ jobs:
       - name: Install SSH Key
         env:
           KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
-          PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          PRIVATE_KEY: ${{ secrets.SSH_RSYNC_KEY }}
           HOST: ${{ secrets.SSH_HOST }}
           USER: ${{ secrets.SSH_USER }}
         run: |
@@ -80,4 +81,5 @@ jobs:
         working-directory: projects/sbwi/miso
         env:
           USER: ${{ secrets.SSH_USER }}
-        run: rsync -z --mkpath guidelines.json styles.css "$USER"@staging:miso/
+          PREFIX: ${{ needs.setup.outputs.prefix }}
+        run: rsync -z --mkpath guidelines.json styles.css "$USER"@staging:"$PREFIX"miso/
