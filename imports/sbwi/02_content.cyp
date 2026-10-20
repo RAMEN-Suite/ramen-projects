@@ -1,7 +1,12 @@
+// [STEP C00] Set data source parameters
+// TODO: update remote files to current export
+:param lettersUrl => 'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json';
+:param sectionsUrl => 'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/sections.json';
+
+
 // [STEP C01] Import corpora and corpus hierarchy
 CALL apoc.load.json(
-  // FIX: load local data instead of GitLab
-  'file:///ramen/sections.json'
+  $sectionsUrl
 )
 YIELD value AS json
 
@@ -47,8 +52,7 @@ RETURN
 // [STEP C02] Import letters, documents and figures
 :auto
 CALL apoc.load.json(
-  // FIX: load local data instead of GitLab
-  'file:///ramen/letters.json',
+  $lettersUrl,
   '$.record[*]',
   {
     pathOptions: []
@@ -126,8 +130,7 @@ RETURN count(*) AS processedResourceRecords;
 // [STEP C03] Create all variants listed by their parent resources
 :auto
 CALL apoc.load.json(
-  // FIX: load local data instead of GitLab
-  'file:///ramen/letters.json',
+  $lettersUrl,
   '$.record[*]',
   {
     pathOptions: []
@@ -195,8 +198,7 @@ RETURN count(*) AS processedVariantRelations;
 // [STEP C04] Import metadata for every variant record
 :auto
 CALL apoc.load.json(
-  // FIX: load local data instead of GitLab
-  'file:///ramen/letters.json',
+  $lettersUrl,
   '$.record[*]',
   {
     pathOptions: []
@@ -255,8 +257,7 @@ RETURN count(*) AS processedVariantRecords;
 // [STEP C05] Import abstracts with texts and annotations
 :auto
 CALL apoc.load.json(
-  // FIX: load local data instead of GitLab
-  'file:///ramen/letters.json',
+  $lettersUrl,
   '$.record[*]',
   {
     pathOptions: []
@@ -394,8 +395,7 @@ RETURN count(*) AS processedAbstractRecords;
 // [STEP C06] Import variant main texts and annotations
 :auto
 CALL apoc.load.json(
-  // FIX: load local data instead of GitLab
-  'file:///ramen/letters.json',
+  $lettersUrl,
   '$.record[*]',
   {
     pathOptions: []
@@ -530,8 +530,7 @@ RETURN count(*) AS processedMainTexts;
 // [STEP C07] Import variant editorial notes as annotations
 :auto
 CALL apoc.load.json(
-  // FIX: load local data instead of GitLab
-  'file:///ramen/letters.json',
+  $lettersUrl,
   '$.record[*]',
   {
     pathOptions: []
@@ -674,8 +673,7 @@ RETURN count(*) AS processedEditorialNotes;
 // [STEP C08] Import editorial comments and their annotations
 :auto
 CALL apoc.load.json(
-  // FIX: load local data instead of GitLab
-  'file:///ramen/letters.json',
+  $lettersUrl,
   '$.record[*]',
   {
     pathOptions: []
@@ -976,8 +974,7 @@ RETURN
 // [STEP C09] Import correspondence annotations
 :auto
 CALL apoc.load.json(
-  // FIX: load local data instead of GitLab
-  'file:///ramen/letters.json',
+  $lettersUrl,
   '$.record[*]',
   {
     pathOptions: []
@@ -1090,8 +1087,7 @@ RETURN count(root) AS markedCorpusRoots;
 // FIX: sections.json lacks sub-corpus and letter edges, derive them from folder paths
 :auto
 CALL apoc.load.json(
-  // FIX: load local data instead of GitLab
-  'file:///ramen/letters.json',
+  $lettersUrl,
   '$.record[*]',
   {
     pathOptions: []
@@ -1165,8 +1161,7 @@ RETURN count(*) AS processedFolderPaths;
 // FIX: sections.json lacks sub-corpus and letter edges, derive them from folder paths
 :auto
 CALL apoc.load.json(
-  // FIX: load local data instead of GitLab
-  'file:///ramen/letters.json',
+  $lettersUrl,
   '$.record[*]',
   {
     pathOptions: []
@@ -1224,8 +1219,7 @@ RETURN count(corpus) AS cleanedCorpora;
 // [STEP C11] Import attachment collections
 :auto
 CALL apoc.load.json(
-  // FIX: load local data instead of GitLab
-  'file:///ramen/letters.json',
+  $lettersUrl,
   '$.record[*]',
   {
     pathOptions: []
