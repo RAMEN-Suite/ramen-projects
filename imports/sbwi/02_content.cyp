@@ -1083,7 +1083,7 @@ SET root.sourcePath = ''
 RETURN count(root) AS markedCorpusRoots;
 
 
-// [STEP C10b] Build corpus hierarchy from letter folder paths
+// [STEP C10b] Build corpus hierarchy from record folder paths
 // FIX: sections.json lacks sub-corpus and letter edges, derive them from folder paths
 :auto
 CALL apoc.load.json(
@@ -1096,11 +1096,8 @@ CALL apoc.load.json(
 YIELD value AS record
 
 WITH record
-WHERE record.metadata.generalMetadataIsPresent = true
-  // FIX: filter on doctype and metadataIsReference
-  AND toLower(record.metadata.generalMetadata.attributes.doctype) = 'letter'
-  AND record.metadata.variantMetadata.attributes.metadataIsReference = true
-  AND record.file CONTAINS '/'
+// FIX: use folder paths of all records, not only letters
+WHERE record.file CONTAINS '/'
 
 WITH split(record.file, '/') AS parts
 
@@ -1157,7 +1154,7 @@ CALL (folderPath) {
 RETURN count(*) AS processedFolderPaths;
 
 
-// [STEP C10c] Connect letters to their folder corpus
+// [STEP C10c] Connect resources to their folder corpus
 // FIX: sections.json lacks sub-corpus and letter edges, derive them from folder paths
 :auto
 CALL apoc.load.json(
@@ -1169,38 +1166,82 @@ CALL apoc.load.json(
 )
 YIELD value AS record
 
-WITH record
-WHERE record.metadata.generalMetadataIsPresent = true
-  // FIX: filter on doctype and metadataIsReference
-  AND toLower(record.metadata.generalMetadata.attributes.doctype) = 'letter'
-  AND record.metadata.variantMetadata.attributes.metadataIsReference = true
-  AND record.file CONTAINS '/'
+WITH
+  collect({
+    // FIX: source IDs are stored as guid
+    resourceUuid: CASE
+      WHEN record.metadata.generalMetadataIsPresent = true
+      THEN record.metadata.generalMetadata.attributes.guid
+    END,
+    doctype: toLower(record.metadata.generalMetadata.attributes.doctype),
+    isReference: record.metadata.variantMetadata.attributes.metadataIsReference,
+    file: record.file,
+    // same attachments as in C11: only those of reference letters
+    attachmentUuids: CASE
+      WHEN record.metadata.generalMetadataIsPresent = true
+        AND toLower(record.metadata.generalMetadata.attributes.doctype) = 'letter'
+        AND record.metadata.variantMetadata.attributes.metadataIsReference = true
+      THEN [
+        relation IN coalesce(
+          apoc.convert.toList(
+            record.metadata.communication.outgoingRelations.relation
+          ),
+          []
+        )
+        WHERE relation.relationType = 'HAS_ATTACHMENT'
+        | relation.guid
+      ]
+
+      ELSE []
+    END
+  }) AS rows
 
 WITH
-  record,
-  split(record.file, '/') AS parts
+  rows,
+  apoc.coll.toSet(
+    apoc.coll.flatten(
+      [row IN rows | row.attachmentUuids]
+    )
+  ) AS attachmentUuids
+
+UNWIND rows AS row
+
+// FIX: also connect documents and figures, unless they are attachments
+WITH
+  row,
+  attachmentUuids
+WHERE row.resourceUuid IS NOT NULL
+  AND row.isReference = true
+  AND row.file CONTAINS '/'
+  AND (
+    row.doctype = 'letter'
+    OR NOT row.resourceUuid IN attachmentUuids
+  )
 
 WITH
-  record,
+  row,
+  split(row.file, '/') AS parts
+
+WITH
+  row,
   reduce(
     path = '',
     folder IN parts[0..size(parts) - 1] | path + '/' + folder
   ) AS folderPath
 
-CALL (record, folderPath) {
-  // FIX: source IDs are stored as guid
-  MATCH (letter:Letter:Collection {
-    uuid: record.metadata.generalMetadata.attributes.guid
+CALL (row, folderPath) {
+  MATCH (resource:Collection {
+    uuid: row.resourceUuid
   })
 
   MATCH (corpus:Corpus:Collection {
     sourcePath: folderPath
   })
 
-  MERGE (letter)-[:PART_OF]->(corpus)
+  MERGE (resource)-[:PART_OF]->(corpus)
 } IN TRANSACTIONS OF 250 ROWS
 
-RETURN count(*) AS processedLetterRecords;
+RETURN count(*) AS processedResourceRecords;
 
 
 // [STEP C10d] Remove temporary corpus path information
