@@ -1,7 +1,7 @@
 // [STEP C00] Set data source parameters
 // TODO: update remote files to current export
-:param lettersUrl => 'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/letters.json';
-:param sectionsUrl => 'https://gitlab.rlp.net/adwmainz/digicademy/sbw/csv-data-dump/-/raw/feature-model-revision/data/json/sections.json';
+:param lettersUrl => 'https://gitlab.rlp.net/maxmiche/atag-assets/-/raw/main/data/letters.json';
+:param sectionsUrl => 'https://gitlab.rlp.net/maxmiche/atag-assets/-/raw/main/data/sections.json';
 
 
 // [STEP C01] Import corpora and corpus hierarchy
