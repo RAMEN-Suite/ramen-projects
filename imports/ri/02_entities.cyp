@@ -7,7 +7,7 @@ CALL (line) {
   MATCH (r:Regesta {origPlaceOfIssue: line.Original})
   MERGE (p:Place {normalizedGerman: line.normalisiertDeutsch})
     ON CREATE SET
-      p :Entity,
+      p:Entity,
       p.uuid = randomUUID(),
       p.label = line.normalisiertDeutsch
   SET
@@ -43,8 +43,8 @@ CALL (line) {
 
 } IN TRANSACTIONS OF 1000 ROWS;
 
-// [STEP 002] Heinrich 7 Entities
 
+// [STEP 002] Heinrich 7 Entities
 CALL
   apoc.load.xml(
     "https://gitlab.rlp.net/adwmainz/regesta-imperii/lab/regesta-imperii-data/-/raw/main/archive/RegestenUndRegister/abt-06/ri_06,4-heinrich_vii_gesamtregister/xml/gesamtregister.xml?inline=false",
@@ -374,26 +374,16 @@ WITH
     WHERE y.type = "empfaenger"
     | y._text
   ] AS empfaenger
-
-MATCH (i:Entity {xmlId: xmlId})
-WITH
-  i,
-  htmlLabel,
-  trim(string.regexReplace(htmlLabel, '<[^>]*>', '')) AS cleanLabel
-SET
-  i.htmlLabel = htmlLabel,
-  i.htmlOrigLabel = htmlLabel,
-  i.label = cleanLabel,
-  i.origLabel = cleanLabel;
-
-//IS_SUB_OF erstellen
-MATCH (i:Entity), (p:Entity)
-WHERE i.parentId = p.xmlId
-MERGE
-  (i)-[:HAS_ANNOTATION]->
-  (a:Annotation {label: 'ri:isSubOf', type: 'ri:isSubOf'})-[:REFERS_TO]->
-  (p)
-  ON CREATE SET a.uuid = randomUUID();
+  MATCH (i:Entity {xmlId: xmlId})
+  WITH
+    i,
+    htmlLabel,
+    trim(string.regexReplace(htmlLabel, '<[^>]*>', '')) AS cleanLabel
+  SET
+    i.htmlLabel = htmlLabel,
+    i.htmlOrigLabel = htmlLabel,
+    i.label = cleanLabel,
+    i.origLabel = cleanLabel;
 
 // wikidataId ergänzen
 CYPHER runtime = slotted
@@ -450,6 +440,236 @@ CREATE
   (r)
 RETURN count(a);
 
+
+// [STEP 004] Heinrich IV Entities
+// registerId erstellen
+MATCH (reg:Regesta)
+UNWIND apoc.text.regexGroups(reg.identifier, "RI III,2,3 n. (\\S+)") AS link
+SET reg.registerId = link[1];
+
+// entitäten erstellen
+CYPHER runtime = slotted
+CALL
+  apoc.load.xml(
+    'https://gitlab.rlp.net/adwmainz/regesta-imperii/lab/regesta-imperii-data/-/raw/main/archive/RegestenUndRegister/abt-03/ri_03,2,3-heinrich_iv/Register/RI_003-002.xml',
+    '',
+    {},
+    true
+  )
+  YIELD value AS xmlFile
+UNWIND xmlFile._register AS wdata
+CREATE
+  (e:Entity
+    {
+      xmlId: wdata.id,
+      type: wdata.typ,
+      parentId: wdata.parent,
+      lat: wdata.lat,
+      long: wdata.lon,
+      wikidataId: wdata.wikidata,
+      geonames: wdata.geonames,
+      state: 'h4 import'
+    })
+RETURN count(e);
+
+// Label bei den Entitäten ergänzen
+CYPHER runtime = slotted
+CALL
+  apoc.load.xml(
+    'https://gitlab.rlp.net/adwmainz/regesta-imperii/lab/regesta-imperii-data/-/raw/main/archive/RegestenUndRegister/abt-03/ri_03,2,3-heinrich_iv/Register/RI_003-002.xml',
+    '',
+    {},
+    true
+  )
+  YIELD value AS xmlFile
+UNWIND xmlFile._register AS lemma
+WITH
+  lemma.id AS xmlId,
+  [x IN lemma._lemma WHERE x._type = "label" | x._text][0] AS label,
+  [
+    y IN [x IN lemma._lemma WHERE x._type = "numbers" | x._numbers][0]
+    WHERE y.type = "nennung"
+    | y._text
+  ] AS nennung,
+  [
+    y IN [x IN lemma._lemma WHERE x._type = "numbers" | x._numbers][0]
+    WHERE y.type = "empfaenger"
+    | y._text
+  ] AS empfaenger
+MATCH (i:Entity {xmlId: xmlId})
+SET i.origLabel = label;
+
+// wikidataId ergänzen
+CYPHER runtime = slotted
+CALL
+  apoc.load.xml(
+    'https://gitlab.rlp.net/adwmainz/regesta-imperii/lab/regesta-imperii-data/-/raw/main/archive/RegestenUndRegister/abt-03/ri_03,2,3-heinrich_iv/Register/RI_003-002.xml',
+    '',
+    {},
+    true
+  )
+  YIELD value AS xmlFile
+UNWIND xmlFile._register AS lemma
+WITH
+  lemma.id AS xmlId,
+  [x IN lemma._lemma WHERE x._type = 'idno' AND x.type = 'wikidata' | x._text][0] AS wikidataId
+WITH wikidataId, xmlId
+WHERE wikidataId IS NOT NULL
+MATCH (i:Entity {xmlId: xmlId})
+SET i.wikidataId = wikidataId
+RETURN count(i);
+
+//IS_SUB_OF erstellen
+MATCH (c:Entity {state: 'h4 import'}), (p:Entity {state: 'h4 import'})
+WHERE c.parentId = p.xmlId
+MERGE (c)-[r:IS_SUB_OF]->(p)
+RETURN count(r);
+
+// label erstellen
+MATCH
+  (e0:Entity {state: 'h4 import'})<-[:IS_SUB_OF]-
+  (e1:Entity {state: 'h4 import'})
+SET e1.label = e0.origLabel + ' // ' + e1.origLabel;
+MATCH
+  (e0:Entity {pathLength: '0', state: 'h4 import'})<-[:IS_SUB_OF]-
+  (e1:Entity {state: 'h4 import'})<-[:IS_SUB_OF]-
+  (e2:Entity {state: 'h4 import'})
+SET e2.label = e0.origLabel + ' // ' + e1.origLabel + ' // ' + e2.origLabel;
+MATCH
+  (e0:Entity {pathLength: '0', state: 'h4 import'})<-[:IS_SUB_OF]-
+  (e1:Entity {state: 'h4 import'})<-[:IS_SUB_OF]-
+  (e2:Entity {state: 'h4 import'})<-[:IS_SUB_OF]-
+  (e3:Entity {state: 'h4 import'})
+SET
+  e3.label =
+    e0.origLabel +
+    ' // ' +
+    e1.origLabel +
+    ' // ' +
+    e2.origLabel +
+    ' // ' +
+    e3.origLabel;
+MATCH
+  (e0:Entity {pathLength: '0', state: 'h4 import'})<-[:IS_SUB_OF]-
+  (e1:Entity {state: 'h4 import'})<-[:IS_SUB_OF]-
+  (e2:Entity {state: 'h4 import'})<-[:IS_SUB_OF]-
+  (e3:Entity {state: 'h4 import'})<-[:IS_SUB_OF]-
+  (e4:Entity {state: 'h4 import'})
+SET
+  e4.label =
+    e0.origLabel +
+    ' // ' +
+    e1.origLabel +
+    ' // ' +
+    e2.origLabel +
+    ' // ' +
+    e3.origLabel +
+    ' // ' +
+    e4.origLabel;
+MATCH
+  (e0:Entity {pathLength: '0', state: 'h4 import'})<-[:IS_SUB_OF]-
+  (e1:Entity {state: 'h4 import'})<-[:IS_SUB_OF]-
+  (e2:Entity {state: 'h4 import'})<-[:IS_SUB_OF]-
+  (e3:Entity {state: 'h4 import'})<-[:IS_SUB_OF]-
+  (e4:Entity {state: 'h4 import'})<-[:IS_SUB_OF]-
+  (e5:Entity {state: 'h4 import'})
+SET
+  e5.label =
+    e0.origLabel +
+    ' // ' +
+    e1.origLabel +
+    ' // ' +
+    e2.origLabel +
+    ' // ' +
+    e3.origLabel +
+    ' // ' +
+    e4.origLabel +
+    ' // ' +
+    e5.origLabel;
+MATCH
+  (e0:Entity {pathLength: '0', state: 'h4 import'})<-[:IS_SUB_OF]-
+  (e1:Entity {state: 'h4 import'})<-[:IS_SUB_OF]-
+  (e2:Entity {state: 'h4 import'})<-[:IS_SUB_OF]-
+  (e3:Entity {state: 'h4 import'})<-[:IS_SUB_OF]-
+  (e4:Entity {state: 'h4 import'})<-[:IS_SUB_OF]-
+  (e5:Entity {state: 'h4 import'})<-[:IS_SUB_OF]-
+  (e6:Entity {state: 'h4 import'})
+SET
+  e6.label =
+    e0.origLabel +
+    ' // ' +
+    e1.origLabel +
+    ' // ' +
+    e2.origLabel +
+    ' // ' +
+    e3.origLabel +
+    ' // ' +
+    e4.origLabel +
+    ' // ' +
+    e5.origLabel +
+    ' // ' +
+    e6.origLabel;
+
+// Haupteinträge mit label versehen
+MATCH (e:Entity {state: 'h4 import'})
+WHERE e.label IS NULL AND e.origLabel IS NOT NULL
+SET e.label = e.origLabel;
+
+// APPEARS_IN erstellen
+CYPHER runtime = slotted
+CALL
+  apoc.load.xml(
+    "https://gitlab.rlp.net/adwmainz/regesta-imperii/lab/regesta-imperii-data/-/raw/main/archive/RegestenUndRegister/abt-03/ri_03,2,3-heinrich_iv/Register/RI_003-002.xml",
+    '',
+    {},
+    true
+  )
+  YIELD value AS xmlFile
+UNWIND xmlFile._register AS wdata
+UNWIND wdata._lemma AS lemma
+UNWIND lemma._numbers AS number
+MATCH (e:Entity {state: 'h4 import', xmlId: wdata.id})
+MATCH (r:Regesta {identifier: 'RI III,2,3 n. ' + number._text})
+WITH wdata, e, r, number
+// WHERE number.type = "nennung"
+CREATE
+  (e)-[:HAS_ANNOTATION]->
+  (a:Annotation
+    {
+      label: 'ri:appearsIn',
+      type: 'ri:appearsIn',
+      role: number.type,
+      uuid: randomUUID()
+    })-
+    [:REFERS_TO]->
+  (r)
+RETURN count(a);
+
+// Is Sub Of Annotation erstellen
+MATCH
+  (c:Entity {state: 'h4 import'})-[r:IS_SUB_OF]->(p:Entity {state: 'h4 import'})
+MERGE
+  (c)-[:HAS_ANNOTATION]->
+  (a:Annotation {label: 'ri:isSubOf', type: 'ri:isSubOf'})-[:REFERS_TO]->
+  (p)
+  ON CREATE SET a.uuid = randomUUID()
+DELETE r;
+
+MATCH (c:Entity {state: 'h4 import'})
+REMOVE c.state;
+
+
+
+// [STEP 00?] Finale Anpassungen
+//IS_SUB_OF erstellen
+MATCH (i:Entity), (p:Entity)
+WHERE i.parentId = p.xmlId
+MERGE
+  (i)-[:HAS_ANNOTATION]->
+  (a:Annotation {label: 'ri:isSubOf', type: 'ri:isSubOf'})-[:REFERS_TO]->
+  (p)
+  ON CREATE SET a.uuid = randomUUID();
+
 // Indexeinträge mit neo4j-Koordinaten der Ausstellungsorte versehen
 MATCH (e:Entity)
 WHERE e.latitude IS NOT NULL
@@ -461,3 +681,15 @@ SET
 MATCH (e:Entity)
 WHERE e.latitude IS NOT NULL
 SET e.latLong = e.latitude + ',' + e.longitude;
+
+// Entity label von html bereinigen
+MATCH (i:Entity)
+WITH
+  i,
+  htmlLabel,
+  trim(string.regexReplace(htmlLabel, '<[^>]*>', '')) AS cleanLabel
+SET
+  i.htmlLabel = htmlLabel,
+  i.htmlOrigLabel = htmlLabel,
+  i.label = cleanLabel,
+  i.origLabel = cleanLabel;
