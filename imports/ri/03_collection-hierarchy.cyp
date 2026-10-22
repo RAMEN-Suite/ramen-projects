@@ -683,15 +683,22 @@ RETURN c1.label AS department, c2.label AS nextDepartment
 ORDER BY i;
 
 // NEXT Kanten zwischen Regesta Nodes
-MATCH (r:Regesta)-[:PART_OF]->(v:Collection:Volume)
-WHERE r.regestennummernorm IS NOT NULL
-WITH v, r
-ORDER BY v, toFloat(r.regestennummernorm)
-WITH v, collect(r) AS regesta
-UNWIND range(0, size(regesta) - 2) AS i
-WITH regesta[i] AS currentRegesta, regesta[i + 1] AS nextRegesta
-MERGE
-  (currentRegesta)-[:HAS_ANNOTATION]->
-  (a:Annotation:Next {label: 'next', type: 'next'})-[:REFERS_TO]->
-  (nextRegesta)
-  ON CREATE SET a.uuid = randomUUID();
+MATCH (v:Collection:Volume)
+CALL (v) {
+  MATCH (r:Regesta)-[:PART_OF]->(v)
+  WHERE r.regestennummernorm IS NOT NULL
+
+  WITH r
+  ORDER BY toFloat(r.regestennummernorm)
+
+  WITH collect(r) AS regesta
+  UNWIND range(0, size(regesta) - 2) AS i
+
+  WITH regesta[i] AS currentRegesta, regesta[i + 1] AS nextRegesta
+
+  MERGE
+    (currentRegesta)-[:HAS_ANNOTATION]->
+    (a:Annotation:Next {label: 'next', type: 'next'})-[:REFERS_TO]->
+    (nextRegesta)
+    ON CREATE SET a.uuid = randomUUID()
+} IN TRANSACTIONS OF 1 ROW;

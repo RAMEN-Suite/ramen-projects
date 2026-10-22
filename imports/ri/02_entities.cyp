@@ -7,7 +7,7 @@ CALL (line) {
   MATCH (r:Regesta {origPlaceOfIssue: line.Original})
   MERGE (p:Place {normalizedGerman: line.normalisiertDeutsch})
     ON CREATE SET
-      p:Entity,
+      p :Entity,
       p.uuid = randomUUID(),
       p.label = line.normalisiertDeutsch
   SET
@@ -42,7 +42,6 @@ CALL (line) {
     r.latLong = p.latLong
 
 } IN TRANSACTIONS OF 1000 ROWS;
-
 
 // [STEP 002] Heinrich 7 Entities
 CALL
@@ -151,8 +150,8 @@ CALL (rows) {
   MATCH (e:Entity {id: row.id})
   WITH
     e,
-    trim(string.regexReplace(
-      string.regexReplace(
+    trim(apoc.text.replace(
+      apoc.text.replace(
         row.rawInhaltXml,
         '(?s)<Regestennummer>.*?</Regestennummer>',
         ''
@@ -374,16 +373,16 @@ WITH
     WHERE y.type = "empfaenger"
     | y._text
   ] AS empfaenger
-  MATCH (i:Entity {xmlId: xmlId})
-  WITH
-    i,
-    htmlLabel,
-    trim(string.regexReplace(htmlLabel, '<[^>]*>', '')) AS cleanLabel
-  SET
-    i.htmlLabel = htmlLabel,
-    i.htmlOrigLabel = htmlLabel,
-    i.label = cleanLabel,
-    i.origLabel = cleanLabel;
+MATCH (i:Entity {xmlId: xmlId})
+WITH
+  i,
+  htmlLabel,
+  trim(apoc.text.replace(htmlLabel, '<[^>]*>', '')) AS cleanLabel
+SET
+  i.htmlLabel = htmlLabel,
+  i.htmlOrigLabel = htmlLabel,
+  i.label = cleanLabel,
+  i.origLabel = cleanLabel;
 
 // wikidataId ergänzen
 CYPHER runtime = slotted
@@ -439,7 +438,6 @@ CREATE
     [:REFERS_TO]->
   (r)
 RETURN count(a);
-
 
 // [STEP 004] Heinrich IV Entities
 // registerId erstellen
@@ -658,8 +656,6 @@ DELETE r;
 MATCH (c:Entity {state: 'h4 import'})
 REMOVE c.state;
 
-
-
 // [STEP 00?] Finale Anpassungen
 //IS_SUB_OF erstellen
 MATCH (i:Entity), (p:Entity)
@@ -686,10 +682,12 @@ SET e.latLong = e.latitude + ',' + e.longitude;
 MATCH (i:Entity)
 WITH
   i,
-  htmlLabel,
-  trim(string.regexReplace(htmlLabel, '<[^>]*>', '')) AS cleanLabel
+  i.label AS htmlLabel,
+  i.origLabel AS htmlOrigLabel,
+  trim(apoc.text.replace(i.label, '<[^>]*>', '')) AS cleanLabel,
+  trim(apoc.text.replace(i.origLabel, '<[^>]*>', '')) AS cleanOrigLabel
 SET
   i.htmlLabel = htmlLabel,
-  i.htmlOrigLabel = htmlLabel,
+  i.htmlOrigLabel = htmlOrigLabel,
   i.label = cleanLabel,
-  i.origLabel = cleanLabel;
+  i.origLabel = cleanOrigLabel;

@@ -188,28 +188,28 @@ CALL {
       r,
       def,
       i,
-      string.regexReplace(def.t, '<sup>(.*?)</sup>', '<sup>[$1]</sup>') AS textWithSuperscript
+      apoc.text.replace(def.t, '<sup>(.*?)</sup>', '<sup>[$1]</sup>') AS textWithSuperscript
 
     // Nach jedem Listenelement einen Zeilenumbruch einfügen
     WITH
       r,
       def,
       i,
-      string.regexReplace(textWithSuperscript, '</li>', '</li>\n') AS formatedListsText
+      apoc.text.replace(textWithSuperscript, '</li>', '</li>\n') AS formatedListsText
 
     // html Kommentare entfernen
     WITH
       r,
       def,
       i,
-      string.regexReplace(formatedListsText, '(?s)<!--.*?(-->|$)', '') AS rmHtmlCommentText
+      apoc.text.replace(formatedListsText, '(?s)<!--.*?(-->|$)', '') AS rmHtmlCommentText
 
     // kaputte span elemente entfernen
     WITH
       r,
       def,
       i,
-      string.regexReplace(rmHtmlCommentText, '</</span>', '</span>') AS text
+      apoc.text.replace(rmHtmlCommentText, '</</span>', '</span>') AS text
 
     CREATE (c:Content:Text {uuid: randomUUID(), label: def.l, text: text})
     CREATE (c)-[:PART_OF]->(r)
@@ -376,32 +376,3 @@ CALL (r) {
       ref.url_title = link[2]
   MERGE (r)-[:HAS_ANNOTATION]->(ref)
 } IN TRANSACTIONS OF 1000 ROWS;
-
-// xml tag cleanup
-MATCH (:Regesta)<-[:PART_OF]-(t:Text)
-CALL (t) {
-  WITH
-    t,
-    CASE
-      WHEN t.text IS NOT NULL AND t.htmlText IS NULL THEN t.text
-      ELSE null
-    END AS newHtmlText
-
-  SET t.htmlText = COALESCE(t.htmlText, newHtmlText)
-  SET t.text =
-      CASE
-        WHEN newHtmlText IS NOT NULL THEN null
-        ELSE t.text
-      END
-  WITH t
-  CALL
-    atag.text.import.html(
-      t,
-      'htmlText',
-      'Annotation',
-      'text',
-      'HAS_ANNOTATION'
-    )
-    YIELD node
-  RETURN count(node) AS dummy
-} IN TRANSACTIONS OF 500 ROWS;
