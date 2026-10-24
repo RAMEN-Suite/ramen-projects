@@ -217,7 +217,17 @@
         },
         {
           "type": "head",
-          "properties": [],
+          "properties": [
+            {
+              "name": "level",
+              "type": "Integer",
+              "minimum": 1,
+              "maximum": 6,
+              "required": true,
+              "editable": true,
+              "visible": true
+            }
+          ],
           "miso": {
             "group": "structure",
             "controls": {},
@@ -244,20 +254,70 @@
         },
         {
           "type": "row",
-          "properties": [],
+          "properties": [
+            {
+              "name": "rows",
+              "type": "Integer",
+              "required": false,
+              "editable": false,
+              "visible": true
+            },
+            {
+              "name": "cols",
+              "type": "Integer",
+              "required": false,
+              "editable": false,
+              "visible": true
+            },
+            {
+              "name": "role",
+              "type": "String",
+              "required": false,
+              "editable": false,
+              "visible": true,
+              "options": ["data", "label"]
+            }
+          ],
           "miso": {
             "group": "structure",
             "controls": {},
-            "editing": { "native": { "type": "tableRow" } }
+            "editing": {
+              "native": { "type": "tableRow", "attributes": { "colspan": "cols", "rowspan": "rows", "role": "role" } }
+            }
           }
         },
         {
           "type": "cell",
-          "properties": [],
+          "properties": [
+            {
+              "name": "rows",
+              "type": "Integer",
+              "required": false,
+              "editable": true,
+              "visible": true
+            },
+            {
+              "name": "cols",
+              "type": "Integer",
+              "required": false,
+              "editable": true,
+              "visible": true
+            },
+            {
+              "name": "role",
+              "type": "String",
+              "required": false,
+              "editable": false,
+              "visible": true,
+              "options": ["data", "label"]
+            }
+          ],
           "miso": {
             "group": "structure",
             "controls": {},
-            "editing": { "native": { "type": "tableCell", "attributes": { "colspan": "cols", "rowspan": "rows" } } }
+            "editing": {
+              "native": { "type": "tableCell", "attributes": { "colspan": "cols", "rowspan": "rows", "role": "role" } }
+            }
           }
         },
         {
