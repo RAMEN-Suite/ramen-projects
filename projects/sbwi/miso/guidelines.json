@@ -35,10 +35,9 @@
           {
             "name": "status",
             "type": "String",
-            "required": true,
+            "required": false,
             "editable": true,
-            "visible": true,
-            "options": ["100", "70", "40"]
+            "visible": true
           },
           {
             "name": "xmlDownload",
@@ -56,10 +55,10 @@
                 {
                   "name": "dateType",
                   "type": "String",
+                  "options": ["point", "imprecise", "range"],
                   "required": false,
                   "editable": true,
-                  "visible": true,
-                  "options": ["point", "imprecise", "range"]
+                  "visible": true
                 },
                 {
                   "name": "dateStart",
@@ -77,21 +76,18 @@
                 },
                 {
                   "name": "dateCertainty",
+                  "options": ["high", "low"],
                   "type": "String",
                   "required": false,
                   "editable": true,
-                  "visible": true,
-                  "options": ["high", "low"]
+                  "visible": true
                 }
               ],
               "miso": {
                 "group": "project",
                 "controls": {},
-                "editing": {
-                  "extent": "range"
-                }
-              },
-              "hasEntities": true
+                "editing": { "extent": "range" }
+              }
             },
             {
               "type": "received",
@@ -99,10 +95,10 @@
                 {
                   "name": "dateType",
                   "type": "String",
+                  "options": ["point", "imprecise"],
                   "required": false,
                   "editable": true,
-                  "visible": true,
-                  "options": ["point", "imprecise"]
+                  "visible": true
                 },
                 {
                   "name": "dateStart",
@@ -120,37 +116,32 @@
                 },
                 {
                   "name": "dateCertainty",
+                  "options": ["high", "low"],
                   "type": "String",
                   "required": false,
                   "editable": true,
-                  "visible": true,
-                  "options": ["high", "low"]
+                  "visible": true
                 }
               ],
               "miso": {
                 "group": "project",
                 "controls": {}
-              },
-              "hasEntities": true
+              }
             },
             {
-              "type": "editorial_comment",
+              "type": "comment-editorial_note",
               "properties": [],
               "miso": {
                 "group": "project",
                 "controls": {},
-                "editing": {
-                  "extent": "range"
-                },
+                "editing": { "extent": "range" },
                 "appearance": {
-                  "highlight": {
-                    "kind": "properties",
-                    "backgroundColor": "hsla(55, 100%, 70%, 0.35)"
-                  }
+                  "highlight": { "kind": "properties", "backgroundColor": "hsla(55, 100%, 70%, 0.35)" }
                 }
               }
             }
           ],
+
           "properties": []
         },
         "miso": {}
@@ -168,10 +159,9 @@
           {
             "name": "status",
             "type": "String",
-            "required": true,
+            "required": false,
             "editable": true,
-            "visible": true,
-            "options": ["100", "70", "40"]
+            "visible": true
           },
           {
             "name": "xmlDownload",
@@ -200,10 +190,9 @@
           {
             "name": "status",
             "type": "String",
-            "required": true,
+            "required": false,
             "editable": true,
-            "visible": true,
-            "options": ["100", "70", "40"]
+            "visible": true
           },
           {
             "name": "xmlDownload",
@@ -234,8 +223,7 @@
             "type": "String",
             "required": false,
             "editable": true,
-            "visible": true,
-            "options": ["print", "final_copy", "manuscript", "copy", "concept", "notExtant", "print-as-print"]
+            "visible": true
           },
           {
             "name": "textGenre",
@@ -249,8 +237,7 @@
             "type": "String",
             "required": false,
             "editable": true,
-            "visible": true,
-            "options": ["lat", "fra", "deu", "pol", "ita", "nld"]
+            "visible": true
           },
           {
             "name": "archive",
@@ -290,10 +277,9 @@
           {
             "name": "license",
             "type": "String",
-            "required": true,
+            "required": false,
             "editable": true,
-            "visible": true,
-            "options": ["https://creativecommons.org/licenses/by/4.0/", "https://creativecommons.org/licenses/by-sa/3.0/"]
+            "visible": true
           }
         ],
         "annotations": {
@@ -330,14 +316,7 @@
     }
   },
   "contents": {
-    "types": [
-      {
-        "additionalLabel": "Text",
-        "miso": {
-          "medium": "text"
-        }
-      }
-    ],
+    "types": [{ "additionalLabel": "Text", "miso": { "medium": "text" } }],
     "annotations": {
       "types": [
         {
@@ -346,34 +325,21 @@
             {
               "name": "rendition",
               "type": "String",
+              "options": ["#et"],
               "required": false,
               "editable": true,
-              "visible": true,
-              "options": ["#et"]
+              "visible": true
             }
           ],
           "miso": {
             "group": "structure",
             "controls": {},
-            "editing": {
-              "native": {
-                "type": "paragraph"
-              }
-            }
+            "editing": { "native": { "type": "paragraph" } }
           }
         },
         {
           "type": "head",
           "properties": [
-            {
-              "name": "level",
-              "type": "Integer",
-              "minimum": 1,
-              "maximum": 6,
-              "required": true,
-              "editable": true,
-              "visible": true
-            },
             {
               "name": "lang",
               "type": "String",
@@ -385,52 +351,16 @@
           "miso": {
             "group": "structure",
             "controls": {},
-            "editing": {
-              "native": {
-                "type": "heading"
-              }
-            }
+            "editing": { "native": { "type": "heading" } }
           }
         },
         {
           "type": "row",
-          "properties": [
-            {
-              "name": "rows",
-              "type": "Integer",
-              "required": false,
-              "editable": false,
-              "visible": true
-            },
-            {
-              "name": "cols",
-              "type": "Integer",
-              "required": false,
-              "editable": false,
-              "visible": true
-            },
-            {
-              "name": "role",
-              "type": "String",
-              "required": false,
-              "editable": false,
-              "visible": true,
-              "options": ["data", "label"]
-            }
-          ],
+          "properties": [],
           "miso": {
             "group": "structure",
             "controls": {},
-            "editing": {
-              "native": {
-                "type": "tableRow",
-                "attributes": {
-                  "colspan": "cols",
-                  "rowspan": "rows",
-                  "role": "role"
-                }
-              }
-            }
+            "editing": { "native": { "type": "tableRow" } }
           }
         },
         {
@@ -439,52 +369,31 @@
           "miso": {
             "group": "structure",
             "controls": {},
-            "editing": {
-              "native": {
-                "type": "hardBreak"
-              }
-            }
+            "editing": { "native": { "type": "hardBreak" } }
           }
         },
         {
           "type": "cell",
           "properties": [
             {
-              "name": "rows",
-              "type": "Integer",
-              "required": false,
-              "editable": true,
-              "visible": true
-            },
-            {
               "name": "cols",
-              "type": "Integer",
-              "required": false,
-              "editable": true,
-              "visible": true
-            },
-            {
-              "name": "role",
               "type": "String",
               "required": false,
-              "editable": false,
-              "visible": true,
-              "options": ["data", "label"]
+              "editable": true,
+              "visible": true
+            },
+            {
+              "name": "rows",
+              "type": "String",
+              "required": false,
+              "editable": true,
+              "visible": true
             }
           ],
           "miso": {
             "group": "structure",
             "controls": {},
-            "editing": {
-              "native": {
-                "type": "tableCell",
-                "attributes": {
-                  "colspan": "cols",
-                  "rowspan": "rows",
-                  "role": "role"
-                }
-              }
-            }
+            "editing": { "native": { "type": "tableCell", "attributes": { "colspan": "cols", "rowspan": "rows" } } }
           }
         },
         {
@@ -493,11 +402,7 @@
           "miso": {
             "group": "structure",
             "controls": {},
-            "editing": {
-              "native": {
-                "type": "bulletList"
-              }
-            }
+            "editing": { "native": { "type": "bulletList" } }
           }
         },
         {
@@ -506,11 +411,7 @@
           "miso": {
             "group": "structure",
             "controls": {},
-            "editing": {
-              "native": {
-                "type": "listItem"
-              }
-            }
+            "editing": { "native": { "type": "listItem" } }
           }
         },
         {
@@ -519,19 +420,16 @@
             {
               "name": "lang",
               "type": "String",
+              "options": ["lat"],
               "required": false,
               "editable": true,
-              "visible": true,
-              "options": ["lat"]
+              "visible": true
             }
           ],
           "miso": {
             "group": "structure",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "blockClassification"
-            }
+            "editing": { "extent": "range", "representation": "blockClassification" }
           }
         },
         {
@@ -540,6 +438,7 @@
             {
               "name": "lang",
               "type": "String",
+              "options": ["deu", "fra", "lat", "ita"],
               "required": false,
               "editable": true,
               "visible": true
@@ -548,10 +447,7 @@
           "miso": {
             "group": "structure",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "blockClassification"
-            }
+            "editing": { "extent": "range", "representation": "blockClassification" }
           }
         },
         {
@@ -560,10 +456,7 @@
           "miso": {
             "group": "structure",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "blockClassification"
-            }
+            "editing": { "extent": "range", "representation": "blockClassification" }
           }
         },
         {
@@ -572,10 +465,7 @@
           "miso": {
             "group": "structure",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "blockClassification"
-            }
+            "editing": { "extent": "range", "representation": "blockClassification" }
           }
         },
         {
@@ -584,10 +474,7 @@
           "miso": {
             "group": "structure",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "blockClassification"
-            }
+            "editing": { "extent": "range", "representation": "blockClassification" }
           }
         },
         {
@@ -596,27 +483,24 @@
             {
               "name": "hand",
               "type": "String",
-              "required": true,
+              "options": ["#author", "#addressee", "#unknown"],
+              "required": false,
               "editable": true,
-              "visible": true,
-              "options": ["#author", "#addressee", "#unknown"]
+              "visible": true
             },
             {
               "name": "place",
               "type": "String",
+              "options": ["mTop", "mBottom", "left", "right", "mInline"],
               "required": false,
               "editable": true,
-              "visible": true,
-              "options": ["mTop", "mBottom", "left", "right", "mInline"]
+              "visible": true
             }
           ],
           "miso": {
             "group": "structure",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "blockClassification"
-            }
+            "editing": { "extent": "range", "representation": "blockClassification" }
           }
         },
         {
@@ -625,6 +509,7 @@
             {
               "name": "rendition",
               "type": "String",
+              "options": ["#right"],
               "required": false,
               "editable": true,
               "visible": true
@@ -633,10 +518,7 @@
           "miso": {
             "group": "structure",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "blockClassification"
-            }
+            "editing": { "extent": "range", "representation": "blockClassification" }
           }
         },
         {
@@ -645,10 +527,7 @@
           "miso": {
             "group": "structure",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "blockClassification"
-            }
+            "editing": { "extent": "range", "representation": "blockClassification" }
           }
         },
         {
@@ -657,10 +536,7 @@
           "miso": {
             "group": "structure",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "blockClassification"
-            }
+            "editing": { "extent": "range", "representation": "blockClassification" }
           }
         },
         {
@@ -669,10 +545,7 @@
           "miso": {
             "group": "structure",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "blockClassification"
-            }
+            "editing": { "extent": "range", "representation": "blockClassification" }
           }
         },
         {
@@ -681,6 +554,7 @@
             {
               "name": "lang",
               "type": "String",
+              "options": ["grc", "lat"],
               "required": false,
               "editable": true,
               "visible": true
@@ -689,10 +563,7 @@
           "miso": {
             "group": "structure",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "blockClassification"
-            }
+            "editing": { "extent": "range", "representation": "blockClassification" }
           }
         },
         {
@@ -709,10 +580,7 @@
           "miso": {
             "group": "structure",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "blockClassification"
-            }
+            "editing": { "extent": "range", "representation": "blockClassification" }
           }
         },
         {
@@ -721,10 +589,7 @@
           "miso": {
             "group": "structure",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "blockClassification"
-            }
+            "editing": { "extent": "range", "representation": "blockClassification" }
           }
         },
         {
@@ -733,10 +598,7 @@
           "miso": {
             "group": "structure",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "blockClassification"
-            }
+            "editing": { "extent": "range", "representation": "blockClassification" }
           }
         },
         {
@@ -744,14 +606,14 @@
           "properties": [
             {
               "name": "cols",
-              "type": "Integer",
+              "type": "String",
               "required": false,
               "editable": true,
               "visible": true
             },
             {
               "name": "rows",
-              "type": "Integer",
+              "type": "String",
               "required": false,
               "editable": true,
               "visible": true
@@ -760,11 +622,7 @@
           "miso": {
             "group": "structure",
             "controls": {},
-            "editing": {
-              "native": {
-                "type": "table"
-              }
-            }
+            "editing": { "native": { "type": "table" } }
           }
         },
         {
@@ -773,24 +631,18 @@
             {
               "name": "place",
               "type": "String",
-              "required": true,
+              "options": ["superlinear", "sublinear", "intralinear", "left", "right", "mBottom", "across"],
+              "required": false,
               "editable": true,
-              "visible": true,
-              "options": ["superlinear", "sublinear", "intralinear", "left", "right", "mBottom", "across"]
+              "visible": true
             }
           ],
           "miso": {
             "group": "edition",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
-              "highlight": {
-                "kind": "properties",
-                "color": "hsl(22, 81%, 40%)"
-              }
+              "highlight": { "kind": "properties", "color": "hsl(22, 81%, 40%)" }
             }
           }
         },
@@ -800,25 +652,18 @@
             {
               "name": "rendition",
               "type": "String",
-              "required": true,
+              "options": ["#s", "#erased", "#ow"],
+              "required": false,
               "editable": true,
-              "visible": true,
-              "options": ["#s", "#erased", "#ow"]
+              "visible": true
             }
           ],
           "miso": {
             "group": "edition",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
-              "highlight": {
-                "kind": "properties",
-                "textDecorationLine": "line-through",
-                "color": "hsl(0, 0%, 44%)"
-              }
+              "highlight": { "kind": "properties", "textDecorationLine": "line-through", "color": "hsl(0, 0%, 44%)" }
             }
           }
         },
@@ -836,15 +681,9 @@
           "miso": {
             "group": "edition",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
-              "highlight": {
-                "kind": "properties",
-                "backgroundColor": "hsla(36, 85%, 76%, 0.3)"
-              }
+              "highlight": { "kind": "properties", "backgroundColor": "hsla(36, 85%, 76%, 0.3)" }
             }
           }
         },
@@ -854,10 +693,10 @@
             {
               "name": "certainty",
               "type": "String",
+              "options": ["high", "low"],
               "required": false,
               "editable": true,
-              "visible": true,
-              "options": ["high", "low"]
+              "visible": true
             },
             {
               "name": "correction",
@@ -869,24 +708,18 @@
             {
               "name": "isDeleted",
               "type": "String",
+              "options": ["true", "false"],
               "required": false,
               "editable": true,
-              "visible": true,
-              "options": ["true", "false"]
+              "visible": true
             }
           ],
           "miso": {
             "group": "edition",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
-              "highlight": {
-                "kind": "properties",
-                "color": "hsl(130, 99%, 29%)"
-              }
+              "highlight": { "kind": "properties", "color": "hsl(130, 99%, 29%)" }
             }
           }
         },
@@ -896,32 +729,26 @@
             {
               "name": "reason",
               "type": "String",
-              "required": true,
+              "options": ["illegible", "covered"],
+              "required": false,
               "editable": true,
-              "visible": true,
-              "options": ["illegible", "covered"]
+              "visible": true
             },
             {
               "name": "cert",
               "type": "String",
+              "options": ["high", "low"],
               "required": false,
               "editable": true,
-              "visible": true,
-              "options": ["high", "low"]
+              "visible": true
             }
           ],
           "miso": {
             "group": "edition",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
-              "highlight": {
-                "kind": "properties",
-                "color": "hsl(328, 98%, 47%)"
-              }
+              "highlight": { "kind": "properties", "color": "hsl(328, 98%, 47%)" }
             }
           }
         },
@@ -931,18 +758,18 @@
             {
               "name": "reason",
               "type": "String",
+              "options": ["illegible", "lost", "empty", "covered"],
               "required": false,
               "editable": true,
-              "visible": true,
-              "options": ["illegible", "lost", "empty", "covered"]
+              "visible": true
             },
             {
               "name": "unit",
               "type": "String",
+              "options": ["chars", "words", "lines", "pages"],
               "required": false,
               "editable": true,
-              "visible": true,
-              "options": ["chars", "words", "lines", "pages"]
+              "visible": true
             },
             {
               "name": "quantity",
@@ -955,10 +782,7 @@
           "miso": {
             "group": "edition",
             "controls": {},
-            "editing": {
-              "extent": "zeroPoint",
-              "representation": "inline"
-            },
+            "editing": { "extent": "zeroPoint", "representation": "inline" },
             "appearance": {
               "marker": {
                 "kind": "icon",
@@ -976,33 +800,26 @@
             {
               "name": "reason",
               "type": "String",
+              "options": ["covered", "damage"],
               "required": false,
               "editable": true,
-              "visible": true,
-              "options": ["covered", "damage"]
+              "visible": true
             },
             {
               "name": "cert",
               "type": "String",
+              "options": ["high", "low"],
               "required": false,
               "editable": true,
-              "visible": true,
-              "options": ["high", "low"]
+              "visible": true
             }
           ],
           "miso": {
             "group": "edition",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
-              "highlight": {
-                "kind": "properties",
-                "color": "hsl(217, 60%, 45%)",
-                "fontStyle": "italic"
-              }
+              "highlight": { "kind": "properties", "color": "hsl(217, 60%, 45%)", "fontStyle": "italic" }
             }
           }
         },
@@ -1020,10 +837,7 @@
           "miso": {
             "group": "edition",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
               "highlight": {
                 "kind": "properties",
@@ -1040,16 +854,9 @@
           "miso": {
             "group": "edition",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
-              "highlight": {
-                "kind": "properties",
-                "color": "hsl(201, 22%, 50%)",
-                "fontStyle": "italic"
-              }
+              "highlight": { "kind": "properties", "color": "hsl(201, 22%, 50%)", "fontStyle": "italic" }
             }
           }
         },
@@ -1059,16 +866,9 @@
           "miso": {
             "group": "edition",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
-              "highlight": {
-                "kind": "properties",
-                "color": "hsl(201, 22%, 50%)",
-                "fontStyle": "italic"
-              }
+              "highlight": { "kind": "properties", "color": "hsl(201, 22%, 50%)", "fontStyle": "italic" }
             }
           }
         },
@@ -1078,15 +878,9 @@
           "miso": {
             "group": "edition",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
-              "highlight": {
-                "kind": "properties",
-                "backgroundColor": "hsla(0, 0%, 50%, 0.12)"
-              }
+              "highlight": { "kind": "properties", "backgroundColor": "hsla(0, 0%, 50%, 0.12)" }
             }
           }
         },
@@ -1096,6 +890,7 @@
             {
               "name": "cert",
               "type": "String",
+              "options": ["high", "low"],
               "required": false,
               "editable": true,
               "visible": true
@@ -1104,15 +899,9 @@
           "miso": {
             "group": "edition",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
-              "highlight": {
-                "kind": "properties",
-                "backgroundColor": "hsla(36, 85%, 76%, 0.6)"
-              }
+              "highlight": { "kind": "properties", "backgroundColor": "hsla(36, 85%, 76%, 0.6)" }
             }
           }
         },
@@ -1130,16 +919,9 @@
           "miso": {
             "group": "edition",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
-              "highlight": {
-                "kind": "properties",
-                "color": "hsl(201, 22%, 50%)",
-                "fontStyle": "italic"
-              }
+              "highlight": { "kind": "properties", "color": "hsl(201, 22%, 50%)", "fontStyle": "italic" }
             }
           }
         },
@@ -1149,24 +931,18 @@
             {
               "name": "rendition",
               "type": "String",
-              "required": true,
+              "options": ["#b", "#i", "#u", "#g", "#k", "#k #g", "#aq", "#fr", "#sup", "#sub"],
+              "required": false,
               "editable": true,
-              "visible": true,
-              "options": ["#b", "#i", "#u", "#g", "#k", "#k #g", "#aq", "#fr", "#sup", "#sub"]
+              "visible": true
             }
           ],
           "miso": {
             "group": "edition",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
-              "highlight": {
-                "kind": "properties",
-                "fontWeight": "bold"
-              }
+              "highlight": { "kind": "properties", "fontWeight": "bold" }
             }
           }
         },
@@ -1176,25 +952,18 @@
             {
               "name": "lang",
               "type": "String",
+              "options": ["deu", "lat", "grc", "fra", "ita", "spa", "eng", "pol", "heb", "rus", "nld", "ara-Latn"],
               "required": false,
               "editable": true,
-              "visible": true,
-              "options": ["deu", "lat", "grc", "fra", "ita", "spa", "eng", "pol", "heb", "rus", "nld", "ara-Latn"]
+              "visible": true
             }
           ],
           "miso": {
             "group": "edition",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
-              "highlight": {
-                "kind": "properties",
-                "fontStyle": "italic",
-                "color": "hsl(240, 30%, 50%)"
-              }
+              "highlight": { "kind": "properties", "fontStyle": "italic", "color": "hsl(240, 30%, 50%)" }
             }
           }
         },
@@ -1212,10 +981,7 @@
           "miso": {
             "group": "edition",
             "controls": {},
-            "editing": {
-              "extent": "zeroPoint",
-              "representation": "inline"
-            },
+            "editing": { "extent": "zeroPoint", "representation": "inline" },
             "appearance": {
               "marker": {
                 "kind": "icon",
@@ -1240,18 +1006,18 @@
             {
               "name": "calendar",
               "type": "String",
+              "options": ["#Gregorian", "#Julian"],
               "required": false,
               "editable": true,
-              "visible": true,
-              "options": ["#Gregorian", "#Julian", "#Gregorian #Julian"]
+              "visible": true
             },
             {
               "name": "cert",
               "type": "String",
+              "options": ["high", "low"],
               "required": false,
               "editable": true,
-              "visible": true,
-              "options": ["high", "low"]
+              "visible": true
             },
             {
               "name": "from",
@@ -1271,15 +1037,9 @@
           "miso": {
             "group": "edition",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
-              "highlight": {
-                "kind": "properties",
-                "color": "hsl(200, 50%, 40%)"
-              }
+              "highlight": { "kind": "properties", "color": "hsl(200, 50%, 40%)" }
             }
           }
         },
@@ -1311,10 +1071,7 @@
           "miso": {
             "group": "layout",
             "controls": {},
-            "editing": {
-              "extent": "zeroPoint",
-              "representation": "inline"
-            },
+            "editing": { "extent": "zeroPoint", "representation": "inline" },
             "appearance": {
               "marker": {
                 "kind": "icon",
@@ -1327,79 +1084,21 @@
           }
         },
         {
-          "type": "formula",
-          "properties": [
-            {
-              "name": "latex",
-              "type": "String",
-              "required": true,
-              "editable": true,
-              "visible": true
-            },
-            {
-              "name": "display",
-              "type": "String",
-              "options": ["inline", "block"],
-              "required": false,
-              "editable": true,
-              "visible": true
-            }
-          ],
-          "miso": {
-            "group": "edition",
-            "controls": {},
-            "editing": {
-              "extent": "zeroPoint",
-              "representation": "inline"
-            },
-            "appearance": {
-              "icon": "sigma",
-              "marker": {
-                "kind": "math",
-                "property": "latex"
-              },
-              "variants": [
-                {
-                  "property": "display",
-                  "values": {
-                    "inline": {
-                      "marker": {
-                        "kind": "math",
-                        "property": "latex"
-                      }
-                    },
-                    "block": {
-                      "marker": {
-                        "kind": "math",
-                        "property": "latex",
-                        "display": "block"
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        {
           "type": "cb",
           "properties": [
             {
               "name": "n",
               "type": "String",
+              "options": ["1", "2", "b"],
               "required": false,
               "editable": true,
-              "visible": true,
-              "options": ["1", "2", "b"]
+              "visible": true
             }
           ],
           "miso": {
             "group": "layout",
             "controls": {},
-            "editing": {
-              "extent": "zeroPoint",
-              "representation": "inline"
-            },
+            "editing": { "extent": "zeroPoint", "representation": "inline" },
             "appearance": {
               "marker": {
                 "kind": "icon",
@@ -1417,10 +1116,7 @@
           "miso": {
             "group": "layout",
             "controls": {},
-            "editing": {
-              "extent": "zeroPoint",
-              "representation": "inline"
-            },
+            "editing": { "extent": "zeroPoint", "representation": "inline" },
             "appearance": {
               "marker": {
                 "kind": "icon",
@@ -1438,10 +1134,7 @@
           "miso": {
             "group": "layout",
             "controls": {},
-            "editing": {
-              "extent": "zeroPoint",
-              "representation": "inline"
-            },
+            "editing": { "extent": "zeroPoint", "representation": "inline" },
             "appearance": {
               "marker": {
                 "kind": "icon",
@@ -1468,32 +1161,28 @@
           "miso": {
             "group": "layout",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
-              "highlight": {
-                "kind": "properties",
-                "color": "hsl(0, 0%, 55%)",
-                "fontSize": "0.85em"
-              }
+              "highlight": { "kind": "properties", "color": "hsl(0, 0%, 55%)", "fontSize": "0.85em" }
             }
           }
         },
         {
           "type": "persName",
           "hasEntities": true,
-          "properties": [],
+          "properties": [
+            {
+              "name": "key",
+              "type": "String",
+              "required": false,
+              "editable": true,
+              "visible": true
+            }
+          ],
           "miso": {
             "group": "entities",
-            "controls": {
-              "shortcut": "Mod-Shift-p"
-            },
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "controls": { "shortcut": "Mod-Shift-p" },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
               "highlight": {
                 "kind": "properties",
@@ -1507,14 +1196,19 @@
         {
           "type": "placeName",
           "hasEntities": true,
-          "properties": [],
+          "properties": [
+            {
+              "name": "key",
+              "type": "String",
+              "required": false,
+              "editable": true,
+              "visible": true
+            }
+          ],
           "miso": {
             "group": "entities",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
               "highlight": {
                 "kind": "properties",
@@ -1528,14 +1222,19 @@
         {
           "type": "rs-person",
           "hasEntities": true,
-          "properties": [],
+          "properties": [
+            {
+              "name": "key",
+              "type": "String",
+              "required": false,
+              "editable": true,
+              "visible": true
+            }
+          ],
           "miso": {
             "group": "entities",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
               "highlight": {
                 "kind": "properties",
@@ -1549,14 +1248,19 @@
         {
           "type": "rs-place",
           "hasEntities": true,
-          "properties": [],
+          "properties": [
+            {
+              "name": "key",
+              "type": "String",
+              "required": false,
+              "editable": true,
+              "visible": true
+            }
+          ],
           "miso": {
             "group": "entities",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
               "highlight": {
                 "kind": "properties",
@@ -1570,14 +1274,19 @@
         {
           "type": "rs-term",
           "hasEntities": true,
-          "properties": [],
+          "properties": [
+            {
+              "name": "key",
+              "type": "String",
+              "required": false,
+              "editable": true,
+              "visible": true
+            }
+          ],
           "miso": {
             "group": "entities",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
               "highlight": {
                 "kind": "properties",
@@ -1590,14 +1299,20 @@
         },
         {
           "type": "rs-letter",
-          "properties": [],
+          "hasEntities": true,
+          "properties": [
+            {
+              "name": "key",
+              "type": "String",
+              "required": false,
+              "editable": true,
+              "visible": true
+            }
+          ],
           "miso": {
             "group": "entities",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
               "highlight": {
                 "kind": "properties",
@@ -1611,14 +1326,19 @@
         {
           "type": "rs-comet",
           "hasEntities": true,
-          "properties": [],
+          "properties": [
+            {
+              "name": "key",
+              "type": "String",
+              "required": false,
+              "editable": true,
+              "visible": true
+            }
+          ],
           "miso": {
             "group": "entities",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
               "highlight": {
                 "kind": "properties",
@@ -1632,14 +1352,19 @@
         {
           "type": "name-subjectIndexTerm",
           "hasEntities": true,
-          "properties": [],
+          "properties": [
+            {
+              "name": "key",
+              "type": "String",
+              "required": false,
+              "editable": true,
+              "visible": true
+            }
+          ],
           "miso": {
             "group": "entities",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
               "highlight": {
                 "kind": "properties",
@@ -1664,10 +1389,7 @@
           "miso": {
             "group": "sources",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
               "highlight": {
                 "kind": "properties",
@@ -1684,6 +1406,7 @@
             {
               "name": "unit",
               "type": "String",
+              "options": ["pages"],
               "required": false,
               "editable": true,
               "visible": true
@@ -1692,15 +1415,9 @@
           "miso": {
             "group": "sources",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
-              "highlight": {
-                "kind": "properties",
-                "fontStyle": "italic"
-              }
+              "highlight": { "kind": "properties", "fontStyle": "italic" }
             }
           }
         },
@@ -1718,15 +1435,38 @@
           "miso": {
             "group": "sources",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
               "highlight": {
                 "kind": "properties",
                 "textDecorationLine": "underline",
                 "textDecorationColor": "hsl(200, 80%, 50%)",
+                "textDecorationThickness": "2px"
+              }
+            }
+          }
+        },
+        {
+          "type": "seeAlso",
+          "properties": [
+            {
+              "name": "target",
+              "type": "String",
+              "required": false,
+              "editable": true,
+              "visible": true
+            }
+          ],
+          "miso": {
+            "group": "sources",
+            "controls": {},
+            "editing": { "extent": "range", "representation": "inline" },
+            "appearance": {
+              "highlight": {
+                "kind": "properties",
+                "textDecorationLine": "underline",
+                "textDecorationStyle": "dashed",
+                "textDecorationColor": "hsl(270, 50%, 55%)",
                 "textDecorationThickness": "2px"
               }
             }
@@ -1746,10 +1486,7 @@
           "miso": {
             "group": "sources",
             "controls": {},
-            "editing": {
-              "extent": "zeroPoint",
-              "representation": "inline"
-            },
+            "editing": { "extent": "zeroPoint", "representation": "inline" },
             "appearance": {
               "marker": {
                 "kind": "icon",
@@ -1763,14 +1500,19 @@
         },
         {
           "type": "rs-comment",
-          "properties": [],
+          "properties": [
+            {
+              "name": "key",
+              "type": "String",
+              "required": false,
+              "editable": true,
+              "visible": true
+            }
+          ],
           "miso": {
             "group": "sources",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
               "highlight": {
                 "kind": "properties",
@@ -1796,18 +1538,18 @@
             {
               "name": "place",
               "type": "String",
+              "options": ["mTop", "mTop left", "mTop right", "mBottom", "left", "right", "mInline"],
               "required": false,
               "editable": true,
-              "visible": true,
-              "options": ["mTop", "mTop left", "mTop right", "mBottom", "left", "right", "mInline"]
+              "visible": true
             },
             {
               "name": "hand",
               "type": "String",
+              "options": ["#author", "#addressee", "#unknown", "#Kuyper"],
               "required": false,
               "editable": true,
-              "visible": true,
-              "options": ["#author", "#addressee", "#unknown", "#Kuyper"]
+              "visible": true
             },
             {
               "name": "id",
@@ -1827,33 +1569,29 @@
           "miso": {
             "group": "project",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
-              "highlight": {
-                "kind": "properties",
-                "backgroundColor": "hsla(55, 100%, 70%, 0.35)"
-              }
+              "highlight": { "kind": "properties", "backgroundColor": "hsla(55, 100%, 70%, 0.35)" }
             }
           }
         },
         {
           "type": "commented",
-          "properties": [],
+          "properties": [
+            {
+              "name": "key",
+              "type": "String",
+              "required": false,
+              "editable": true,
+              "visible": true
+            }
+          ],
           "miso": {
             "group": "project",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
-            },
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
-              "highlight": {
-                "kind": "properties",
-                "backgroundColor": "hsla(30, 80%, 85%, 0.6)"
-              }
+              "highlight": { "kind": "properties", "backgroundColor": "hsla(30, 80%, 85%, 0.6)" }
             }
           }
         },
@@ -1863,15 +1601,103 @@
           "miso": {
             "group": "project",
             "controls": {},
-            "editing": {
-              "extent": "range",
-              "representation": "inline"
+            "editing": { "extent": "range", "representation": "inline" },
+            "appearance": {
+              "highlight": { "kind": "properties", "backgroundColor": "hsla(200, 60%, 85%, 0.6)" }
+            }
+          }
+        },
+        {
+          "type": "normdata",
+          "properties": [
+            {
+              "name": "ref",
+              "type": "String",
+              "required": false,
+              "editable": true,
+              "visible": true
             },
+            {
+              "name": "identifier",
+              "type": "String",
+              "options": ["gndId", "wikidataId", "geoId", "simbadId", "sbdbId", "emloId"],
+              "required": false,
+              "editable": true,
+              "visible": true
+            },
+            {
+              "name": "url",
+              "type": "String",
+              "required": false,
+              "editable": true,
+              "visible": true
+            }
+          ],
+          "miso": {
+            "group": "project",
+            "controls": {},
+            "editing": { "extent": "range", "representation": "inline" },
             "appearance": {
               "highlight": {
                 "kind": "properties",
-                "backgroundColor": "hsla(200, 60%, 85%, 0.6)"
+                "textDecorationLine": "underline",
+                "textDecorationStyle": "dotted",
+                "textDecorationColor": "hsl(280, 50%, 55%)",
+                "textDecorationThickness": "2px"
               }
+            }
+          }
+        },
+        {
+          "type": "altLabel",
+          "properties": [
+            {
+              "name": "value",
+              "type": "String",
+              "required": false,
+              "editable": true,
+              "visible": true
+            },
+            {
+              "name": "forename",
+              "type": "String",
+              "required": false,
+              "editable": true,
+              "visible": true
+            },
+            {
+              "name": "label",
+              "type": "String",
+              "required": false,
+              "editable": true,
+              "visible": true
+            },
+            {
+              "name": "surname",
+              "type": "String",
+              "required": false,
+              "editable": true,
+              "visible": true
+            }
+          ],
+          "miso": {
+            "group": "project",
+            "controls": {},
+            "editing": { "extent": "range", "representation": "inline" },
+            "appearance": {
+              "highlight": { "kind": "properties", "backgroundColor": "hsla(160, 60%, 80%, 0.6)" }
+            }
+          }
+        },
+        {
+          "type": "subOf",
+          "properties": [],
+          "miso": {
+            "group": "project",
+            "controls": {},
+            "editing": { "extent": "range", "representation": "inline" },
+            "appearance": {
+              "highlight": { "kind": "properties", "backgroundColor": "hsla(260, 60%, 85%, 0.6)" }
             }
           }
         }
@@ -1899,22 +1725,12 @@
   },
   "entities": {
     "types": [
-      {
-        "additionalLabel": "Person",
-        "miso": {}
-      },
-      {
-        "additionalLabel": "Place",
-        "miso": {}
-      },
-      {
-        "additionalLabel": "Term",
-        "miso": {}
-      },
-      {
-        "additionalLabel": "BibleVerse",
-        "miso": {}
-      }
+      { "additionalLabel": "Person", "miso": {} },
+      { "additionalLabel": "Place", "miso": {} },
+      { "additionalLabel": "Term", "miso": {} },
+      { "additionalLabel": "BibleVerse", "miso": {} },
+      { "additionalLabel": "Letter", "miso": {} },
+      { "additionalLabel": "Comet", "miso": {} }
     ]
   }
 }
