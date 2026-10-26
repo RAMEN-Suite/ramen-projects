@@ -3,7 +3,7 @@ name: ri combine scripts
 on:
   push:
     branches:
-      - test/ri-import-combine
+      - dev
   workflow_dispatch:
 
 concurrency:
