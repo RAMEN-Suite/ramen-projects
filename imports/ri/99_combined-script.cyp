@@ -1,3 +1,6 @@
+// VERSION INFO
+// neo4j 5.26 with the apoc plugin required. The neo4j-atag plugin is required to clean the text nodes and create annotations from it. Everything else works without it.
+
 // [STEP 001] Create UUID constraints
 CREATE CONSTRAINT entity_uuid_unique IF NOT EXISTS
 FOR (node:Entity)
@@ -224,6 +227,7 @@ ON (node.labelNorm);
 CREATE INDEX entity_orig_label_index IF NOT EXISTS
 FOR (node:Entity)
 ON (node.origLabel);
+
 
 // [STEP 000] clean the regesta data and import all Regesta nodes
 LOAD CSV WITH HEADERS FROM 'https://gitlab.rlp.net/adwmainz/regesta-imperii/lab/regesta-imperii-data/-/raw/main/data/regesta-csv/RI_alles.csv' AS line FIELDTERMINATOR '\t'
@@ -454,6 +458,66 @@ CALL {
       [:REFERS_TO]->
     (b)
 } IN TRANSACTIONS OF 100 ROWS;
+
+
+// clean text properties and create annotations with the neo4j atag plugin
+CALL
+  apoc.cypher.runManyReadOnly(
+    '
+    SHOW PROCEDURES YIELD name
+    WHERE name = $procedureName
+    RETURN count(*) > 0 AS available
+  ',
+    {procedureName: 'atag.text.import.html'},
+    {statistics: false}
+  )
+  YIELD result
+
+WITH result.available AS available
+WHERE available
+
+MATCH (t:Text)
+CALL (t) {
+  CALL
+    apoc.cypher.doIt(
+      '
+      WITH $t AS t
+      WITH
+        t,
+        CASE
+          WHEN t.text IS NOT NULL AND t.htmlText IS NULL THEN t.text
+          ELSE null
+        END AS newHtmlText
+
+      SET t.htmlText = coalesce(t.htmlText, newHtmlText)
+      SET t.text =
+        CASE
+          WHEN newHtmlText IS NOT NULL THEN null
+          ELSE t.text
+        END
+
+      WITH t
+      CALL atag.text.import.html(
+        t,
+        "htmlText",
+        "Annotation",
+        "text",
+        "HAS_ANNOTATION"
+      )
+      YIELD node
+      FOREACH (
+        key IN [k IN keys(node) WHERE k STARTS WITH "attribute:"] |
+      REMOVE node[key]
+      )
+      RETURN node
+    ',
+      {t: t}
+    )
+    YIELD value
+  RETURN value.node AS node
+} IN TRANSACTIONS OF 100 ROWS
+
+RETURN count(*) AS resultCount;
 
 // Regestennummer einzeln erstellen
 MATCH (reg:Regesta)
