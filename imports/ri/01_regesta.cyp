@@ -226,13 +226,14 @@ CALL {
     (:Annotation:Next {uuid: randomUUID(), label: 'next', type: 'next'})-
       [:REFERS_TO]->
     (b)
-
 } IN TRANSACTIONS OF 100 ROWS;
 
 // Regestennummer einzeln erstellen
 MATCH (reg:Regesta)
-UNWIND apoc.text.regexGroups(reg.identifier, '.* n\. (\\S+)$') AS n
-SET reg.regestaNumber = n[1];
+CALL (reg) {
+  UNWIND apoc.text.regexGroups(reg.identifier, '.* n\\. (\\S+)$') AS n
+  SET reg.regestaNumber = n[1]
+} IN TRANSACTIONS OF 1000 ROWS;
 
 // External Links erstellen
 MATCH (reg:Regesta)
