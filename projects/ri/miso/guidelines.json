@@ -571,6 +571,15 @@
               }
             }
           }
+        },
+        {
+          "type": "next",
+          "hasEntities": true,
+          "miso": {
+            "group": "none",
+            "controls": {},
+            "editing": { "extent": "range" }
+          }
         }
       ],
       "properties": {
