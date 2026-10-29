@@ -239,8 +239,7 @@ WITH line
 // WHERE line.identifier STARTS WITH '[RI VII] ' // Regesten Ludwik der Bayer
 // WHERE line.identifier STARTS WITH "[RI XIII]" OR  line.identifier STARTS WITH "Chmel" // Regesten Friedrich 3
 WITH line
-CALL {
-  WITH line
+CALL (line) {
   CREATE
     (r:Collection:Regesta
       {
@@ -414,38 +413,59 @@ CALL {
     UNWIND range(0, size(defs) - 1) AS i
     WITH r, defs[i] AS def, i
 
+    CREATE (c:Content:Text {uuid: randomUUID(), label: def.l, origText: def.t})
+    CREATE (c)-[:PART_OF]->(r)
+    WITH c, def
+    SET c: $ (def.lbl)
+
     // hochgestellte zeichen umklammern
     WITH
-      r,
-      def,
-      i,
+      c,
       apoc.text.replace(def.t, '<sup>(.*?)</sup>', '<sup>[$1]</sup>') AS textWithSuperscript
 
     // Nach jedem Listenelement einen Zeilenumbruch einfügen
     WITH
-      r,
-      def,
-      i,
+      c,
       apoc.text.replace(textWithSuperscript, '</li>', '</li>\n') AS formatedListsText
 
     // html Kommentare entfernen
     WITH
-      r,
-      def,
-      i,
+      c,
       apoc.text.replace(formatedListsText, '(?s)<!--.*?(-->|$)', '') AS rmHtmlCommentText
 
     // kaputte span elemente entfernen
     WITH
-      r,
-      def,
-      i,
-      apoc.text.replace(rmHtmlCommentText, '</</span>', '</span>') AS text
+      c,
+      apoc.text.replace(rmHtmlCommentText, '</</span>', '</span>') AS rmBrokenSpanText
 
-    CREATE (c:Content:Text {uuid: randomUUID(), label: def.l, text: text})
-    CREATE (c)-[:PART_OF]->(r)
-    WITH c, def
-    SET c: $ (def.lbl)
+    // link tags zu gültigem (custom) html formatierem
+    WITH
+      c,
+      apoc.text.replace(
+        rmBrokenSpanText,
+        '<link\\s+([^>]+)>',
+        '<link href="$1">'
+      ) AS cleanLinkTags
+
+    // format some text that disturbes the html parser
+    WITH
+      c,
+      apoc.text.replace(
+        cleanLinkTags,
+        '(?i)<(?!(?:br|hr|img|input|meta|p|area|base|col|embed|source|track|wbr|em|sup|ol|li|e|nz|link|p n=\'ueberlieferung\|span class=\'smallcaps\'|span class=\'smallcaps\')(?=[\\s/>]))(([\\p{L}][\\w:-]*)(?=[\\s/>])[^<>]*)>(?![\\s\\S]*?</\\2\\s*>)',
+        '&lt;$1&gt;'
+      ) AS cleanHTML
+
+    // Weg mit den alleine stehenden "<"
+    WITH c, apoc.text.replace(cleanHTML, '<(?![^<>]*>)', '&lt;') AS cleanHTML
+
+    // Weg mit allen "<" und ">" die wahrscheinlich nur text beinhalten
+    WITH
+      c,
+      apoc.text.replace(cleanHTML, '<(?!link|a|xref)([^<>]{80,})>', '&lt;') AS text
+
+    SET c.text = text
+
     RETURN collect(c) AS nodes
   }
 
@@ -458,7 +478,6 @@ CALL {
       [:REFERS_TO]->
     (b)
 } IN TRANSACTIONS OF 100 ROWS;
-
 
 // clean text properties and create annotations with the neo4j atag plugin
 CALL
@@ -505,10 +524,10 @@ CALL (t) {
         "HAS_ANNOTATION"
       )
       YIELD node
-      FOREACH (
-        key IN [k IN keys(node) WHERE k STARTS WITH "attribute:"] |
-      REMOVE node[key]
-      )
+//      FOREACH (
+//        key IN [k IN keys(node) WHERE k STARTS WITH "attribute:"] |
+//      REMOVE node[key]
+//      )
       RETURN node
     ',
       {t: t}
@@ -528,16 +547,17 @@ CALL (reg) {
 
 // External Links erstellen
 MATCH (reg:Regesta)
-WHERE reg.externalLinks CONTAINS 'link'
-WITH reg
+WHERE reg.externalLinks CONTAINS '<link href='
 CALL (reg) {
   UNWIND
     apoc.text.regexGroups(
       reg.externalLinks,
-      '<link (\\S*?)( - \\S*?)>(.*?)</link>'
+      '<link\\s+href="([^"]+)"[^>]*>(.*?)</link>'
     ) AS link
+
   MERGE (ref:Annotation {url: link[1], type: "ri:externalLink"})
-    ON CREATE SET ref :RegestaAnnotation, ref.url_title = link[3]
+    ON CREATE SET ref :RegestaAnnotation, ref.url_title = link[2]
+
   MERGE (reg)-[:HAS_ANNOTATION]->(ref)
 } IN TRANSACTIONS OF 1000 ROWS;
 
@@ -652,20 +672,21 @@ CALL (reg) {
 
 // Literaturnetzwerk erstellen
 MATCH (r:Regesta)
-WHERE r.archivalHistory CONTAINS "link"
-WITH r
+WHERE r.archivalHistory CONTAINS '<link href='
 CALL (r) {
   UNWIND
     apoc.text.regexGroups(
       r.archivalHistory,
-      "<link (http.*?=)(.+?)>(.+?)<\\/link>"
+      '<link\\s+href="([^"]+)"[^>]*>(.*?)</link>'
     ) AS link
-  MERGE (ref:Annotation {url: link[1] + link[2], type: 'ri:literature'})
+
+  MERGE (ref:Annotation {url: link[1], type: 'ri:literature'})
     ON CREATE SET
       ref :RegestaAnnotation,
       ref.uuid = randomUUID(),
-      ref.url_label = link[3],
-      ref.url_title = link[2]
+      ref.url_label = link[2],
+      ref.url_title = link[1]
+
   MERGE (r)-[:HAS_ANNOTATION]->(ref)
 } IN TRANSACTIONS OF 1000 ROWS;
 
