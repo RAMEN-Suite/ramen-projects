@@ -227,3 +227,35 @@ ON (node.labelNorm);
 CREATE INDEX entity_orig_label_index IF NOT EXISTS
 FOR (node:Entity)
 ON (node.origLabel);
+
+
+// RI Goes Graph 2
+// GLOBAL
+CREATE FULLTEXT INDEX combined_search IF NOT EXISTS FOR (n:Regesta|Text|Entity) ON EACH [n.label, n.text];
+
+// FILTER
+CREATE FULLTEXT INDEX department_search IF NOT EXISTS FOR (n:Department) ON EACH [n.label];
+CREATE FULLTEXT INDEX volume_search IF NOT EXISTS FOR (n:Volume) ON EACH [n.label];
+CREATE FULLTEXT INDEX person_search IF NOT EXISTS FOR (n:Person) ON EACH [n.label];
+CREATE FULLTEXT INDEX place_search IF NOT EXISTS FOR (n:Place) ON EACH [n.label];
+CREATE FULLTEXT INDEX thing_search IF NOT EXISTS FOR (n:Thing) ON EACH [n.label];
+CREATE FULLTEXT INDEX entity_search IF NOT EXISTS FOR (n:Entity) ON EACH [n.label];
+
+// TEXT FILTER
+CREATE FULLTEXT INDEX annotations_search IF NOT EXISTS FOR (n:Annotation) ON EACH [n.text];
+CREATE FULLTEXT INDEX archivalHistory_search IF NOT EXISTS FOR (n:ArchivalHistory) ON EACH [n.text];
+CREATE FULLTEXT INDEX chancellor_search IF NOT EXISTS FOR (n:Chancellor) ON EACH [n.text];
+CREATE FULLTEXT INDEX clerk_search IF NOT EXISTS FOR (n:Clerk) ON EACH [n.text];
+CREATE FULLTEXT INDEX commentary_search IF NOT EXISTS FOR (n:Commentary) ON EACH [n.text];
+CREATE FULLTEXT INDEX date_search IF NOT EXISTS FOR (n:Date) ON EACH [n.text];
+CREATE FULLTEXT INDEX footnotes_search IF NOT EXISTS FOR (n:Footnotes) ON EACH [n.text];
+CREATE FULLTEXT INDEX identifier_search IF NOT EXISTS FOR (n:Identifier) ON EACH [n.text];
+CREATE FULLTEXT INDEX incipit_search IF NOT EXISTS FOR (n:Incipit) ON EACH [n.text];
+CREATE FULLTEXT INDEX literature_search IF NOT EXISTS FOR (n:Literature) ON EACH [n.text];
+CREATE FULLTEXT INDEX originalDate_search IF NOT EXISTS FOR (n:OriginalDate) ON EACH [n.text];
+CREATE FULLTEXT INDEX placeOfIssue_search IF NOT EXISTS FOR (n:PlaceOfIssue) ON EACH [n.text];
+CREATE FULLTEXT INDEX recipient_search IF NOT EXISTS FOR (n:Recipient) ON EACH [n.text];
+CREATE FULLTEXT INDEX summary_search IF NOT EXISTS FOR (n:Summary) ON EACH [n.text];
+CREATE FULLTEXT INDEX title_search IF NOT EXISTS FOR (n:Title) ON EACH [n.text];
+CREATE FULLTEXT INDEX versoNote_search IF NOT EXISTS FOR (n:VersoNote) ON EACH [n.text];
+CREATE FULLTEXT INDEX witnesses_search IF NOT EXISTS FOR (n:Witnesses) ON EACH [n.text];

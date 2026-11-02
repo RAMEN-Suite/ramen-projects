@@ -682,6 +682,42 @@ MERGE (a)-[:REFERS_TO]->(c2)
 RETURN c1.label AS department, c2.label AS nextDepartment
 ORDER BY i;
 
+// NEXT Kanten zwischen Volume Nodes
+MATCH (d:Department)<-[:PART_OF]-(v:Volume)
+
+WITH DISTINCT d, v,
+     CASE
+       WHEN v.label =~ '^[0-9]+.*'
+       THEN toIntegerOrNull(
+         split(split(split(v.label, ' ')[0], ',')[0], '-')[0]
+       )
+       ELSE null
+     END AS mainNumber,
+     CASE
+       WHEN v.label =~ '^[0-9]+,[0-9]+.*'
+       THEN toIntegerOrNull(
+         split(split(v.label, ',')[1], ' ')[0]
+       )
+       ELSE 0
+     END AS subNumber
+
+WITH d, v
+ORDER BY mainNumber ASC, subNumber ASC, v.label ASC, elementId(v)
+
+WITH d, collect(v) AS volumes
+WHERE size(volumes) > 1
+
+UNWIND range(0, size(volumes) - 2) AS i
+
+WITH d, volumes[i] AS current, volumes[i + 1] AS next
+
+MERGE (current)-[:HAS_ANNOTATION]->(a:Annotation:Next {label: 'next', type: 'next'})-[:REFERS_TO]->(next)
+  ON CREATE SET a.uuid = randomUUID()
+
+RETURN d, current.label AS from, next.label AS to
+ORDER BY elementId(d), from;
+
+
 // NEXT Kanten zwischen Regesta Nodes
 MATCH (v:Collection:Volume)
 CALL (v) {
