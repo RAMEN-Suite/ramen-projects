@@ -229,6 +229,38 @@ FOR (node:Entity)
 ON (node.origLabel);
 
 
+// RI Goes Graph 2
+// GLOBAL
+CREATE FULLTEXT INDEX combined_search IF NOT EXISTS FOR (n:Regesta|Text|Entity) ON EACH [n.label, n.text];
+
+// FILTER
+CREATE FULLTEXT INDEX department_search IF NOT EXISTS FOR (n:Department) ON EACH [n.label];
+CREATE FULLTEXT INDEX volume_search IF NOT EXISTS FOR (n:Volume) ON EACH [n.label];
+CREATE FULLTEXT INDEX person_search IF NOT EXISTS FOR (n:Person) ON EACH [n.label];
+CREATE FULLTEXT INDEX place_search IF NOT EXISTS FOR (n:Place) ON EACH [n.label];
+CREATE FULLTEXT INDEX thing_search IF NOT EXISTS FOR (n:Thing) ON EACH [n.label];
+CREATE FULLTEXT INDEX entity_search IF NOT EXISTS FOR (n:Entity) ON EACH [n.label];
+
+// TEXT FILTER
+CREATE FULLTEXT INDEX annotations_search IF NOT EXISTS FOR (n:Annotation) ON EACH [n.text];
+CREATE FULLTEXT INDEX archivalHistory_search IF NOT EXISTS FOR (n:ArchivalHistory) ON EACH [n.text];
+CREATE FULLTEXT INDEX chancellor_search IF NOT EXISTS FOR (n:Chancellor) ON EACH [n.text];
+CREATE FULLTEXT INDEX clerk_search IF NOT EXISTS FOR (n:Clerk) ON EACH [n.text];
+CREATE FULLTEXT INDEX commentary_search IF NOT EXISTS FOR (n:Commentary) ON EACH [n.text];
+CREATE FULLTEXT INDEX date_search IF NOT EXISTS FOR (n:Date) ON EACH [n.text];
+CREATE FULLTEXT INDEX footnotes_search IF NOT EXISTS FOR (n:Footnotes) ON EACH [n.text];
+CREATE FULLTEXT INDEX identifier_search IF NOT EXISTS FOR (n:Identifier) ON EACH [n.text];
+CREATE FULLTEXT INDEX incipit_search IF NOT EXISTS FOR (n:Incipit) ON EACH [n.text];
+CREATE FULLTEXT INDEX literature_search IF NOT EXISTS FOR (n:Literature) ON EACH [n.text];
+CREATE FULLTEXT INDEX originalDate_search IF NOT EXISTS FOR (n:OriginalDate) ON EACH [n.text];
+CREATE FULLTEXT INDEX placeOfIssue_search IF NOT EXISTS FOR (n:PlaceOfIssue) ON EACH [n.text];
+CREATE FULLTEXT INDEX recipient_search IF NOT EXISTS FOR (n:Recipient) ON EACH [n.text];
+CREATE FULLTEXT INDEX summary_search IF NOT EXISTS FOR (n:Summary) ON EACH [n.text];
+CREATE FULLTEXT INDEX title_search IF NOT EXISTS FOR (n:Title) ON EACH [n.text];
+CREATE FULLTEXT INDEX versoNote_search IF NOT EXISTS FOR (n:VersoNote) ON EACH [n.text];
+CREATE FULLTEXT INDEX witnesses_search IF NOT EXISTS FOR (n:Witnesses) ON EACH [n.text];
+
+
 // [STEP 000] clean the regesta data and import all Regesta nodes
 LOAD CSV WITH HEADERS FROM 'https://gitlab.rlp.net/adwmainz/regesta-imperii/lab/regesta-imperii-data/-/raw/main/data/regesta-csv/RI_alles.csv' AS line FIELDTERMINATOR '\t'
 WITH line
@@ -2081,6 +2113,42 @@ MERGE (a)-[:REFERS_TO]->(c2)
 
 RETURN c1.label AS department, c2.label AS nextDepartment
 ORDER BY i;
+
+// NEXT Kanten zwischen Volume Nodes
+MATCH (d:Department)<-[:PART_OF]-(v:Volume)
+
+WITH DISTINCT d, v,
+     CASE
+       WHEN v.label =~ '^[0-9]+.*'
+       THEN toIntegerOrNull(
+         split(split(split(v.label, ' ')[0], ',')[0], '-')[0]
+       )
+       ELSE null
+     END AS mainNumber,
+     CASE
+       WHEN v.label =~ '^[0-9]+,[0-9]+.*'
+       THEN toIntegerOrNull(
+         split(split(v.label, ',')[1], ' ')[0]
+       )
+       ELSE 0
+     END AS subNumber
+
+WITH d, v
+ORDER BY mainNumber ASC, subNumber ASC, v.label ASC, elementId(v)
+
+WITH d, collect(v) AS volumes
+WHERE size(volumes) > 1
+
+UNWIND range(0, size(volumes) - 2) AS i
+
+WITH d, volumes[i] AS current, volumes[i + 1] AS next
+
+MERGE (current)-[:HAS_ANNOTATION]->(a:Annotation:Next {label: 'next', type: 'next'})-[:REFERS_TO]->(next)
+  ON CREATE SET a.uuid = randomUUID()
+
+RETURN d, current.label AS from, next.label AS to
+ORDER BY elementId(d), from;
+
 
 // NEXT Kanten zwischen Regesta Nodes
 MATCH (v:Collection:Volume)
