@@ -304,8 +304,20 @@ CALL (t) {
     YIELD value
   RETURN value.node AS node
 } IN TRANSACTIONS OF 100 ROWS
-
 RETURN count(*) AS resultCount;
+
+MATCH (a:Annotation)
+where a.type is null and a.tag is not null
+CALL (a) {
+  SET a.type = a.tag
+} IN TRANSACTIONS of 1000 ROWS;
+
+MATCH (a:Annotation)
+WHERE a.type = a.tag
+  AND a.`attribute:class` IS NOT NULL
+CALL (a) {
+  SET a.type = a.`attribute:class`
+} IN TRANSACTIONS OF 1000 ROWS;
 
 // Regestennummer einzeln erstellen
 MATCH (reg:Regesta)
