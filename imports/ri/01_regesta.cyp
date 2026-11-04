@@ -213,7 +213,7 @@ CALL (line) {
       apoc.text.replace(
         rmBrokenSpanText,
         '<link\\s+([^>]+)>',
-        '<link href="$1">'
+        '<a href="$1">'
       ) AS cleanLinkTags
 
     // format some text that disturbes the html parser
@@ -221,7 +221,7 @@ CALL (line) {
       c,
       apoc.text.replace(
         cleanLinkTags,
-        '(?i)<(?!(?:br|hr|img|input|meta|p|area|base|col|embed|source|track|wbr|em|sup|ol|li|e|nz|link|p n=\'ueberlieferung\|span class=\'smallcaps\'|span class=\'smallcaps\')(?=[\\s/>]))(([\\p{L}][\\w:-]*)(?=[\\s/>])[^<>]*)>(?![\\s\\S]*?</\\2\\s*>)',
+        '(?i)<(?!(?:br|hr|img|input|meta|p|area|base|col|embed|source|track|wbr|em|sup|ol|li|e|nz|a|link|p n=\'ueberlieferung\|span class=\'smallcaps\'|span class=\'smallcaps\')(?=[\\s/>]))(([\\p{L}][\\w:-]*)(?=[\\s/>])[^<>]*)>(?![\\s\\S]*?</\\2\\s*>)',
         '&lt;$1&gt;'
       ) AS cleanHTML
 
@@ -470,3 +470,11 @@ CALL (r) {
 
   MERGE (r)-[:HAS_ANNOTATION]->(ref)
 } IN TRANSACTIONS OF 1000 ROWS;
+
+// regesten die über links mit "riregesten:" referenziert sind verlinken.
+MATCH (l:Annotation {type: 'a'})
+WHERE l.`attribute:href` STARTS WITH 'riregesten:'
+WITH l, split(l.`attribute:href`, ':')[1] AS identifier
+MATCH (r:Regesta {exchangeIdentifier: identifier})
+MERGE (l)-[rel:REFERS_TO]->(r)
+RETURN count(rel);
