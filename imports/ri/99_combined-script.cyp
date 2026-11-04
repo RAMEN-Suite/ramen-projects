@@ -734,13 +734,22 @@ CALL (r) {
   MERGE (r)-[:HAS_ANNOTATION]->(ref)
 } IN TRANSACTIONS OF 1000 ROWS;
 
-// regesten die über links mit "riregesten:" referenziert sind verlinken.
+// regesten die über links mit "riregesten:" oder "reg:" referenziert sind verlinken.
 MATCH (l:Annotation {type: 'a'})
-WHERE l.`attribute:href` STARTS WITH 'riregesten:'
+WHERE
+  l.`attribute:href` STARTS WITH 'riregesten:' OR
+  l.`attribute:href` STARTS WITH 'reg:'
 WITH l, split(l.`attribute:href`, ':')[1] AS identifier
 MATCH (r:Regesta {exchangeIdentifier: identifier})
 MERGE (l)-[rel:REFERS_TO]->(r)
 RETURN count(rel);
+
+// hyperlinks als url speichern
+MATCH (l:Annotation {type: 'a'})
+WHERE
+  l.`attribute:href` STARTS WITH "http:" OR
+  l.`attribute:href` STARTS WITH "https:"
+SET l.uri = l.`attribute:href`;
 
 
 // [STEP 001] RI-Ausstellungsorte-geo erstellen
