@@ -4,9 +4,15 @@
   "description": "RAMEN project files including configurations, language files, markdown and more.",
   "version": "0.0.0",
   "private": true,
+  "license": "Apache-2.0",
   "format": "prettier --check src",
   "format:fix": "prettier --write src",
+  "scripts": {
+    "prepare": "git config core.hooksPath .githooks"
+  },
   "devDependencies": {
+    "@commitlint/cli": "^21.2.0",
+    "@commitlint/config-conventional": "^21.2.0",
     "prettier": "^3.8.3"
   }
 }

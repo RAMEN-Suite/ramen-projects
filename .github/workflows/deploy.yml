@@ -1,0 +1,137 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main, dev]
+    paths:
+      - 'projects/**'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: On dev, the environment to sync (on main, all production hosts are synced)
+        type: choice
+        options: [staging, development]
+      project:
+        description: On dev, lock this project for the environment first, or keep the locked one
+        type: choice
+        options: [locked, abbw, sbwi, ri]
+        default: locked
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions: {}
+
+jobs:
+  lock:
+    name: Lock project
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/dev' && inputs.project != 'locked'
+    runs-on: ubuntu-latest
+    environment: project-lock
+    permissions: {}
+    steps:
+      - name: Create an app token
+        id: app-token
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0 # zizmor: ignore[github-app]
+        with:
+          client-id: ${{ vars.LOCK_APP_CLIENT_ID }}
+          private-key: ${{ secrets.LOCK_APP_PRIVATE_KEY }}
+      - name: Store the lock
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          ENVIRONMENT: ${{ inputs.environment }}
+          PROJECT: ${{ inputs.project }}
+        run: gh variable set "LOCKED_PROJECT_${ENVIRONMENT^^}" --body "$PROJECT" --repo "$GITHUB_REPOSITORY"
+
+  production:
+    name: Production (${{ matrix.project }})
+    if: github.ref == 'refs/heads/main'
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { project: abbw, environment: antjebrons }
+          - { project: sbwi, environment: sbwi }
+          - { project: ri, environment: riserver }
+    uses: RAMEN-Suite/ramen-workflows/.github/workflows/sync-files.yml@25a074cb7def054f196b57c26729160b0cb8b7f9 # v0.2.7
+    with:
+      environment: ${{ matrix.environment }}
+      transfers: >-
+        [{"from": "projects/${{ matrix.project }}/shoyu", "to": "shoyu/", "delete": true,
+          "paths": ["assets", "config", "i18n", "markdown"]},
+         {"from": "projects/${{ matrix.project }}/miso", "to": "miso/",
+          "paths": ["guidelines.json", "styles.css"]},
+         {"from": "projects", "to": "gcore/", "restart": ["ed/tori server", "ed/miso server"],
+          "paths": ["gcore.json", "${{ matrix.project }}/ramen.gcore.json", "${{ matrix.project }}/project.gcore.json"]}]
+    secrets:
+      SSH_HOST: ${{ secrets.SSH_HOST }}
+      SSH_USER: ${{ secrets.SSH_USER }}
+      SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+      SSH_RSYNC_KEY: ${{ secrets.SSH_RSYNC_KEY }}
+      SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+    permissions:
+      contents: read # checkout
+
+  staging:
+    name: Staging (${{ matrix.project }})
+    needs: [lock]
+    if: >-
+      !cancelled() && needs.lock.result != 'failure'
+      && github.ref == 'refs/heads/dev' && (github.event_name == 'push' || inputs.environment == 'staging')
+    strategy:
+      matrix:
+        project:
+          - ${{ inputs.environment == 'staging' && inputs.project != 'locked' && inputs.project
+            || vars.LOCKED_PROJECT_STAGING || 'abbw' }}
+    uses: RAMEN-Suite/ramen-workflows/.github/workflows/sync-files.yml@25a074cb7def054f196b57c26729160b0cb8b7f9 # v0.2.7
+    with:
+      environment: staging
+      transfers: >-
+        [{"from": "projects/${{ matrix.project }}/shoyu", "to": "shoyu/", "delete": true,
+          "paths": ["assets", "config", "i18n", "markdown"]},
+         {"from": "projects/${{ matrix.project }}/miso", "to": "miso/",
+          "paths": ["guidelines.json", "styles.css"]},
+         {"from": "projects", "to": "gcore/", "restart": ["dev/tori server", "dev/miso server"],
+          "paths": ["gcore.json", "${{ matrix.project }}/ramen.gcore.json", "${{ matrix.project }}/project.gcore.json"]}]
+    secrets:
+      SSH_HOST: ${{ secrets.SSH_HOST }}
+      SSH_USER: ${{ secrets.SSH_USER }}
+      SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+      SSH_RSYNC_KEY: ${{ secrets.SSH_RSYNC_KEY }}
+      SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+    permissions:
+      contents: read # checkout
+
+  development:
+    name: Development (${{ matrix.project }})
+    needs: [lock]
+    if: >-
+      !cancelled() && needs.lock.result != 'failure'
+      && github.ref == 'refs/heads/dev' && (github.event_name == 'push' || inputs.environment == 'development')
+    strategy:
+      matrix:
+        project:
+          - ${{ inputs.environment == 'development' && inputs.project != 'locked' && inputs.project
+            || vars.LOCKED_PROJECT_DEVELOPMENT || 'abbw' }}
+    uses: RAMEN-Suite/ramen-workflows/.github/workflows/sync-files.yml@25a074cb7def054f196b57c26729160b0cb8b7f9 # v0.2.7
+    with:
+      environment: development
+      transfers: >-
+        [{"from": "projects/${{ matrix.project }}/shoyu", "to": "shoyu/shoyu/", "delete": true,
+          "paths": ["assets", "config", "i18n", "markdown"]},
+         {"from": "projects/${{ matrix.project }}/miso", "to": "miso/miso/",
+          "paths": ["guidelines.json", "styles.css"]},
+         {"from": "projects", "to": "tori/gcore/", "restart": ["tori/tori server"],
+          "paths": ["gcore.json", "${{ matrix.project }}/ramen.gcore.json", "${{ matrix.project }}/project.gcore.json"]},
+         {"from": "projects", "to": "miso/gcore/", "restart": ["miso/miso server"],
+          "paths": ["gcore.json", "${{ matrix.project }}/ramen.gcore.json", "${{ matrix.project }}/project.gcore.json"]}]
+    secrets:
+      SSH_HOST: ${{ secrets.SSH_HOST }}
+      SSH_USER: ${{ secrets.SSH_USER }}
+      SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+      SSH_RSYNC_KEY: ${{ secrets.SSH_RSYNC_KEY }}
+      SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+    permissions:
+      contents: read # checkout
