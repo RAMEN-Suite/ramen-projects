@@ -16,6 +16,3 @@
 /imports/abbw/ @sebenns
 
 /.github/ @ramondevprivate
-/.githooks/ @ramondevprivate
-/.npmrc @ramondevprivate
-/commitlint.config.js @ramondevprivate
