@@ -78,7 +78,7 @@ jobs:
     name: Staging (${{ matrix.project }})
     needs: [lock]
     if: >-
-      !cancelled() && && needs.lock.result != 'failure'
+      !cancelled() && needs.lock.result != 'failure'
       && github.ref == 'refs/heads/dev' && (github.event_name == 'push' || inputs.environment == 'staging')
     strategy:
       matrix:
