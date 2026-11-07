@@ -1,0 +1,18 @@
+* @sebenns
+
+/projects/ri/shoyu/ @VNxyz1 @sebenns
+/projects/ri/*.gcore.json @VNxyz1
+/projects/ri/miso/ @VNxyz1 @mmiche01
+/imports/ri/ @VNxyz1
+
+/projects/sbwi/shoyu/ @mmiche01 @sebenns
+/projects/sbwi/*.gcore.json @mmiche01 @VNxyz1
+/projects/sbwi/miso/ @mmiche01
+/imports/sbwi/ @mmiche01
+
+/projects/abbw/shoyu/ @sebenns
+/projects/abbw/*.gcore.json @sebenns @VNxyz1
+/projects/abbw/miso/ @sebenns @mmiche01
+/imports/abbw/ @sebenns
+
+/.github/ @ramondevprivate
