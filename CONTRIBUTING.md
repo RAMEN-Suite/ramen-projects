@@ -28,20 +28,6 @@ Actions → **Deploy** → Run workflow, on branch `dev`:
 Lock the environment back to the project its database holds (abbw on staging and development today) when you're done:
 locking only switches the files, not the data. Production can be redeployed by hand the same way, run on `main`: it syncs all three production hosts.
 
-## Commits
-
-Commits and pull request titles follow [Conventional Commits](https://www.conventionalcommits.org): `type(scope): subject`,
-for example `fix(sbwi): correct the start page title` or `feat(abbw): add the letter detail view`. The scope is the
-project (`abbw`, `sbwi`, `ri`, `hvb`) or `deps`; leave it out for repository-wide changes. Set up the commit hook once:
-
-```bash
-nvm install
-npm ci            # commitlint for the commit-msg hook
-npm run prepare   # activates .githooks; .npmrc disables install scripts, so npm does not run it for you
-```
-
-CI lints the pull request title (required for `main`) and the commits you push.
-
 ## Checks
 
 Every deploy and every pull request checks that all JSON files under `projects/` parse; a broken file never reaches a
