@@ -55,7 +55,7 @@ jobs:
           - { project: abbw, environment: antjebrons }
           - { project: sbwi, environment: sbwi }
           - { project: ri, environment: riserver }
-    uses: RAMEN-Suite/ramen-workflows/.github/workflows/sync-files.yml@4c5a73211c21748e0ba7f044b706c70551c0f6bb # v0.2.9
+    uses: RAMEN-Suite/ramen-workflows/.github/workflows/sync-files.yml@bf7ce40db2970dfc8cf349ca84d3fd924e779c4d # v0.2.10
     with:
       environment: ${{ matrix.environment }}
       transfers: >-
@@ -85,7 +85,7 @@ jobs:
         project:
           - ${{ inputs.environment == 'staging' && inputs.project != 'locked' && inputs.project
             || vars.LOCKED_PROJECT_STAGING || 'abbw' }}
-    uses: RAMEN-Suite/ramen-workflows/.github/workflows/sync-files.yml@4c5a73211c21748e0ba7f044b706c70551c0f6bb # v0.2.9
+    uses: RAMEN-Suite/ramen-workflows/.github/workflows/sync-files.yml@bf7ce40db2970dfc8cf349ca84d3fd924e779c4d # v0.2.10
     with:
       environment: staging
       transfers: >-
@@ -115,7 +115,7 @@ jobs:
         project:
           - ${{ inputs.environment == 'development' && inputs.project != 'locked' && inputs.project
             || vars.LOCKED_PROJECT_DEVELOPMENT || 'abbw' }}
-    uses: RAMEN-Suite/ramen-workflows/.github/workflows/sync-files.yml@4c5a73211c21748e0ba7f044b706c70551c0f6bb # v0.2.9
+    uses: RAMEN-Suite/ramen-workflows/.github/workflows/sync-files.yml@bf7ce40db2970dfc8cf349ca84d3fd924e779c4d # v0.2.10
     with:
       environment: development
       transfers: >-
