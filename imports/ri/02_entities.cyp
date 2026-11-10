@@ -109,8 +109,7 @@ CALL (row) {
       END,
     i.wikidataId = wikidata._text,
     i.geonames = geonames._text,
-    i.type = raw.typ,
-    i._importTest = "H7"
+    i.type = raw.typ
 } IN TRANSACTIONS OF 500 ROWS;
 
 LOAD CSV FROM "https://gitlab.rlp.net/adwmainz/regesta-imperii/lab/regesta-imperii-data/-/raw/main/archive/RegestenUndRegister/abt-06/ri_06,4-heinrich_vii_gesamtregister/xml/gesamtregister.xml?inline=false" AS row FIELDTERMINATOR '\u0000'
@@ -691,3 +690,8 @@ SET
   i.htmlOrigLabel = htmlOrigLabel,
   i.label = cleanLabel,
   i.origLabel = cleanOrigLabel;
+
+// WikidataId normalisieren
+MATCH (n:Entity) WHERE n.wikidataId IS NOT NULL
+SET n.wikidataId = "Q" + split(n.wikidataId, "Q")[1]
+RETURN count(n);
