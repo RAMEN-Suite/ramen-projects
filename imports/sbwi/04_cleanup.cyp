@@ -88,3 +88,15 @@ CALL (
 } IN TRANSACTIONS OF 1000 ROWS
 
 RETURN count(*) AS updatedListAnnotations;
+
+// [STEP F05] Remove relations not allowed in RAMEN
+:auto
+MATCH ()-[r]->()
+
+WHERE NOT type(r) IN [
+  'HAS_ANNOTATION',
+  'PART_OF',
+  'REFERS_TO'
+]
+
+DELETE r;
