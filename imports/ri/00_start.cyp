@@ -1,5 +1,7 @@
 // VERSION INFO
 // neo4j 5.26 with the apoc plugin required. The neo4j-atag plugin is required to clean the text nodes and create annotations from it. Everything else works without it.
+// neo4j-atag plugin -> https://github.com/THM-Graphs/neo4j-atag
+
 
 // [STEP 001] Create UUID constraints
 CREATE CONSTRAINT entity_uuid_unique IF NOT EXISTS
