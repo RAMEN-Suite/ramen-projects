@@ -1222,6 +1222,7 @@ MATCH (i:Entity {xmlId: xmlId})
 SET i.wikidataId = wikidataId
 RETURN count(i);
 
+
 // APPEARS_IN erstellen
 CYPHER runtime = slotted
 CALL
@@ -1235,26 +1236,50 @@ CALL
 UNWIND xmlFile._register AS wdata
 UNWIND wdata._lemma AS lemma
 UNWIND lemma._numbers AS number
-MATCH (e:Entity {xmlId: wdata.id})
-MATCH (r:Regesta {registerId: number._text})
-WHERE
-  r.identifier STARTS WITH "Chmel, Anh" OR
-  r.identifier STARTS WITH "[RI XIII]" OR
-  r.identifier STARTS WITH "Chmel "
-WITH wdata, e, r, number
-// WHERE number.type = "nennung"
-CREATE
-  (e)-[:HAS_ANNOTATION]->
-  (a:Annotation
-    {
-      label: 'ri:appearsIn',
-      type: 'ri:appearsIn',
-      role: number.type,
-      uuid: randomUUID()
-    })-
-    [:REFERS_TO]->
-  (r)
-RETURN count(a);
+// Nur kleine skalare Werte weitergeben
+WITH
+  wdata.id AS xmlId,
+  trim(toString(number._text)) AS regestaId,
+  number.type AS role
+
+WHERE xmlId IS NOT NULL
+  AND regestaId IS NOT NULL
+  AND regestaId <> ''
+
+// Kleine Transaktionen
+CALL (xmlId, regestaId, role) {
+
+  MATCH (e:Entity {xmlId: xmlId})
+
+  MATCH (r:Regesta {registerId: regestaId})
+  WHERE
+    r.identifier STARTS WITH 'Chmel, Anh'
+    OR r.identifier STARTS WITH '[RI XIII]'
+    OR r.identifier STARTS WITH 'Chmel '
+
+  WITH
+    e, r, xmlId, role,
+    'RI_013|' +
+    xmlId + '|' +
+    r.identifier + '|' +
+    coalesce(role, '') AS annotationKey
+
+  // Wiederholbare Importe ermöglichen
+  MERGE (a:Annotation {
+    importKey: annotationKey
+  })
+
+  ON CREATE SET
+    a.label = 'ri:appearsIn',
+    a.type = 'ri:appearsIn',
+    a.role = role,
+    a.uuid = randomUUID()
+
+  MERGE (e)-[:HAS_ANNOTATION]->(a)
+  MERGE (a)-[:REFERS_TO]->(r)
+
+} IN TRANSACTIONS OF 50 ROWS;
+
 
 // [STEP 004] Heinrich IV Entities
 // registerId erstellen
