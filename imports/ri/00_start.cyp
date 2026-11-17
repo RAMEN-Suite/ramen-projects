@@ -230,11 +230,11 @@ CREATE INDEX entity_orig_label_index IF NOT EXISTS
 FOR (node:Entity)
 ON (node.origLabel);
 
-CREATE RANGE INDEX regesta_number_identifier_r-index IF NOT EXISTS
+CREATE RANGE INDEX regesta_number_identifier_rindex IF NOT EXISTS
 FOR (r:Regesta)
 ON (r.regestaNumber, r.identifier);
 
-CREATE RANGE INDEX annotation_import_key_r-index IF NOT EXISTS
+CREATE RANGE INDEX annotation_import_key_rindex IF NOT EXISTS
 FOR (a:Annotation)
 ON (a.importKey);
 
