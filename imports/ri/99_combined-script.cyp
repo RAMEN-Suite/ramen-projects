@@ -230,6 +230,15 @@ CREATE INDEX entity_orig_label_index IF NOT EXISTS
 FOR (node:Entity)
 ON (node.origLabel);
 
+CREATE RANGE INDEX regesta_number_identifier_r-index IF NOT EXISTS
+FOR (r:Regesta)
+ON (r.regestaNumber, r.identifier);
+
+CREATE RANGE INDEX annotation_import_key_r-index IF NOT EXISTS
+FOR (a:Annotation)
+ON (a.importKey);
+
+
 
 // RI Goes Graph 2
 // GLOBAL
@@ -947,81 +956,134 @@ CALL (childId, parentId) {
     ON CREATE SET a.uuid = randomUUID()
 } IN TRANSACTIONS OF 500 ROWS;
 
-CALL
-  apoc.load.xml(
-    "https://gitlab.rlp.net/adwmainz/regesta-imperii/lab/regesta-imperii-data/-/raw/main/archive/RegestenUndRegister/abt-06/ri_06,4-heinrich_vii_gesamtregister/xml/gesamtregister.xml?inline=false",
-    "/document/body/section/Stufe0",
-    {},
-    false
-  )
-  YIELD value AS s0
 
-WITH
-  s0,
-  [
-    c IN coalesce(s0._children, [])
-    WHERE c._type STARTS WITH "Stufe" AND c.id IS NOT NULL
-  ] AS children
+CALL apoc.load.xml(
+  "https://gitlab.rlp.net/adwmainz/regesta-imperii/lab/regesta-imperii-data/-/raw/main/archive/RegestenUndRegister/abt-06/ri_06,4-heinrich_vii_gesamtregister/xml/gesamtregister.xml?inline=false",
+  '/document/body/section//*[starts-with(local-name(), "Stufe") and @id]',
+  {},
+  false
+)
+YIELD value AS stufe
 
-WITH [s0] + children AS stufen
-UNWIND stufen AS stufe
+// Alle direkten Inhalt-Elemente der jeweiligen Stufe
+UNWIND [
+  c IN coalesce(stufe._children, [])
+  WHERE c IS :: MAP NOT NULL
+] AS inhalt
 
-WITH
-  stufe,
-  head(
-    [
-      c IN coalesce(stufe._children, [])
-      WHERE valueType(c) = "MAP" AND c._type = "Inhalt"
-    ]) AS inhalt
+WITH stufe, inhalt
+WHERE inhalt._type = 'Inhalt'
 
-UNWIND
-  [
-    r IN coalesce(inhalt._children, [])
-    WHERE valueType(r) = "MAP" AND r._type = "Regestennummer"
-  ] AS regestennummer
+// Alle Regestennummer-Gruppen eines Inhalt-Elements
+UNWIND [
+  c IN coalesce(inhalt._children, [])
+  WHERE c IS :: MAP NOT NULL
+] AS regestennummer
 
-UNWIND
-  [
-    nr IN coalesce(regestennummer._children, [])
-    WHERE valueType(nr) = "MAP" AND nr._type = "nr"
-  ] AS nr
+WITH stufe, regestennummer
+WHERE regestennummer._type = 'Regestennummer'
 
-WITH
+// Einzelne nr-Elemente aus jeder Regestennummer-Gruppe
+UNWIND [
+  c IN coalesce(regestennummer._children, [])
+  WHERE c IS :: MAP NOT NULL
+] AS nr
+
+WITH stufe, nr
+WHERE nr._type = 'nr'
+  AND nr._text IS NOT NULL
+
+// XML-Attribute extrahieren
+WITH DISTINCT
   stufe.id AS entityId,
-  trim(toString(nr._text)) AS regestaNumber,
+  trim(toString(nr._text)) AS rawNumber,
   nr.type AS relType,
-  nr.source_type AS sourceType,
+  nr.source_type AS sourceType
+
+WHERE entityId IS NOT NULL
+  AND rawNumber <> ''
+  AND relType IS NOT NULL
+
+// Verschiedene Schreibweisen der Regestennummer
+WITH
+  entityId,
+  rawNumber,
+  relType,
+  sourceType,
+  CASE
+    WHEN rawNumber =~ '^[0-9]+$'
+    THEN [
+      rawNumber,
+      right('00000' + rawNumber, 5),
+      toString(toInteger(rawNumber)),
+      toInteger(rawNumber)
+    ]
+    ELSE [rawNumber]
+  END AS numberVariants,
+
   {
-    `nennung`: 'APPEARS_IN_REGESTATEXT',
-    `zeuge`: 'APPEARS_AS_WITNESS_IN',
-    `adressat`: 'APPEARS_AS_ADRESSEE_IN',
-    `p_ueblieferung`: 'APPEARS_IN_ARCHIVAL_HISTORY',
-    `kommentar`: 'APPEARS_IN_COMMENTARY',
-    `austOrt`: 'APPEARS_AS_PLACE_OF_ISSUE_IN',
-    `notIns`: 'APPEARS_AS_NOTARIAL_INSTRUMENT_IN',
-    `abwesend`: 'APPEARS_AS_ABSENT_IN',
-    `ab`: 'APPEARS_AS_ABSENT_IN',
-    `aussteller`: 'APPEARS_AS_ISSUER_IN',
-    `datOrt`: 'APPEARS_AS_OPPOSITES_PLACE_OF_ISSUE_IN',
-    `notar`: 'APPEARS_AS_NOTARY_IN',
-    `p_tot`: 'APPEARS_AS_DEAD_PERSON_IN',
-    `rekogneszent`: 'APPEARS_AS_RECOGNECENT_IN',
-    `empfaenger`: 'APPEARS_AS_RECEIVER_IN'
+    nennung: 'APPEARS_IN_REGESTATEXT',
+    zeuge: 'APPEARS_AS_WITNESS_IN',
+    adressat: 'APPEARS_AS_ADRESSEE_IN',
+    p_ueblieferung: 'APPEARS_IN_ARCHIVAL_HISTORY',
+    kommentar: 'APPEARS_IN_COMMENTARY',
+    austOrt: 'APPEARS_AS_PLACE_OF_ISSUE_IN',
+    notIns: 'APPEARS_AS_NOTARIAL_INSTRUMENT_IN',
+    abwesend: 'APPEARS_AS_ABSENT_IN',
+    ab: 'APPEARS_AS_ABSENT_IN',
+    aussteller: 'APPEARS_AS_ISSUER_IN',
+    datOrt: 'APPEARS_AS_OPPOSITES_PLACE_OF_ISSUE_IN',
+    notar: 'APPEARS_AS_NOTARY_IN',
+    p_tot: 'APPEARS_AS_DEAD_PERSON_IN',
+    rekogneszent: 'APPEARS_AS_RECOGNECENT_IN',
+    empfaenger: 'APPEARS_AS_RECEIVER_IN'
   } AS typeMap
 
-CALL (entityId, regestaNumber, relType, sourceType, typeMap) {
+
+CALL (
+  entityId,
+  rawNumber,
+  relType,
+  sourceType,
+  numberVariants,
+  typeMap
+) {
+  // Entity gezielt über den Index suchen
   MATCH (i:Entity {id: entityId})
+  USING INDEX i:Entity(id)
+
+  // Regestennummer gezielt über den Index suchen
   MATCH (r:Regesta)
-  WHERE r.identifier STARTS WITH "RI VI," AND r.regestaNumber = regestaNumber
-  CREATE
-    (i)-[:HAS_ANNOTATION]->
-    (a:Annotation {label: 'ri:appearsIn', type: 'ri:appearsIn', role: relType})-
-      [:REFERS_TO]->
-    (r)
-  SET
-    a.label = typeMap[relType],
+  USING INDEX r:Regesta(regestaNumber, identifier)
+  WHERE r.regestaNumber IN numberVariants
+    AND r.identifier STARTS WITH 'RI VI,'
+
+  WITH
+    i, r, entityId, rawNumber,
+    relType, sourceType, typeMap,
+    'RI_VI4|' +
+    entityId + '|' +
+    r.identifier + '|' +
+    relType + '|' +
+    coalesce(sourceType, '') AS annotationKey
+
+  MERGE (a:Annotation {
+    importKey: annotationKey
+  })
+
+  ON CREATE SET
+    a.label = coalesce(
+      typeMap[relType],
+      'ri:appearsIn'
+    ),
+    a.type = 'ri:appearsIn',
+    a.role = relType,
     a.sourceType = sourceType,
-    a.regestaNumber = regestaNumber
+    a.regestaNumber = rawNumber
+
+  MERGE (i)-[:HAS_ANNOTATION]->(a)
+  MERGE (a)-[:REFERS_TO]->(r)
+
 } IN TRANSACTIONS OF 500 ROWS;
 
 // Entity mit weiteren Labels ausstatten
