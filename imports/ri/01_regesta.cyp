@@ -1,43 +1,56 @@
+/* [STEP 000] Detect UUID function */
+CALL
+  apoc.cypher.run(
+    'SHOW USER DEFINED FUNCTIONS EXECUTABLE BY CURRENT USER
+   YIELD name
+   WHERE name = "atag.deterministicUUID"
+   RETURN count(name) AS n',
+    {}
+  )
+  YIELD value
+
+WITH
+  CASE
+    WHEN value.n > 0 THEN 'RETURN atag.deterministicUUID($uid)'
+    ELSE 'RETURN randomUUID()'
+  END AS uuidQuery
+
 // [STEP 000] clean the regesta data and import all Regesta nodes
 LOAD CSV WITH HEADERS FROM 'https://gitlab.rlp.net/adwmainz/regesta-imperii/lab/regesta-imperii-data/-/raw/main/data/regesta-csv/RI_alles.csv' AS line FIELDTERMINATOR '\t'
-WITH line
+WITH line, uuidQuery
 // WHERE line.identifier =~ 'RI III,2,3 .*' // Regesten Heinrich IV.
 // WHERE line.identifier =~ 'RI IV,4,4,.*' // RI 4 Papstregesten
 // WHERE line.identifier =~ 'RI IV,2,.*' // Regesten Barbarossa
 // WHERE line.identifier =~ "RI VI,4,.*" OR line.identifier =~ ".*Regg\. Heinrich VII\. n\..*" // Regesten Heinrich 7
 // WHERE line.identifier STARTS WITH '[RI VII] ' // Regesten Ludwik der Bayer
 // WHERE line.identifier STARTS WITH "[RI XIII]" OR  line.identifier STARTS WITH "Chmel" // Regesten Friedrich 3
-WITH line
-CALL (line) {
-  CREATE
-    (r:Collection:Regesta
-      {
-        uuid: randomUUID(),
-        label:
-          coalesce(nullif(trim(line.`title`), ''), '-') +
-          ' - ' +
-          coalesce(nullif(trim(line.`identifier`), ''), '-') +
-          ' ' +
-          coalesce(nullif(trim(line.`date_string`), ''), '-') +
-          ', ' +
-          coalesce(nullif(trim(line.`locality_string`), ''), '-'),
-        regid: line.persistent_identifier,
-        origPlaceOfIssue: line.locality_string,
-        startDate: line.start_date,
-        endDate: line.end_date,
-        externalLinks: line.external_links,
-        archivalHistory: line.archival_history,
-        exchangeIdentifier: line.exchange_identifier,
-        urn: line.urn,
-        pid: line.pid,
-        uid: line.uid,
-        sorting: line.sorting,
-        bandpk: line.bandpk,
-        laufendenummer: toInteger(line.laufendenummer),
-        regestennummernorm: line.regestennummernorm,
-        identifier: line.identifier,
-        date: line.date_string
-      })
+CALL (line, uuidQuery) {
+  MERGE (r:Collection:Regesta {uid: line.uid})
+    ON CREATE SET
+      r.uuid = apoc.cypher.runFirstColumnSingle(uuidQuery, {uid: line.uid}),
+      r.label =
+        coalesce(nullif(trim(line.`title`), ''), '-') +
+        ' - ' +
+        coalesce(nullif(trim(line.`identifier`), ''), '-') +
+        ' ' +
+        coalesce(nullif(trim(line.`date_string`), ''), '-') +
+        ', ' +
+        coalesce(nullif(trim(line.`locality_string`), ''), '-'),
+      r.regid = line.persistent_identifier,
+      r.origPlaceOfIssue = line.locality_string,
+      r.startDate = line.start_date,
+      r.endDate = line.end_date,
+      r.externalLinks = line.external_links,
+      r.archivalHistory = line.archival_history,
+      r.exchangeIdentifier = line.exchange_identifier,
+      r.urn = line.urn,
+      r.pid = line.pid,
+      r.sorting = line.sorting,
+      r.bandpk = line.bandpk,
+      r.laufendenummer = toInteger(line.laufendenummer),
+      r.regestennummernorm = line.regestennummernorm,
+      r.identifier = line.identifier,
+      r.date = line.date_string
 
   WITH
     r,
@@ -210,11 +223,7 @@ CALL (line) {
     // link tags zu gültigem (custom) html formatierem
     WITH
       c,
-      apoc.text.replace(
-        rmBrokenSpanText,
-        '<link\\s+([^>]+)>',
-        '<a href="$1">'
-      ) AS cleanLinkTags
+      apoc.text.replace(rmBrokenSpanText, '<link\\s+([^>]+)>', '<a href="$1">') AS cleanLinkTags
 
     // format some text that disturbes the html parser
     WITH
@@ -307,14 +316,13 @@ CALL (t) {
 RETURN count(*) AS resultCount;
 
 MATCH (a:Annotation)
-where a.type is null and a.tag is not null
+WHERE a.type IS NULL AND a.tag IS NOT NULL
 CALL (a) {
   SET a.type = a.tag
-} IN TRANSACTIONS of 1000 ROWS;
+} IN TRANSACTIONS OF 1000 ROWS;
 
 MATCH (a:Annotation)
-WHERE a.type = a.tag
-  AND a.`attribute:class` IS NOT NULL
+WHERE a.type = a.tag AND a.`attribute:class` IS NOT NULL
 CALL (a) {
   SET a.type = a.`attribute:class`
 } IN TRANSACTIONS OF 1000 ROWS;
