@@ -1,1186 +1,5042 @@
 {
-  "texts": {
-    "additionalLabels": ["Text"]
+  "$schema": "https://ramen-schema.org/miso/1.0.0/config.schema.json",
+  "id": "sTs6BanUHxMmZ2Qa",
+  "meta": {
+    "description": "Miso config of abbw"
   },
-  "collections": {
-    "properties": {
-      "system": [
-        {
-          "name": "label",
-          "type": "string",
-          "required": true,
-          "editable": true,
-          "visible": false
-        }
-      ],
-      "base": []
+  "model": {
+    "$schema": "https://ramen-schema.org/ramen/1.0.0/file.schema.json",
+    "id": "oyxmqT5a5yiuoig3",
+    "project": {
+      "name": "abbw",
+      "description": "RAMEN model of abbw, derived from the data (introspection snapshot 2026-11-06)"
     },
-    "types": [
+    "models": [
       {
-        "additionalLabel": "Letter",
-        "level": "primary",
-        "properties": [
+        "$schema": "https://ramen-schema.org/model/1.0.0/schema.json",
+        "$id": "https://ramen-schema.org/ramen/1.0.0/model.json",
+        "id": "lW611f30a2ky4276g3l8N",
+        "version": "1.0.0",
+        "kind": "Model",
+        "name": "RAMEN",
+        "description": "Base model for digital editions, defining collections, content, entities and annotations and the relations between them.",
+        "imports": [],
+        "ext": {}
+      },
+      {
+        "$schema": "https://ramen-schema.org/ramen/1.0.0/project.schema.json",
+        "$id": "urn:rmf:model:oyxmqT5a5yiuoig3",
+        "id": "oyxmqT5a5yiuoig3",
+        "version": "1.0.0",
+        "kind": "Model",
+        "name": "abbw",
+        "imports": [
           {
-            "name": "number",
-            "type": "integer",
-            "required": false,
-            "editable": true,
-            "visible": true
-          },
-          {
-            "name": "status",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
-          },
-          {
-            "name": "editor",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
-          },
-          {
-            "name": "xmlDownload",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
+            "modelUri": "https://ramen-schema.org/ramen/1.0.0/model.json",
+            "modelId": "lW611f30a2ky4276g3l8N",
+            "version": "1.0.0",
+            "name": "RAMEN"
           }
         ],
-        "annotations": {
-          "types": [
-            {
-              "type": "sent",
-              "isBlock": false,
-              "category": "project",
-              "defaultSelected": true,
-              "isZeroPoint": false,
-              "hasAdditionalTexts": false,
-              "properties": [
-                {
-                  "name": "dateType",
-                  "type": "string",
-                  "options": ["point", "imprecise"],
-                  "required": false,
-                  "editable": true,
-                  "visible": true
-                },
-                {
-                  "name": "dateStart",
-                  "type": "date",
-                  "required": false,
-                  "editable": true,
-                  "visible": true
-                },
-                {
-                  "name": "dateEnd",
-                  "type": "date",
-                  "required": false,
-                  "editable": true,
-                  "visible": true
-                },
-                {
-                  "name": "dateCertainty",
-                  "options": ["high", "low"],
-                  "type": "string",
-                  "required": false,
-                  "editable": true,
-                  "visible": true
-                }
-              ]
-            },
-            {
-              "type": "received",
-              "isBlock": false,
-              "topLevel": true,
-              "properties": [
-                {
-                  "name": "dateType",
-                  "type": "string",
-                  "options": ["point", "imprecise"],
-                  "required": false,
-                  "editable": true,
-                  "visible": true
-                },
-                {
-                  "name": "dateStart",
-                  "type": "date",
-                  "required": false,
-                  "editable": true,
-                  "visible": true
-                },
-                {
-                  "name": "dateEnd",
-                  "type": "date",
-                  "required": false,
-                  "editable": true,
-                  "visible": true
-                },
-                {
-                  "name": "dateCertainty",
-                  "options": ["high", "low"],
-                  "type": "string",
-                  "required": false,
-                  "editable": true,
-                  "visible": true
-                }
-              ],
-              "shortcut": [],
-              "text": "",
-              "category": "project",
-              "defaultSelected": true
-            }
-          ],
-          "properties": [],
-          "entities": [],
-          "additionalTexts": []
-        }
-      },
-      {
-        "additionalLabel": "Witness",
-        "level": "secondary",
-        "properties": [
-          {
-            "name": "isReference",
-            "type": "boolean",
-            "required": false,
-            "editable": true,
-            "visible": true
-          },
-          {
-            "name": "textType",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
-          },
-          {
-            "name": "language",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
-          },
-          {
-            "name": "extent",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
-          },
-          {
-            "name": "archive",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
-          },
-          {
-            "name": "shelfmark",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
-          },
-          {
-            "name": "collection",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
-          },
-          {
-            "name": "license",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
-          }
-        ]
-      },
-      {
-        "additionalLabel": "Abstract",
-        "level": "secondary",
-        "properties": []
+        "ext": {}
       }
     ],
-    "annotations": {
-      "properties": {
-        "system": [],
-        "base": []
-      },
-      "types": [],
-      "entities": [],
-      "additionalTexts": []
-    }
-  },
-  "annotations": {
-    "types": [
+    "classifiers": [
       {
-        "type": "p",
-        "editorRole": "paragraph",
-        "isBlock": true,
-        "category": "structure",
-        "defaultSelected": true,
-        "shortcut": [],
-        "text": "",
-        "properties": [],
-        "role": "structure",
-        "behaviour": "range"
-      },
-      {
-        "type": "head",
-        "editorRole": "heading",
-        "isBlock": true,
-        "category": "structure",
-        "defaultSelected": true,
-        "shortcut": [],
-        "text": "",
-        "properties": [
+        "kind": "DataType",
+        "id": "Q9mT2aL7vK0pX4sN1cDz",
+        "name": "UUID",
+        "description": "A universally unique identifier represented as a string.",
+        "baseType": "String",
+        "constraints": [
           {
-            "name": "n",
-            "editorAttr": "level",
-            "type": "number",
-            "minimum": 1,
-            "maximum": 6,
-            "required": true,
-            "editable": true,
-            "visible": true
+            "id": "K8tKZTPud1b5JDZV",
+            "name": "Valid UUID",
+            "description": "Checks that the string has UUID format.",
+            "language": "format",
+            "expression": "uuid",
+            "message": "Value must be a UUID."
           }
         ],
-        "role": "structure",
-        "behaviour": "range"
+        "modelId": "lW611f30a2ky4276g3l8N"
       },
       {
-        "type": "lb",
-        "editorRole": "hardBreak",
-        "isBlock": true,
-        "category": "structure",
-        "defaultSelected": true,
-        "shortcut": [],
-        "text": "",
-        "properties": [],
-        "role": "structure",
-        "behaviour": "zeroPoint"
-      },
-      {
-        "type": "div-writingSession",
-        "isBlock": true,
-        "topLevel": true,
-        "priority": 100,
-        "properties": [],
-        "shortcut": [],
-        "text": "",
-        "category": "structure",
-        "defaultSelected": true,
-        "role": "semanticBlock",
-        "behaviour": "range"
-      },
-      {
-        "type": "opener",
-        "isBlock": true,
-        "topLevel": true,
-        "priority": 70,
-        "properties": [
+        "kind": "DataType",
+        "id": "WdlVlvh7jqs6DEUC",
+        "name": "Date",
+        "description": "A calendar date in RFC 3339 full-date format, such as 2026-10-21.",
+        "baseType": "String",
+        "constraints": [
           {
-            "name": "reason",
-            "type": "string",
-            "options": ["illegible", "damaged", "omitted"],
-            "required": false,
-            "editable": true,
-            "visible": true
+            "id": "YdW8qnQHAtYBiAN8",
+            "name": "Valid date",
+            "description": "Checks that the string is an RFC 3339 calendar date.",
+            "language": "format",
+            "expression": "date",
+            "message": "Value must be an RFC 3339 full-date."
           }
         ],
-        "shortcut": [],
-        "text": "",
-        "category": "structure",
-        "defaultSelected": true,
-        "role": "semanticBlock",
-        "behaviour": "range"
+        "modelId": "lW611f30a2ky4276g3l8N"
       },
       {
-        "type": "closer",
-        "isBlock": true,
-        "topLevel": true,
-        "priority": 70,
-        "properties": [],
-        "shortcut": [],
-        "text": "",
-        "category": "structure",
-        "defaultSelected": true,
-        "role": "semanticBlock",
-        "behaviour": "range"
-      },
-      {
-        "type": "postscript",
-        "isBlock": true,
-        "topLevel": true,
-        "priority": 65,
-        "properties": [],
-        "shortcut": [],
-        "text": "",
-        "category": "structure",
-        "defaultSelected": true,
-        "role": "semanticBlock",
-        "behaviour": "range"
-      },
-      {
-        "type": "dateline",
-        "isBlock": true,
-        "topLevel": true,
-        "priority": 55,
-        "properties": [],
-        "shortcut": [],
-        "text": "",
-        "category": "structure",
-        "defaultSelected": true,
-        "role": "semanticBlock",
-        "behaviour": "range"
-      },
-      {
-        "type": "salute",
-        "isBlock": true,
-        "topLevel": true,
-        "priority": 55,
-        "properties": [],
-        "shortcut": [],
-        "text": "",
-        "category": "structure",
-        "defaultSelected": true,
-        "role": "semanticBlock",
-        "behaviour": "range"
-      },
-      {
-        "type": "signed",
-        "isBlock": true,
-        "topLevel": true,
-        "priority": 50,
-        "properties": [],
-        "shortcut": [],
-        "text": "",
-        "category": "structure",
-        "defaultSelected": true,
-        "role": "semanticBlock",
-        "behaviour": "range"
-      },
-      {
-        "type": "lg-poem",
-        "isBlock": true,
-        "topLevel": true,
-        "priority": 80,
-        "properties": [],
-        "shortcut": [],
-        "text": "",
-        "category": "structure",
-        "defaultSelected": true,
-        "role": "semanticBlock",
-        "behaviour": "range"
-      },
-      {
-        "type": "lg",
-        "isBlock": true,
-        "topLevel": true,
-        "priority": 75,
-        "properties": [
+        "kind": "DataType",
+        "id": "mXhHHuR4mQoDq31D",
+        "name": "DateTime",
+        "description": "A date and time in RFC 3339 date-time format, including a UTC offset.",
+        "baseType": "String",
+        "constraints": [
           {
-            "name": "n",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
+            "id": "VWUbg6WMufCNlIo4",
+            "name": "Valid date-time",
+            "description": "Checks that the string is an RFC 3339 date and time.",
+            "language": "format",
+            "expression": "date-time",
+            "message": "Value must be an RFC 3339 date-time."
           }
         ],
-        "shortcut": [],
-        "text": "",
-        "category": "structure",
-        "defaultSelected": true,
-        "role": "semanticBlock",
-        "behaviour": "range"
+        "modelId": "lW611f30a2ky4276g3l8N"
       },
       {
-        "type": "l",
-        "isBlock": true,
-        "topLevel": false,
-        "priority": 65,
-        "properties": [
+        "kind": "DataType",
+        "id": "T3YiJGOy7M7g1lTQ",
+        "name": "URI",
+        "description": "An absolute Uniform Resource Identifier used to identify a resource.",
+        "baseType": "String",
+        "constraints": [
           {
-            "name": "n",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
+            "id": "3UrCtNdlE5qh9RDe",
+            "name": "Valid URI",
+            "description": "Checks that the string is an absolute URI.",
+            "language": "format",
+            "expression": "uri",
+            "message": "Value must be an absolute URI."
           }
         ],
-        "shortcut": [],
-        "text": "",
-        "category": "structure",
-        "defaultSelected": true,
-        "role": "semanticBlock",
-        "behaviour": "range"
+        "modelId": "lW611f30a2ky4276g3l8N"
       },
       {
-        "type": "address",
-        "isBlock": true,
-        "topLevel": false,
-        "priority": 50,
-        "properties": [
+        "kind": "DataType",
+        "id": "DJRorIpghXJGAi41",
+        "name": "Email",
+        "description": "An email address represented as a string.",
+        "baseType": "String",
+        "constraints": [
           {
-            "name": "rendition",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
+            "id": "L65BaGOJP4W9lUKQ",
+            "name": "Valid email",
+            "description": "Checks that the string has email address format.",
+            "language": "format",
+            "expression": "email",
+            "message": "Value must be an email address."
           }
         ],
-        "shortcut": [],
-        "text": "",
-        "category": "structure",
-        "defaultSelected": true,
-        "role": "semanticBlock",
-        "behaviour": "range"
+        "modelId": "lW611f30a2ky4276g3l8N"
       },
       {
-        "type": "addrLine",
-        "isBlock": true,
-        "topLevel": false,
-        "priority": 45,
-        "properties": [],
-        "shortcut": [],
-        "text": "",
-        "category": "structure",
-        "defaultSelected": true,
-        "role": "semanticBlock",
-        "behaviour": "range"
+        "kind": "DataType",
+        "id": "selectorDataType01",
+        "name": "Selector",
+        "description": "A JSON object identifying a part of an annotated resource. RAMEN requires a non-empty type; the consuming tool interprets the remaining fields.",
+        "baseType": "Object",
+        "modelId": "lW611f30a2ky4276g3l8N"
       },
       {
-        "type": "add",
-        "isBlock": false,
-        "category": "edition",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasAdditionalTexts": true,
-        "properties": [
+        "kind": "Node",
+        "id": "aP3xK8nV1qR6tY2uZ9wB",
+        "name": "Collection",
+        "description": "A group of resources in an edition, such as a letter or book. Collections can contain content and other collections.",
+        "superTypes": [],
+        "attributes": [
           {
-            "name": "place",
-            "type": "string",
-            "options": ["aboveLine", "belowLine", "marginLeft", "marginRight", "inline"],
-            "required": false,
-            "editable": true,
-            "visible": true
-          }
-        ],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "del",
-        "isBlock": false,
-        "category": "edition",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasAdditionalTexts": true,
-        "properties": [
-          {
-            "name": "rendition",
-            "type": "string",
-            "options": ["strikethrough", "erasure", "overwrite"],
-            "required": false,
-            "editable": true,
-            "visible": true
-          }
-        ],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "subst",
-        "isBlock": false,
-        "category": "edition",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasAdditionalTexts": false,
-        "properties": [
-          {
-            "name": "del",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
-          }
-        ],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "sic",
-        "isBlock": false,
-        "category": "edition",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasAdditionalTexts": true,
-        "properties": [
-          {
-            "name": "certainty",
-            "type": "string",
-            "options": ["high", "low"],
-            "required": false,
-            "editable": true,
-            "visible": true
-          },
-          {
-            "name": "correction",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
-          },
-          {
-            "name": "isDeleted",
-            "type": "string",
-            "options": ["true", "false"],
-            "required": false,
-            "editable": true,
-            "visible": true
-          }
-        ],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "unclear",
-        "isBlock": false,
-        "category": "edition",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasAdditionalTexts": true,
-        "properties": [
-          {
-            "name": "reason",
-            "type": "string",
-            "options": ["illegible", "damaged", "faded"],
-            "required": false,
-            "editable": true,
-            "visible": true
-          },
-          {
-            "name": "cert",
-            "type": "string",
-            "options": ["high", "low"],
-            "required": false,
-            "editable": true,
-            "visible": true
-          }
-        ],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "gap",
-        "isBlock": false,
-        "category": "edition",
-        "defaultSelected": true,
-        "isZeroPoint": true,
-        "hasAdditionalTexts": false,
-        "properties": [
-          {
-            "name": "reason",
-            "type": "string",
-            "options": ["illegible", "damaged", "omitted", "cancelled"],
-            "required": false,
-            "editable": true,
-            "visible": true
-          },
-          {
-            "name": "unit",
-            "type": "string",
-            "options": ["char", "word", "line"],
-            "required": false,
-            "editable": true,
-            "visible": true
-          },
-          {
-            "name": "quantity",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
-          }
-        ],
-        "role": "inline",
-        "behaviour": "zeroPoint"
-      },
-      {
-        "type": "supplied",
-        "isBlock": false,
-        "category": "edition",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasAdditionalTexts": false,
-        "properties": [
-          {
-            "name": "reason",
-            "type": "string",
-            "options": ["illegible", "damaged", "omitted"],
-            "required": false,
-            "editable": true,
-            "visible": true
-          },
-          {
-            "name": "cert",
-            "type": "string",
-            "options": ["high", "low"],
-            "required": false,
-            "editable": true,
-            "visible": true
-          }
-        ],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "abbr",
-        "isBlock": false,
-        "category": "edition",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasAdditionalTexts": false,
-        "properties": [
-          {
-            "name": "expansion",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
-          }
-        ],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "expan",
-        "isBlock": false,
-        "category": "edition",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasAdditionalTexts": false,
-        "properties": [],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "ex",
-        "isBlock": false,
-        "category": "edition",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasAdditionalTexts": false,
-        "properties": [],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "choice",
-        "isBlock": false,
-        "category": "edition",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasAdditionalTexts": false,
-        "properties": [],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "corr",
-        "isBlock": false,
-        "category": "edition",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasAdditionalTexts": false,
-        "properties": [
-          {
-            "name": "cert",
-            "type": "string",
-            "options": ["high", "low"],
-            "required": false,
-            "editable": true,
-            "visible": true
-          }
-        ],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "reg",
-        "isBlock": false,
-        "category": "edition",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasAdditionalTexts": false,
-        "properties": [
-          {
-            "name": "regularisation",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
-          }
-        ],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "metamark",
-        "isBlock": false,
-        "category": "edition",
-        "defaultSelected": true,
-        "isZeroPoint": true,
-        "hasAdditionalTexts": true,
-        "properties": [
-          {
-            "name": "function",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
-          }
-        ],
-        "role": "inline",
-        "behaviour": "zeroPoint"
-      },
-      {
-        "type": "hi",
-        "isBlock": false,
-        "category": "edition",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasAdditionalTexts": false,
-        "properties": [
-          {
-            "name": "rendition",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
-          }
-        ],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "g",
-        "isBlock": false,
-        "category": "edition",
-        "defaultSelected": true,
-        "isZeroPoint": true,
-        "hasAdditionalTexts": false,
-        "properties": [
-          {
-            "name": "ref",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
-          }
-        ],
-        "role": "inline",
-        "behaviour": "zeroPoint"
-      },
-      {
-        "type": "pb",
-        "isBlock": false,
-        "category": "layout",
-        "defaultSelected": true,
-        "isZeroPoint": true,
-        "hasAdditionalTexts": false,
-        "properties": [
-          {
-            "name": "n",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
-          },
-          {
-            "name": "url",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
-          },
-          {
-            "name": "facs",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
-          },
-          {
-            "name": "break",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
-          }
-        ],
-        "role": "inline",
-        "behaviour": "zeroPoint"
-      },
-      {
-        "type": "fw-folNum",
-        "isBlock": false,
-        "category": "layout",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasAdditionalTexts": false,
-        "properties": [
-          {
-            "name": "place",
-            "type": "string",
-            "options": ["top", "bottom", "topLeft", "topRight", "bottomLeft", "bottomRight"],
-            "required": false,
-            "editable": true,
-            "visible": true
-          }
-        ],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "persName",
-        "isBlock": false,
-        "category": "entities",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasEntities": true,
-        "entityNodes": ["Person"],
-        "hasAdditionalTexts": true,
-        "properties": [],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "placeName",
-        "isBlock": false,
-        "category": "entities",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasEntities": true,
-        "entityNodes": ["Place"],
-        "hasAdditionalTexts": true,
-        "properties": [],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "orgName",
-        "isBlock": false,
-        "category": "entities",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasEntities": true,
-        "entityNodes": ["Organisation"],
-        "hasAdditionalTexts": true,
-        "properties": [],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "rs-term",
-        "isBlock": false,
-        "category": "entities",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasEntities": true,
-        "entityNodes": ["Term"],
-        "hasAdditionalTexts": true,
-        "properties": [],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "rs-bible",
-        "isBlock": false,
-        "category": "sources",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasEntities": true,
-        "entityNodes": ["BibleVerse"],
-        "hasAdditionalTexts": true,
-        "properties": [],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "bibl",
-        "isBlock": false,
-        "category": "sources",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasAdditionalTexts": true,
-        "properties": [
-          {
-            "name": "sameAs",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "required": false,
-              "editable": true,
-              "visible": true
+            "name": "uuid",
+            "description": "The required, read-only unique identifier of this record.",
+            "typeId": "Q9mT2aL7vK0pX4sN1cDz",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
             },
-            "required": false,
-            "editable": true,
-            "visible": true
-          }
-        ],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "ptr",
-        "isBlock": false,
-        "category": "sources",
-        "defaultSelected": true,
-        "isZeroPoint": true,
-        "hasAdditionalTexts": false,
-        "properties": [
-          {
-            "name": "target",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
-          }
-        ],
-        "role": "inline",
-        "behaviour": "zeroPoint"
-      },
-      {
-        "type": "seeAlso",
-        "isBlock": false,
-        "category": "sources",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasAdditionalTexts": true,
-        "properties": [
-          {
-            "name": "target",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
-          }
-        ],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "rs-comment",
-        "isBlock": false,
-        "category": "sources",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasAdditionalTexts": true,
-        "properties": [],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "note",
-        "isBlock": false,
-        "category": "project",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasAdditionalTexts": true,
-        "properties": [
-          {
-            "name": "type",
-            "type": "string",
-            "options": ["marginal", "footnote", "endnote", "interlinear"],
-            "required": false,
-            "editable": true,
-            "visible": true
+            "isKey": true,
+            "isReadOnly": true,
+            "id": "efe3cc0f99a3fd9a"
           },
-          {
-            "name": "place",
-            "type": "string",
-            "options": ["marginLeft", "marginRight", "marginTop", "marginBottom", "foot"],
-            "required": false,
-            "editable": true,
-            "visible": true
-          },
-          {
-            "name": "hand",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
-          },
-          {
-            "name": "id",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
-          }
-        ],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "commented",
-        "isBlock": false,
-        "category": "project",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasAdditionalTexts": true,
-        "properties": [],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "seg-comment",
-        "isBlock": false,
-        "category": "project",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasAdditionalTexts": true,
-        "properties": [],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "normdata",
-        "isBlock": false,
-        "category": "project",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasAdditionalTexts": false,
-        "properties": [
-          {
-            "name": "identifier",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
-          },
-          {
-            "name": "namespace",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
-          },
-          {
-            "name": "url",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
-          }
-        ],
-        "role": "inline",
-        "behaviour": "range"
-      },
-      {
-        "type": "altLabel",
-        "isBlock": false,
-        "category": "project",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasAdditionalTexts": false,
-        "properties": [
           {
             "name": "label",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
+            "description": "The human-readable name of this record.",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            },
+            "id": "8c3cef32d4648158"
           }
         ],
-        "role": "inline",
-        "behaviour": "range"
+        "modelId": "lW611f30a2ky4276g3l8N"
       },
       {
-        "type": "relation",
-        "isBlock": false,
-        "category": "project",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasAdditionalTexts": false,
-        "properties": [
+        "kind": "Node",
+        "id": "n7Vb2Qx0Lm9P3sT6yK1h",
+        "name": "Entity",
+        "description": "A person, place or other entity described in an edition. Annotations can refer to entities.",
+        "superTypes": [],
+        "attributes": [
           {
-            "name": "kind",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
+            "name": "uuid",
+            "description": "The required, read-only unique identifier of this record.",
+            "typeId": "Q9mT2aL7vK0pX4sN1cDz",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            },
+            "isKey": true,
+            "isReadOnly": true,
+            "id": "fb10d46599e686d5"
           },
           {
-            "name": "note",
-            "type": "string",
-            "required": false,
-            "editable": true,
-            "visible": true
+            "name": "label",
+            "description": "The human-readable name of this record.",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            },
+            "id": "954699e0badc0d96"
           }
         ],
-        "role": "inline",
-        "behaviour": "range"
+        "modelId": "lW611f30a2ky4276g3l8N"
       },
       {
-        "type": "Property",
-        "isBlock": false,
-        "category": "project",
-        "defaultSelected": true,
-        "isZeroPoint": false,
-        "hasAdditionalTexts": false,
-        "properties": [],
-        "role": "inline",
-        "behaviour": "range"
+        "kind": "Node",
+        "id": "Z4kq1M8sV0bN2xR7pT6u",
+        "name": "Content",
+        "description": "The text, image or other content of a resource. Content can belong to a collection and carry annotations.",
+        "superTypes": [],
+        "attributes": [
+          {
+            "name": "uuid",
+            "description": "The required, read-only unique identifier of this record.",
+            "typeId": "Q9mT2aL7vK0pX4sN1cDz",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            },
+            "isKey": true,
+            "isReadOnly": true,
+            "id": "0838eb93a8dcfd4f"
+          }
+        ],
+        "modelId": "lW611f30a2ky4276g3l8N"
+      },
+      {
+        "kind": "Node",
+        "id": "m2Xv8qL0sP6tN1yK7rB3",
+        "name": "Annotation",
+        "description": "An annotation attached to a resource. Its type selects an annotation shape; shared properties apply to every shape on this node.",
+        "superTypes": [],
+        "attributes": [
+          {
+            "name": "uuid",
+            "description": "The required, read-only unique identifier of this record.",
+            "typeId": "Q9mT2aL7vK0pX4sN1cDz",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            },
+            "isKey": true,
+            "isReadOnly": true,
+            "id": "40dee5e6d8fb2dfb"
+          },
+          {
+            "name": "type",
+            "description": "The name of the annotation shape that defines the properties and permitted relations of this annotation.",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            },
+            "constraints": [],
+            "id": "474ec2797fdb07af"
+          },
+          {
+            "name": "selector",
+            "description": "Optionally identifies the annotated part of a resource, such as a text span or image region. The object must contain a non-empty type.",
+            "typeId": "selectorDataType01",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "id": "annotationSelector01"
+          }
+        ],
+        "modelId": "lW611f30a2ky4276g3l8N"
+      },
+      {
+        "kind": "Node",
+        "id": "57AXt90vljwXrRgg",
+        "name": "Text",
+        "superTypes": ["lW611f30a2ky4276g3l8N:Z4kq1M8sV0bN2xR7pT6u"],
+        "attributes": [
+          {
+            "id": "tBkdFVzUSGjDQ0TO",
+            "name": "text",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "constraints": [],
+        "ext": {},
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "Node",
+        "id": "G1IqxeS8nX3hRYAE",
+        "name": "Person",
+        "superTypes": ["lW611f30a2ky4276g3l8N:n7Vb2Qx0Lm9P3sT6yK1h"],
+        "attributes": [
+          {
+            "id": "LsNx6iyAg85LhEIj",
+            "name": "birth",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "fAGSCy5jsKzKh3X8",
+            "name": "death",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "lfa2OGFWQEpS3CpL",
+            "name": "floruitNotAfter",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "E5ul91TQRRnaQCZw",
+            "name": "floruitNotBefore",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "wQolPBUibjPTLX4x",
+            "name": "forename",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "tSECXMPZE5Da3GL3",
+            "name": "mentions",
+            "typeId": "Integer",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": true,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "BVl5Ut8CHAGWCGid",
+            "name": "remarks",
+            "typeId": "Integer",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": true,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "zdl1gTJRxgrpBpWn",
+            "name": "surname",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "constraints": [],
+        "ext": {},
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "Node",
+        "id": "b33qZvGT0c1h9Ahs",
+        "name": "Letter",
+        "superTypes": ["lW611f30a2ky4276g3l8N:aP3xK8nV1qR6tY2uZ9wB"],
+        "attributes": [
+          {
+            "id": "SDEofbQq1ulYKaFq",
+            "name": "editor",
+            "typeId": "Ope4CoAETAjN4QXX",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "qsbcpsgQoccdW2AM",
+            "name": "number",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "A0r6w7OPoD0LePM4",
+            "name": "status",
+            "typeId": "nzVZ0rqviv0Sr5bo",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "hakk4xykWTMhhwDA",
+            "name": "xmlDownload",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "constraints": [],
+        "ext": {},
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "DataType",
+        "id": "Ope4CoAETAjN4QXX",
+        "name": "LetterEditor",
+        "baseType": "String",
+        "constraints": [],
+        "ext": {},
+        "literals": [
+          {
+            "id": "fnqGjuU2XwlKNUj0",
+            "name": "wegnerManfred",
+            "literal": "wegnerManfred",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "SSmgLYtefHqDQF1k",
+            "name": "bronnerDagmar",
+            "literal": "bronnerDagmar",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "qUxfZlZKpKhb696I",
+            "name": "schniederIsabel",
+            "literal": "schniederIsabel",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "heLlv71HwiPKE99e",
+            "name": "vo KlaasDieter",
+            "literal": "voßKlaasDieter",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "ADMe8E7707z2Mx6z",
+            "name": "schniederIsabelTranskriptionWegnerManfred",
+            "literal": "schniederIsabelTranskriptionWegnerManfred",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "44eoi3XJf4Vuznao",
+            "name": "bronnerDagmarTranskriptionSchniederIsabel",
+            "literal": "bronnerDagmarTranskriptionSchniederIsabel",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "qJt7Yx4XGCXs5Bhk",
+            "name": "wegnerManfredTranskriptionSchniederIsabel",
+            "literal": "wegnerManfredTranskriptionSchniederIsabel",
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "DataType",
+        "id": "nzVZ0rqviv0Sr5bo",
+        "name": "LetterStatus",
+        "baseType": "String",
+        "constraints": [],
+        "ext": {},
+        "literals": [
+          {
+            "id": "ucAUv6VQ2fXCisiO",
+            "name": "0 final",
+            "literal": "0-final",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "9RVC2c4ijKj3Rsgs",
+            "name": "1 transcription",
+            "literal": "1-transcription",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "FgwwgkCPFpNmum63",
+            "name": "2 draft",
+            "literal": "2-draft",
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "Node",
+        "id": "H7rNT9gfX5nrvwbE",
+        "name": "Witness",
+        "superTypes": ["lW611f30a2ky4276g3l8N:aP3xK8nV1qR6tY2uZ9wB"],
+        "attributes": [
+          {
+            "id": "MWKnDY5lcpwx1CNj",
+            "name": "archive",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "AaTxvmJi2XhL85w5",
+            "name": "collection",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "5xNvTOjDNacAe72D",
+            "name": "extent",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "cxhKVE70OEcNcvRV",
+            "name": "isReference",
+            "typeId": "Boolean",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "lbif7Ws6Z3PVbCcG",
+            "name": "language",
+            "typeId": "KNURqRXVq3D9lueR",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "LXzozbUzz2CIimTt",
+            "name": "license",
+            "typeId": "vbxoTsaKvbvtGPpR",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "g7FUEt7IboM3EAE9",
+            "name": "shelfmark",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "h2Pp7eIZ8I76C9ch",
+            "name": "textType",
+            "typeId": "qyy9Ozjq1tFe4m7D",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "constraints": [],
+        "ext": {},
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "DataType",
+        "id": "KNURqRXVq3D9lueR",
+        "name": "WitnessLanguage",
+        "baseType": "String",
+        "constraints": [],
+        "ext": {},
+        "literals": [
+          {
+            "id": "R347uEwWicPf8kEU",
+            "name": "deu",
+            "literal": "deu",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "jdDzzj6XN57YyrYO",
+            "name": "nld",
+            "literal": "nld",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "72JAVJ7XaFGkuigX",
+            "name": "deu fra",
+            "literal": "deu fra",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "QIJYbGiyCVcHHUea",
+            "name": "nld deu",
+            "literal": "nld deu",
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "DataType",
+        "id": "vbxoTsaKvbvtGPpR",
+        "name": "WitnessLicense",
+        "baseType": "String",
+        "constraints": [],
+        "ext": {},
+        "literals": [
+          {
+            "id": "2hzEBlbvia63Vtno",
+            "name": "https creativecommons org licenses by 4 0",
+            "literal": "https://creativecommons.org/licenses/by/4.0/",
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "DataType",
+        "id": "qyy9Ozjq1tFe4m7D",
+        "name": "WitnessTextType",
+        "baseType": "String",
+        "constraints": [],
+        "ext": {},
+        "literals": [
+          {
+            "id": "fGUv6qwOZhwglJEO",
+            "name": "final copy",
+            "literal": "final_copy",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "xHWpp7NKA5t8t5f2",
+            "name": "manuscript",
+            "literal": "manuscript",
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "Node",
+        "id": "TZatc9Xzydq893LO",
+        "name": "Place",
+        "superTypes": ["lW611f30a2ky4276g3l8N:n7Vb2Qx0Lm9P3sT6yK1h"],
+        "attributes": [
+          {
+            "id": "a4LcWkyHVf1IZYOd",
+            "name": "mentions",
+            "typeId": "Integer",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": true,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "B5T8KFw0HsprCD6M",
+            "name": "remarks",
+            "typeId": "Integer",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": true,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "constraints": [],
+        "ext": {},
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "Node",
+        "id": "NtSRyc4IBfqNliGN",
+        "name": "Abstract",
+        "superTypes": ["lW611f30a2ky4276g3l8N:aP3xK8nV1qR6tY2uZ9wB"],
+        "attributes": [],
+        "constraints": [],
+        "ext": {},
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "Node",
+        "id": "5LwOhSHIRyKei4Ws",
+        "name": "Term",
+        "superTypes": ["lW611f30a2ky4276g3l8N:n7Vb2Qx0Lm9P3sT6yK1h"],
+        "attributes": [
+          {
+            "id": "nbLQqwW0BK8MplRU",
+            "name": "mentions",
+            "typeId": "Integer",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": true,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "OLluEBn9TyjkIjvB",
+            "name": "remarks",
+            "typeId": "Integer",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": true,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "constraints": [],
+        "ext": {},
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "Node",
+        "id": "ZK3HvHHL21fvrN90",
+        "name": "Organisation",
+        "superTypes": ["lW611f30a2ky4276g3l8N:n7Vb2Qx0Lm9P3sT6yK1h"],
+        "attributes": [
+          {
+            "id": "Ucm7XqUChWJtjyQ3",
+            "name": "mentions",
+            "typeId": "Integer",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": true,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "7FFN617UC7BtCwQX",
+            "name": "remarks",
+            "typeId": "Integer",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": true,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "constraints": [],
+        "ext": {},
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "Node",
+        "id": "PT5HkRYiLUNwBdlJ",
+        "name": "BibleVerse",
+        "superTypes": ["lW611f30a2ky4276g3l8N:n7Vb2Qx0Lm9P3sT6yK1h"],
+        "attributes": [
+          {
+            "id": "YRbQSkI7Ctphl09g",
+            "name": "mentions",
+            "typeId": "Integer",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": true,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "lrl5XE0kKg6MXsFA",
+            "name": "remarks",
+            "typeId": "Integer",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": true,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "constraints": [],
+        "ext": {},
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "DataType",
+        "id": "Nmb8xc0jvUHpayD4",
+        "name": "ReceivedDateType",
+        "baseType": "String",
+        "constraints": [],
+        "ext": {},
+        "literals": [
+          {
+            "id": "qyK6aPmKxOcx8bEK",
+            "name": "point",
+            "literal": "point",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "7aeX8Spdv9LBFclF",
+            "name": "imprecise",
+            "literal": "imprecise",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "I1YPFG0NBfoIgdRN",
+            "name": "range",
+            "literal": "range",
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "DataType",
+        "id": "mF9YlO47icnXEOW8",
+        "name": "ReceivedDateCertainty",
+        "baseType": "String",
+        "constraints": [],
+        "ext": {},
+        "literals": [
+          {
+            "id": "HkAifjoJuvHFy1hv",
+            "name": "high",
+            "literal": "high",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "LQRb15VyaE5ZW23O",
+            "name": "low",
+            "literal": "low",
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "DataType",
+        "id": "j4hQ5lTkLMaW4dgO",
+        "name": "SentDateCertainty",
+        "baseType": "String",
+        "constraints": [],
+        "ext": {},
+        "literals": [
+          {
+            "id": "OWAC8btWtQ1FCxLF",
+            "name": "high",
+            "literal": "high",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "kYUYXEe3bgcXNCbM",
+            "name": "low",
+            "literal": "low",
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "DataType",
+        "id": "4Xrk1vgnTbNHgNgH",
+        "name": "SentDateType",
+        "baseType": "String",
+        "constraints": [],
+        "ext": {},
+        "literals": [
+          {
+            "id": "UD7sBUdTrZ2blubQ",
+            "name": "point",
+            "literal": "point",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "mtgXTERLZWYx0qGl",
+            "name": "imprecise",
+            "literal": "imprecise",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "KhiGc3lZEbNbbti8",
+            "name": "range",
+            "literal": "range",
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "DataType",
+        "id": "qLY1qSZ8kNCm1vQd",
+        "name": "AddPlace",
+        "baseType": "String",
+        "constraints": [],
+        "ext": {},
+        "literals": [
+          {
+            "id": "Se2aLblCCq0r2GL7",
+            "name": "superlinear",
+            "literal": "superlinear",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "Fxpm0rok46yNURbT",
+            "name": "sublinear",
+            "literal": "sublinear",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "DsNZ7ecO0CcTrgZo",
+            "name": "intralinear",
+            "literal": "intralinear",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "tcPQCF7dwzuv9MGs",
+            "name": "left",
+            "literal": "left",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "fAN4LLESbbF9IiD5",
+            "name": "right",
+            "literal": "right",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "1I8tAHxbjYsw72wH",
+            "name": "mTop",
+            "literal": "mTop",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "Rye7cTAnvMJsPWxK",
+            "name": "mBottom",
+            "literal": "mBottom",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "TVGKCX6tONmM8vVz",
+            "name": "across",
+            "literal": "across",
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "DataType",
+        "id": "aGom7y1voX0iMCqH",
+        "name": "DelRendition",
+        "baseType": "String",
+        "constraints": [],
+        "ext": {},
+        "literals": [
+          {
+            "id": "gyefdFe1w57B6eFc",
+            "name": "s",
+            "literal": "#s",
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "DataType",
+        "id": "v9kRQJw5XEuybnxY",
+        "name": "GapReason",
+        "baseType": "String",
+        "constraints": [],
+        "ext": {},
+        "literals": [
+          {
+            "id": "0PLqYLhTI1UJ6QNF",
+            "name": "illegible",
+            "literal": "illegible",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "S6kPRicbjBQ49RV7",
+            "name": "covered",
+            "literal": "covered",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "wxNsJtQSt59sCDuv",
+            "name": "lost",
+            "literal": "lost",
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "DataType",
+        "id": "vGAnnBzZOf5AB7gY",
+        "name": "GapUnit",
+        "baseType": "String",
+        "constraints": [],
+        "ext": {},
+        "literals": [
+          {
+            "id": "nYRrn3ripquSZu4Z",
+            "name": "chars",
+            "literal": "chars",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "udkYvzHfN7MUFNNz",
+            "name": "words",
+            "literal": "words",
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "DataType",
+        "id": "mIRIG3ky34KyUJQ2",
+        "name": "HiRendition",
+        "baseType": "String",
+        "constraints": [],
+        "ext": {},
+        "literals": [
+          {
+            "id": "fvKfTk4un7h8y2wU",
+            "name": "u",
+            "literal": "#u",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "hnnP38Z4DUp0AaqJ",
+            "name": "uu",
+            "literal": "#uu",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "byypZ6VJwP1N7tyc",
+            "name": "b",
+            "literal": "#b",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "1aTs8q9iqQmzoQeD",
+            "name": "i",
+            "literal": "#i",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "4hfQuoZiiEw7Ug3d",
+            "name": "sup",
+            "literal": "#sup",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "JljToKQ768le7HFp",
+            "name": "mPrint",
+            "literal": "#mPrint",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "h7edUvXBsa0QrMny",
+            "name": "mMM",
+            "literal": "#mMM",
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "DataType",
+        "id": "ZFmh6ZkCctAHfWgy",
+        "name": "NoteHand",
+        "baseType": "String",
+        "constraints": [],
+        "ext": {},
+        "literals": [
+          {
+            "id": "VMFPx3P6xjbdM5Cd",
+            "name": "author",
+            "literal": "#author",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "xV9XgYFSCXI2reSY",
+            "name": "addressee",
+            "literal": "#addressee",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "xZFfFiZkt8JktfYe",
+            "name": "abbw ttj gkm zbc",
+            "literal": "#abbw_ttj_gkm_zbc",
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "DataType",
+        "id": "xFcALfUe1fYp0M8e",
+        "name": "NotePlace",
+        "baseType": "String",
+        "constraints": [],
+        "ext": {},
+        "literals": [
+          {
+            "id": "sPH1F6ZdI1FOVeFL",
+            "name": "left",
+            "literal": "left",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "Ju3kTt0rI4GRALYW",
+            "name": "mTop",
+            "literal": "mTop",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "IJu6W4qSweH8c33k",
+            "name": "mBottom",
+            "literal": "mBottom",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "yrGsDnlEfCv4sG1M",
+            "name": "inline",
+            "literal": "inline",
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "DataType",
+        "id": "icTYNCSpKUYLI01n",
+        "name": "SicCertainty",
+        "baseType": "String",
+        "constraints": [],
+        "ext": {},
+        "literals": [
+          {
+            "id": "sL0DsJgARzi77SJa",
+            "name": "high",
+            "literal": "high",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "V796ILP8ayiqbTD5",
+            "name": "low",
+            "literal": "low",
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "DataType",
+        "id": "sQd5J52sKMtLIwGo",
+        "name": "SicIsDeleted",
+        "baseType": "String",
+        "constraints": [],
+        "ext": {},
+        "literals": [
+          {
+            "id": "VXHAdSVdP24iuTAv",
+            "name": "true",
+            "literal": "true",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "kg47O10DwDdfGBVF",
+            "name": "false",
+            "literal": "false",
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "DataType",
+        "id": "0XoPy4bG9AjYOIcG",
+        "name": "SuppliedCert",
+        "baseType": "String",
+        "constraints": [],
+        "ext": {},
+        "literals": [
+          {
+            "id": "N9PPyPXUOktiO5Vd",
+            "name": "high",
+            "literal": "high",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "V29L4LZlCNROLamy",
+            "name": "low",
+            "literal": "low",
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "DataType",
+        "id": "0hC4rtAYvFSgpQ8q",
+        "name": "UnclearCert",
+        "baseType": "String",
+        "constraints": [],
+        "ext": {},
+        "literals": [
+          {
+            "id": "vqPvqiME3sCqlewN",
+            "name": "high",
+            "literal": "high",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "IXatW9PrU4AWWD11",
+            "name": "low",
+            "literal": "low",
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "DataType",
+        "id": "dF9Siln1qVdnmZUp",
+        "name": "UnclearReason",
+        "baseType": "String",
+        "constraints": [],
+        "ext": {},
+        "literals": [
+          {
+            "id": "CuP6np1Y6gIAqq9K",
+            "name": "illegible",
+            "literal": "illegible",
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "1LzndPdp7F3vy1xv",
+            "name": "covered",
+            "literal": "covered",
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3"
       }
     ],
-    "properties": {
-      "system": [
+    "relations": [
+      {
+        "kind": "Relation",
+        "id": "V7pQ2xL9mR0sT6yK1nB3",
+        "superTypes": [],
+        "name": "PART_OF",
+        "description": "Places a collection within a collection.",
+        "from": {
+          "nodeId": "aP3xK8nV1qR6tY2uZ9wB",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "id": "11882a4a1a1a92f0"
+        },
+        "to": {
+          "nodeId": "aP3xK8nV1qR6tY2uZ9wB",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "id": "5296ec802aed7bb1"
+        },
+        "modelId": "lW611f30a2ky4276g3l8N"
+      },
+      {
+        "kind": "Relation",
+        "id": "K0mT3aL7vQ9pX4sN1cDz",
+        "superTypes": [],
+        "name": "PART_OF",
+        "description": "Places a content item within a collection.",
+        "from": {
+          "nodeId": "Z4kq1M8sV0bN2xR7pT6u",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "id": "ed2832e9484cc9ee"
+        },
+        "to": {
+          "nodeId": "aP3xK8nV1qR6tY2uZ9wB",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "id": "357d8ae975078df2"
+        },
+        "modelId": "lW611f30a2ky4276g3l8N"
+      },
+      {
+        "kind": "Relation",
+        "id": "sT6yK1nB3xV7pQ2L9mR0",
+        "superTypes": [],
+        "name": "HAS_ANNOTATION",
+        "description": "Attaches an annotation to a collection.",
+        "from": {
+          "nodeId": "aP3xK8nV1qR6tY2uZ9wB",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "id": "f203ff8cc45e18d6"
+        },
+        "to": {
+          "nodeId": "m2Xv8qL0sP6tN1yK7rB3",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "id": "4a61755cb3d9a650"
+        },
+        "modelId": "lW611f30a2ky4276g3l8N"
+      },
+      {
+        "kind": "Relation",
+        "id": "pX4sN1cDzK0mT3aL7vQ9",
+        "superTypes": [],
+        "name": "HAS_ANNOTATION",
+        "description": "Attaches an annotation to a content item.",
+        "from": {
+          "nodeId": "Z4kq1M8sV0bN2xR7pT6u",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "id": "e8124ac0f6affeeb"
+        },
+        "to": {
+          "nodeId": "m2Xv8qL0sP6tN1yK7rB3",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "id": "9d1fb8a998d44055"
+        },
+        "modelId": "lW611f30a2ky4276g3l8N"
+      },
+      {
+        "kind": "Relation",
+        "id": "Q2yT6vL9mR0sT6yK1nB3",
+        "superTypes": [],
+        "name": "HAS_ANNOTATION",
+        "description": "Attaches an annotation to an entity.",
+        "from": {
+          "nodeId": "n7Vb2Qx0Lm9P3sT6yK1h",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "id": "01eff83f221ab3ff"
+        },
+        "to": {
+          "nodeId": "m2Xv8qL0sP6tN1yK7rB3",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "id": "09d895defd083d74"
+        },
+        "modelId": "lW611f30a2ky4276g3l8N"
+      },
+      {
+        "kind": "Relation",
+        "id": "xL9mR0sT6yK1nB3xV7pQ",
+        "superTypes": [],
+        "name": "HAS_ANNOTATION",
+        "description": "Attaches an annotation to an annotation.",
+        "from": {
+          "nodeId": "m2Xv8qL0sP6tN1yK7rB3",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "id": "f782e8c214c6de2a"
+        },
+        "to": {
+          "nodeId": "m2Xv8qL0sP6tN1yK7rB3",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "id": "e8762d26b8de4a64"
+        },
+        "modelId": "lW611f30a2ky4276g3l8N"
+      },
+      {
+        "kind": "Relation",
+        "id": "tN1yK7rB3m2Xv8qL0sP6",
+        "superTypes": [],
+        "name": "REFERS_TO",
+        "description": "Links an annotation to a collection that it refers to.",
+        "from": {
+          "nodeId": "m2Xv8qL0sP6tN1yK7rB3",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "id": "c7eb6cb19894f86b"
+        },
+        "to": {
+          "nodeId": "aP3xK8nV1qR6tY2uZ9wB",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "id": "5a3c92c63ec68015"
+        },
+        "modelId": "lW611f30a2ky4276g3l8N"
+      },
+      {
+        "kind": "Relation",
+        "id": "vQ9pX4sN1cDzK0mT3aL7",
+        "superTypes": [],
+        "name": "REFERS_TO",
+        "description": "Links an annotation to a content item that it refers to.",
+        "from": {
+          "nodeId": "m2Xv8qL0sP6tN1yK7rB3",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "id": "c1ce93334b435f1a"
+        },
+        "to": {
+          "nodeId": "Z4kq1M8sV0bN2xR7pT6u",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "id": "ec5e8fa8a5ccc88c"
+        },
+        "modelId": "lW611f30a2ky4276g3l8N"
+      },
+      {
+        "kind": "Relation",
+        "id": "mR0sT6yK1nB3xV7pQ2xL9",
+        "superTypes": [],
+        "name": "REFERS_TO",
+        "description": "Links an annotation to an entity that it refers to.",
+        "from": {
+          "nodeId": "m2Xv8qL0sP6tN1yK7rB3",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "id": "828ed555908f66ce"
+        },
+        "to": {
+          "nodeId": "n7Vb2Qx0Lm9P3sT6yK1h",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "id": "421b47ea683a1a02"
+        },
+        "modelId": "lW611f30a2ky4276g3l8N"
+      },
+      {
+        "kind": "Relation",
+        "id": "eWiONvbz0ddpa1Ic",
+        "superTypes": ["lW611f30a2ky4276g3l8N:V7pQ2xL9mR0sT6yK1nB3"],
+        "name": "PART_OF",
+        "from": {
+          "id": "f8bXesIcPBmZdDzx",
+          "nodeId": "NtSRyc4IBfqNliGN",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "to": {
+          "id": "ai8BT7WMuA8V26cn",
+          "nodeId": "b33qZvGT0c1h9Ahs",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "constraints": [],
+        "ext": {},
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "Relation",
+        "id": "oLlAFk8L4ujtXKOv",
+        "superTypes": ["lW611f30a2ky4276g3l8N:V7pQ2xL9mR0sT6yK1nB3"],
+        "name": "PART_OF",
+        "from": {
+          "id": "K4VC7Jzbzh52HGbJ",
+          "nodeId": "H7rNT9gfX5nrvwbE",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "to": {
+          "id": "jhw2xPbsLnbQtE0f",
+          "nodeId": "b33qZvGT0c1h9Ahs",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "constraints": [],
+        "ext": {},
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "Relation",
+        "id": "KqfwZmHbSOK9vtK6",
+        "superTypes": ["lW611f30a2ky4276g3l8N:K0mT3aL7vQ9pX4sN1cDz"],
+        "name": "PART_OF",
+        "from": {
+          "id": "A2IyjJMHO92GwC6a",
+          "nodeId": "57AXt90vljwXrRgg",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "to": {
+          "id": "ltAqpBKdEMYYtAkD",
+          "nodeId": "NtSRyc4IBfqNliGN",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "constraints": [],
+        "ext": {},
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "Relation",
+        "id": "ILhLRpcNUoVStNgg",
+        "superTypes": ["lW611f30a2ky4276g3l8N:K0mT3aL7vQ9pX4sN1cDz"],
+        "name": "PART_OF",
+        "from": {
+          "id": "sOL5kuLrAhjPZtzv",
+          "nodeId": "57AXt90vljwXrRgg",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "to": {
+          "id": "es8RRMxsfQFBMk5q",
+          "nodeId": "H7rNT9gfX5nrvwbE",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "constraints": [],
+        "ext": {},
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "Relation",
+        "id": "9KXktRh9pBaMVyUr",
+        "superTypes": ["lW611f30a2ky4276g3l8N:Q2yT6vL9mR0sT6yK1nB3"],
+        "name": "HAS_ANNOTATION",
+        "from": {
+          "id": "YyIxvG3OfAckbmYJ",
+          "nodeId": "PT5HkRYiLUNwBdlJ",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "to": {
+          "id": "Rl2zJhkA0h25mb1u",
+          "nodeId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "constraints": [],
+        "ext": {},
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "Relation",
+        "id": "SBDlX5tyaeHjIgbS",
+        "superTypes": ["lW611f30a2ky4276g3l8N:Q2yT6vL9mR0sT6yK1nB3"],
+        "name": "HAS_ANNOTATION",
+        "from": {
+          "id": "zD44ogHysNLYrwCw",
+          "nodeId": "G1IqxeS8nX3hRYAE",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "to": {
+          "id": "gk72mIomVWPIygH2",
+          "nodeId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "constraints": [],
+        "ext": {},
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "Relation",
+        "id": "8J5bYFp0Ipt1MQt5",
+        "superTypes": ["lW611f30a2ky4276g3l8N:Q2yT6vL9mR0sT6yK1nB3"],
+        "name": "HAS_ANNOTATION",
+        "from": {
+          "id": "Lv9YGIMEnKLA3SI1",
+          "nodeId": "TZatc9Xzydq893LO",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "to": {
+          "id": "zJMjKWUOVpNzRv7s",
+          "nodeId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "constraints": [],
+        "ext": {},
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "Relation",
+        "id": "3PsN3P2VWBenebHG",
+        "superTypes": ["lW611f30a2ky4276g3l8N:Q2yT6vL9mR0sT6yK1nB3"],
+        "name": "HAS_ANNOTATION",
+        "from": {
+          "id": "rkGRT52OmSPMk5uf",
+          "nodeId": "5LwOhSHIRyKei4Ws",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "to": {
+          "id": "RBPhG5dWlD1A65gq",
+          "nodeId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "constraints": [],
+        "ext": {},
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "Relation",
+        "id": "0ZNbMAak2LF2wvpc",
+        "superTypes": ["lW611f30a2ky4276g3l8N:Q2yT6vL9mR0sT6yK1nB3"],
+        "name": "HAS_ANNOTATION",
+        "from": {
+          "id": "tKbpiAJdRISK6GSz",
+          "nodeId": "ZK3HvHHL21fvrN90",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "to": {
+          "id": "s11Kd3HGnSBUz0Jw",
+          "nodeId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "constraints": [],
+        "ext": {},
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "Relation",
+        "id": "x7wZwSdqf7048yuc",
+        "superTypes": ["lW611f30a2ky4276g3l8N:vQ9pX4sN1cDzK0mT3aL7"],
+        "name": "REFERS_TO",
+        "from": {
+          "id": "IttREoGbyBGYik0H",
+          "nodeId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "to": {
+          "id": "s8aHndjbcnsMF5dV",
+          "nodeId": "57AXt90vljwXrRgg",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "constraints": [],
+        "ext": {},
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "Relation",
+        "id": "tNnVu0a9qztpWwQ6",
+        "superTypes": ["lW611f30a2ky4276g3l8N:sT6yK1nB3xV7pQ2L9mR0"],
+        "name": "HAS_ANNOTATION",
+        "from": {
+          "id": "OZ5XEancLIqsRQcg",
+          "nodeId": "b33qZvGT0c1h9Ahs",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "to": {
+          "id": "1HsbLQFdZmYNAkby",
+          "nodeId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "constraints": [],
+        "ext": {},
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "Relation",
+        "id": "dQABiMXsigbvkOYN",
+        "superTypes": ["lW611f30a2ky4276g3l8N:mR0sT6yK1nB3xV7pQ2xL9"],
+        "name": "REFERS_TO",
+        "from": {
+          "id": "baXoGUHa7YrORXdW",
+          "nodeId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "to": {
+          "id": "wCYWKkeRedRdlck1",
+          "nodeId": "G1IqxeS8nX3hRYAE",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "constraints": [],
+        "ext": {},
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "Relation",
+        "id": "cJ4SoBgNismxdVJi",
+        "superTypes": ["lW611f30a2ky4276g3l8N:mR0sT6yK1nB3xV7pQ2xL9"],
+        "name": "REFERS_TO",
+        "from": {
+          "id": "0CFCgryFZP6lHcVI",
+          "nodeId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "to": {
+          "id": "j1B2txMdOTKyXWsn",
+          "nodeId": "TZatc9Xzydq893LO",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "constraints": [],
+        "ext": {},
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "Relation",
+        "id": "9cPT4z9a3phmu2gC",
+        "superTypes": ["lW611f30a2ky4276g3l8N:pX4sN1cDzK0mT3aL7vQ9"],
+        "name": "HAS_ANNOTATION",
+        "from": {
+          "id": "k2F4dGK4861bDWJh",
+          "nodeId": "57AXt90vljwXrRgg",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "to": {
+          "id": "NFqorDBWPYUtcDiW",
+          "nodeId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "constraints": [],
+        "ext": {},
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "Relation",
+        "id": "EKmcdJcv8clMUfoV",
+        "superTypes": ["lW611f30a2ky4276g3l8N:mR0sT6yK1nB3xV7pQ2xL9"],
+        "name": "REFERS_TO",
+        "from": {
+          "id": "nL5NR1zhVzuG1Q61",
+          "nodeId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "to": {
+          "id": "il6QtuFmCOhDJhWw",
+          "nodeId": "ZK3HvHHL21fvrN90",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "constraints": [],
+        "ext": {},
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "Relation",
+        "id": "H60IoZlxTHvgUhzm",
+        "superTypes": ["lW611f30a2ky4276g3l8N:mR0sT6yK1nB3xV7pQ2xL9"],
+        "name": "REFERS_TO",
+        "from": {
+          "id": "L2HSrI9ECiUgeZqq",
+          "nodeId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "to": {
+          "id": "G0T5F2WjvFwul9BH",
+          "nodeId": "5LwOhSHIRyKei4Ws",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "constraints": [],
+        "ext": {},
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "kind": "Relation",
+        "id": "hk59es59N0VNMlUS",
+        "superTypes": ["lW611f30a2ky4276g3l8N:mR0sT6yK1nB3xV7pQ2xL9"],
+        "name": "REFERS_TO",
+        "from": {
+          "id": "xnPh6McrOr3QsI8P",
+          "nodeId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "to": {
+          "id": "H4GMyHh268ga6S2H",
+          "nodeId": "PT5HkRYiLUNwBdlJ",
+          "bounds": {
+            "lowerBound": 0,
+            "upperBound": -1
+          },
+          "constraints": [],
+          "ext": {}
+        },
+        "constraints": [],
+        "ext": {},
+        "modelId": "oyxmqT5a5yiuoig3"
+      }
+    ],
+    "annotations": [
+      {
+        "id": "fn8I4maywIDMzaEq",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "altLabel",
+        "properties": [
+          {
+            "id": "SualrOsgumWXPqnB",
+            "name": "label",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["9KXktRh9pBaMVyUr", "SBDlX5tyaeHjIgbS", "8J5bYFp0Ipt1MQt5", "3PsN3P2VWBenebHG"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "id": "Zc2eiAQd5At5eFWQ",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "description",
+        "properties": [],
+        "relations": [
+          {
+            "relationIds": ["9KXktRh9pBaMVyUr", "0ZNbMAak2LF2wvpc", "SBDlX5tyaeHjIgbS", "8J5bYFp0Ipt1MQt5", "3PsN3P2VWBenebHG"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          },
+          {
+            "relationIds": ["x7wZwSdqf7048yuc"],
+            "direction": "outgoing",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "id": "MomYvyraIjQFA2Zs",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "received",
+        "properties": [
+          {
+            "id": "UNdgvFBTJxlGhaYH",
+            "name": "dateType",
+            "typeId": "Nmb8xc0jvUHpayD4",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "NLKtgQTSmwV4YEle",
+            "name": "dateStart",
+            "typeId": "lW611f30a2ky4276g3l8N:WdlVlvh7jqs6DEUC",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "ZzZkRA60zbbnCmiM",
+            "name": "dateEnd",
+            "typeId": "lW611f30a2ky4276g3l8N:WdlVlvh7jqs6DEUC",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "3wjceC55XIxJfw7y",
+            "name": "dateCertainty",
+            "typeId": "mF9YlO47icnXEOW8",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["tNnVu0a9qztpWwQ6"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          },
+          {
+            "relationIds": ["dQABiMXsigbvkOYN"],
+            "direction": "outgoing",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": -1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "JpRnmUyvrKinz8W9",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "sent",
+        "properties": [
+          {
+            "id": "OBE48awIEHCjR65D",
+            "name": "dateCertainty",
+            "typeId": "j4hQ5lTkLMaW4dgO",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "HvoYAzeYyDwqtdlu",
+            "name": "dateEnd",
+            "typeId": "lW611f30a2ky4276g3l8N:WdlVlvh7jqs6DEUC",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "JXIFergAkRE1MLSh",
+            "name": "dateStart",
+            "typeId": "lW611f30a2ky4276g3l8N:WdlVlvh7jqs6DEUC",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "vVOGHKu1pOvIUJaj",
+            "name": "dateType",
+            "typeId": "4Xrk1vgnTbNHgNgH",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["tNnVu0a9qztpWwQ6"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          },
+          {
+            "relationIds": ["dQABiMXsigbvkOYN", "cJ4SoBgNismxdVJi"],
+            "direction": "outgoing",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": -1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "DZ33nFI5my173zua",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "abbr",
+        "properties": [
+          {
+            "id": "n5Cct3STaoWUagFB",
+            "name": "expansion",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "DdQrLgsJ47IPB70I",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "add",
+        "properties": [
+          {
+            "id": "MyEmbMBnFvMbDEGv",
+            "name": "place",
+            "typeId": "qLY1qSZ8kNCm1vQd",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "Z176Y3WNG8apeYCI",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "addrLine",
+        "properties": [],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "9SkeVF2ZcgRrVJFJ",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "address",
+        "properties": [
+          {
+            "id": "MoyRwnN5dErMK3v5",
+            "name": "rendition",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "0W5nUSqcZl9yDOkK",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "bibl",
+        "properties": [
+          {
+            "id": "VwtWdFAW1xsMNPKe",
+            "name": "sameAs",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": -1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "o3gdhynVSlJPq8Rs",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "choice",
+        "properties": [],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "GB75QbdRTQ0ktS2Y",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "closer",
+        "properties": [],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "H0A7qlXNPXE56fu1",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "commented",
+        "properties": [],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          },
+          {
+            "relationIds": ["x7wZwSdqf7048yuc"],
+            "direction": "outgoing",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "dQr9gCfEcJvVMigj",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "corr",
+        "properties": [
+          {
+            "id": "1BdFASL2EGqWm1wL",
+            "name": "cert",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "AtV4MjE7D2pnY38B",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "dateline",
+        "properties": [],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "zs8wdGNejIxjqEOT",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "del",
+        "properties": [
+          {
+            "id": "n2oeMIldtABvDtYP",
+            "name": "rendition",
+            "typeId": "aGom7y1voX0iMCqH",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "m7vt33KDJoog1xVD",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "div-writingSession",
+        "properties": [],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "dxA7ZSfxi42SOhz8",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "ex",
+        "properties": [],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "byUrOxP8wdTPocfR",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "expan",
+        "properties": [],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "kUbkNrmrpmryojQ3",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "fw-folNum",
+        "properties": [
+          {
+            "id": "RwJoA6qD0Nem8iYV",
+            "name": "place",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "0dkHBqAIUU7IMBOh",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "g",
+        "properties": [
+          {
+            "id": "wj3zWMak0digdaKM",
+            "name": "ref",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "M2f5Y3M2806t17cK",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "gap",
+        "properties": [
+          {
+            "id": "NiVXJuWCthZgT644",
+            "name": "quantity",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "XCIm2JzERUVC5Zaz",
+            "name": "reason",
+            "typeId": "v9kRQJw5XEuybnxY",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "c2aNvsIuNGqgY1km",
+            "name": "unit",
+            "typeId": "vGAnnBzZOf5AB7gY",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "vBTnbRfbRvkWGpjv",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "head",
+        "properties": [
+          {
+            "id": "iCAWRHTsO90prRZn",
+            "name": "level",
+            "typeId": "Integer",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [
+              {
+                "name": "Heading level",
+                "language": "json-schema",
+                "expression": {
+                  "minimum": 1,
+                  "maximum": 6
+                },
+                "message": "Value must be between 1 and 6.",
+                "id": "pp140bDlvpj3R2Ub"
+              }
+            ],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "SoTZLBwzRLAlK8r5",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "hi",
+        "properties": [
+          {
+            "id": "Absegqmzik7ldtlD",
+            "name": "rendition",
+            "typeId": "mIRIG3ky34KyUJQ2",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "ztDtgBveeJpnyYUK",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "l",
+        "properties": [
+          {
+            "id": "J3eU6B2GEWlTkSev",
+            "name": "n",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "3taiT49TCwnsYWF8",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "lb",
+        "properties": [
+          {
+            "id": "8KHq7qBwGxV1vduE",
+            "name": "break",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "Ww0vt19GkgvTnAMK",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "lg",
+        "properties": [
+          {
+            "id": "zuyDTd2BeSTXjlfH",
+            "name": "n",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "C6aJUKEE7tPFdzSm",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "lg-poem",
+        "properties": [],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "4KqbqUeGa6J78bZU",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "metamark",
+        "properties": [
+          {
+            "id": "0dfI0O1LH00ef087",
+            "name": "function",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "Ema6BLy4lkKk9EED",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "note",
+        "properties": [
+          {
+            "id": "lPIhkxkgBU4kYoqE",
+            "name": "hand",
+            "typeId": "ZFmh6ZkCctAHfWgy",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "YiuWWp37oWtrhk3U",
+            "name": "id",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "cPp9mEQCVe2qirl0",
+            "name": "place",
+            "typeId": "xFcALfUe1fYp0M8e",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "IMlSx5dVQ1E40V8y",
+            "name": "noteType",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "pxLTUlxOttOZE3Wo",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "opener",
+        "properties": [
+          {
+            "id": "NxWTmJbZS5nPCbb0",
+            "name": "reason",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "fFyTC1vaPDiimuSb",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "orgName",
+        "properties": [],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          },
+          {
+            "relationIds": ["EKmcdJcv8clMUfoV", "H60IoZlxTHvgUhzm"],
+            "direction": "outgoing",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": -1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "dlqXKUPumIoHbyWC",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "p",
+        "properties": [],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "8Y1mADj66h0PsN6u",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "pb",
+        "properties": [
+          {
+            "id": "4mBNlnEOlVDSVzue",
+            "name": "break",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "vMNe2VE0AhjYfDXl",
+            "name": "facs",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "Z6CTnx1NJZwUgROt",
+            "name": "n",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "rqBPc7wIgC5DJDHG",
+            "name": "url",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "SyCYIpDROKhKajXy",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "persName",
+        "properties": [],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          },
+          {
+            "relationIds": ["dQABiMXsigbvkOYN"],
+            "direction": "outgoing",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": -1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "gT00b2MoDFczqEia",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "placeName",
+        "properties": [],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          },
+          {
+            "relationIds": ["cJ4SoBgNismxdVJi"],
+            "direction": "outgoing",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": -1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "cRTJf55JfBzA5qv7",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "postscript",
+        "properties": [],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "aOxIjwvoffB8fD2H",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "ptr",
+        "properties": [
+          {
+            "id": "md9oQYGWjsFrxewN",
+            "name": "target",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "bXmVWQFkC09njHF9",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "ref",
+        "properties": [
+          {
+            "id": "5pmlCJyYwdOC3GmE",
+            "name": "target",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "5z1YZIwxubTH3g3Z",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "reg",
+        "properties": [
+          {
+            "id": "R3oC1VsTx1wVuRmE",
+            "name": "regularisation",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "jh7OR7phIfpwnlom",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "rs-bible",
+        "properties": [],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          },
+          {
+            "relationIds": ["hk59es59N0VNMlUS"],
+            "direction": "outgoing",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": -1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "sCZ3W6gIXpi2TyVF",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "rs-comment",
+        "properties": [],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "fA2WNiqrTH8S6lmv",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "rs-term",
+        "properties": [],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          },
+          {
+            "relationIds": ["EKmcdJcv8clMUfoV", "H60IoZlxTHvgUhzm"],
+            "direction": "outgoing",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": -1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "y59qYK76BwvCknHh",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "salute",
+        "properties": [],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "C4mzvS3SUbpcJTp9",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "seg-comment",
+        "properties": [],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "9t6FNbutCosS3g6z",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "sic",
+        "properties": [
+          {
+            "id": "RwoIU5TAC5O4MZPi",
+            "name": "certainty",
+            "typeId": "icTYNCSpKUYLI01n",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "llDQeCSPfJP1j2RR",
+            "name": "correction",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "yr28fyFAPzlrpWWH",
+            "name": "isDeleted",
+            "typeId": "sQd5J52sKMtLIwGo",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "mb1sUBoSjxq2oS92",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "signed",
+        "properties": [],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "3W1jqCHFLJw7Xorp",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "subst",
+        "properties": [
+          {
+            "id": "2SAMoJlVWyCEOwVb",
+            "name": "del",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "YDYu7K0fpzx93vc8",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "supplied",
+        "properties": [
+          {
+            "id": "CIPJQZyROaOVOshf",
+            "name": "cert",
+            "typeId": "0XoPy4bG9AjYOIcG",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "ZRcwG07xNDkIs2jT",
+            "name": "reason",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "xGNLdNkfDQX78ZP1",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "unclear",
+        "properties": [
+          {
+            "id": "NuvjHmKx8fIJVO0g",
+            "name": "cert",
+            "typeId": "0hC4rtAYvFSgpQ8q",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "RJ3bzPjZYUvAicOA",
+            "name": "reason",
+            "typeId": "dF9Siln1qVdnmZUp",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "HWC5d2ozgBEXIAzE",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "normdata",
+        "properties": [
+          {
+            "id": "Cyyjs4rJfEODXEos",
+            "name": "identifier",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "xNmVYUAJOKFyYhxY",
+            "name": "namespace",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "cYMdZAhazlPq74oK",
+            "name": "url",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["0ZNbMAak2LF2wvpc", "SBDlX5tyaeHjIgbS", "8J5bYFp0Ipt1MQt5"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "id": "orFqCeDDGeTcwf5H",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "seeAlso",
+        "properties": [],
+        "relations": [
+          {
+            "relationIds": ["0ZNbMAak2LF2wvpc", "SBDlX5tyaeHjIgbS", "8J5bYFp0Ipt1MQt5", "3PsN3P2VWBenebHG"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          },
+          {
+            "relationIds": ["EKmcdJcv8clMUfoV", "dQABiMXsigbvkOYN", "cJ4SoBgNismxdVJi", "H60IoZlxTHvgUhzm"],
+            "direction": "outgoing",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "id": "piltBJffeR2pp5hi",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "relation",
+        "properties": [
+          {
+            "id": "UxDVZsoEB04G9BwD",
+            "name": "kind",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "dwOWgSv7Ih7HBynp",
+            "name": "note",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["SBDlX5tyaeHjIgbS"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          },
+          {
+            "relationIds": ["dQABiMXsigbvkOYN"],
+            "direction": "outgoing",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3"
+      },
+      {
+        "id": "biqz7bmx9jUMuGyh",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "table",
+        "properties": [],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "chWla2y2fuhYgQzo",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "row",
+        "properties": [
+          {
+            "id": "u6xg33LO45IPeJHS",
+            "name": "rows",
+            "typeId": "Integer",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "PMzS5StaAHdozsD2",
+            "name": "cols",
+            "typeId": "Integer",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "qghMfypsFAJhhKka",
+            "name": "role",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [
+              {
+                "name": "Table role",
+                "language": "json-schema",
+                "expression": {
+                  "enum": ["data", "label"]
+                },
+                "message": "Value must be \"data\" or \"label\".",
+                "id": "TUdhwTy2SiTj2r9X"
+              }
+            ],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "Vikkk0dtsQU1Z1Bb",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "cell",
+        "properties": [
+          {
+            "id": "QJIm7M4UnLi05XwK",
+            "name": "rows",
+            "typeId": "Integer",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "t90qzcZb8DkJ9z81",
+            "name": "cols",
+            "typeId": "Integer",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [],
+            "ext": {}
+          },
+          {
+            "id": "9dwAhSh0knMRuIZy",
+            "name": "role",
+            "typeId": "String",
+            "bounds": {
+              "lowerBound": 0,
+              "upperBound": 1
+            },
+            "isKey": false,
+            "isReadOnly": false,
+            "isUnique": true,
+            "isOrdered": true,
+            "constraints": [
+              {
+                "name": "Table role",
+                "language": "json-schema",
+                "expression": {
+                  "enum": ["data", "label"]
+                },
+                "message": "Value must be \"data\" or \"label\".",
+                "id": "GNiFMtjP4XbsXk33"
+              }
+            ],
+            "ext": {}
+          }
+        ],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "zO1J3IgcV7k6I8zJ",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "list",
+        "properties": [],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      },
+      {
+        "id": "TjrQtl4w7ZfYGA57",
+        "annotationId": "lW611f30a2ky4276g3l8N:m2Xv8qL0sP6tN1yK7rB3",
+        "type": "item",
+        "properties": [],
+        "relations": [
+          {
+            "relationIds": ["9cPT4z9a3phmu2gC"],
+            "direction": "incoming",
+            "bounds": {
+              "lowerBound": 1,
+              "upperBound": 1
+            }
+          }
+        ],
+        "modelId": "oyxmqT5a5yiuoig3",
+        "ext": {}
+      }
+    ]
+  },
+  "general": {
+    "templates": []
+  },
+  "elements": {
+    "classifiers": {
+      "oyxmqT5a5yiuoig3:57AXt90vljwXrRgg": {
+        "name": "Text",
+        "medium": "text"
+      },
+      "lW611f30a2ky4276g3l8N:aP3xK8nV1qR6tY2uZ9wB": {
+        "name": "Collection",
+        "attributes": {
+          "lW611f30a2ky4276g3l8N:8c3cef32d4648158": {
+            "name": "label",
+            "visible": false
+          }
+        }
+      }
+    },
+    "annotations": {
+      "oyxmqT5a5yiuoig3:MomYvyraIjQFA2Zs": {
+        "name": "received",
+        "group": "project",
+        "controls": {},
+        "appearance": {
+          "icon": {
+            "kind": "url",
+            "url": "https://raw.githubusercontent.com/THM-Graphs/atag-editor/refs/heads/main/client/public/icons/receivedPerson.svg"
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:JpRnmUyvrKinz8W9": {
+        "name": "sent",
+        "group": "project",
+        "controls": {},
+        "editing": {
+          "extent": "range"
+        },
+        "appearance": {
+          "icon": {
+            "kind": "url",
+            "url": "https://raw.githubusercontent.com/THM-Graphs/atag-editor/refs/heads/main/client/public/icons/sentPerson.svg"
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:DZ33nFI5my173zua": {
+        "name": "abbr",
+        "group": "edition",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "inline"
+        },
+        "appearance": {
+          "highlight": {
+            "kind": "properties",
+            "textDecorationLine": "underline",
+            "textDecorationStyle": "dotted",
+            "textDecorationColor": "hsl(0, 0%, 40%)"
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:DdQrLgsJ47IPB70I": {
+        "name": "add",
+        "group": "edition",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "inline"
+        },
+        "appearance": {
+          "highlight": {
+            "kind": "properties",
+            "color": "hsl(22, 81%, 40%)"
+          },
+          "variants": [
+            {
+              "property": "oyxmqT5a5yiuoig3:MyEmbMBnFvMbDEGv",
+              "values": {
+                "marginLeft": {
+                  "highlight": {
+                    "kind": "properties",
+                    "color": "hsl(34, 100%, 47%)"
+                  }
+                },
+                "marginRight": {
+                  "highlight": {
+                    "kind": "properties",
+                    "color": "hsl(34, 100%, 47%)"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "oyxmqT5a5yiuoig3:Z176Y3WNG8apeYCI": {
+        "name": "addrLine",
+        "group": "structure",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "blockClassification"
+        }
+      },
+      "oyxmqT5a5yiuoig3:9SkeVF2ZcgRrVJFJ": {
+        "name": "address",
+        "group": "structure",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "blockClassification"
+        }
+      },
+      "oyxmqT5a5yiuoig3:0W5nUSqcZl9yDOkK": {
+        "name": "bibl",
+        "group": "sources",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "inline"
+        },
+        "appearance": {
+          "highlight": {
+            "kind": "properties",
+            "textDecorationLine": "underline",
+            "textDecorationColor": "hsl(270, 50%, 55%)",
+            "textDecorationThickness": "2px"
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:o3gdhynVSlJPq8Rs": {
+        "name": "choice",
+        "group": "edition",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "inline"
+        },
+        "appearance": {
+          "highlight": {
+            "kind": "properties",
+            "backgroundColor": "hsla(0, 0%, 50%, 0.12)"
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:GB75QbdRTQ0ktS2Y": {
+        "name": "closer",
+        "group": "structure",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "blockClassification"
+        }
+      },
+      "oyxmqT5a5yiuoig3:H0A7qlXNPXE56fu1": {
+        "name": "commented",
+        "group": "project",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "inline"
+        },
+        "appearance": {
+          "highlight": {
+            "kind": "properties",
+            "backgroundColor": "hsla(30, 80%, 85%, 0.6)"
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:dQr9gCfEcJvVMigj": {
+        "name": "corr",
+        "group": "edition",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "inline"
+        },
+        "appearance": {
+          "highlight": {
+            "kind": "properties",
+            "backgroundColor": "hsla(36, 85%, 76%, 0.6)"
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:AtV4MjE7D2pnY38B": {
+        "name": "dateline",
+        "group": "structure",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "blockClassification"
+        }
+      },
+      "oyxmqT5a5yiuoig3:zs8wdGNejIxjqEOT": {
+        "name": "del",
+        "group": "edition",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "inline"
+        },
+        "appearance": {
+          "highlight": {
+            "kind": "properties",
+            "textDecorationLine": "line-through",
+            "color": "hsl(0, 0%, 44%)"
+          },
+          "variants": [
+            {
+              "property": "oyxmqT5a5yiuoig3:n2oeMIldtABvDtYP",
+              "values": {
+                "erasure": {
+                  "highlight": {
+                    "kind": "properties",
+                    "textDecorationLine": "none",
+                    "backgroundColor": "hsla(0, 0%, 70%, 0.4)"
+                  }
+                },
+                "overwrite": {
+                  "highlight": {
+                    "kind": "properties",
+                    "textDecorationLine": "line-through",
+                    "textDecorationStyle": "wavy"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "oyxmqT5a5yiuoig3:m7vt33KDJoog1xVD": {
+        "name": "div-writingSession",
+        "group": "structure",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "blockClassification"
+        }
+      },
+      "oyxmqT5a5yiuoig3:dxA7ZSfxi42SOhz8": {
+        "name": "ex",
+        "group": "edition",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "inline"
+        },
+        "appearance": {
+          "highlight": {
+            "kind": "properties",
+            "color": "hsl(201, 22%, 50%)",
+            "fontStyle": "italic"
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:byUrOxP8wdTPocfR": {
+        "name": "expan",
+        "group": "edition",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "inline"
+        },
+        "appearance": {
+          "highlight": {
+            "kind": "properties",
+            "color": "hsl(201, 22%, 50%)",
+            "fontStyle": "italic"
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:kUbkNrmrpmryojQ3": {
+        "name": "fw-folNum",
+        "group": "layout",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "inline"
+        },
+        "appearance": {
+          "highlight": {
+            "kind": "properties",
+            "color": "hsl(0, 0%, 55%)",
+            "fontSize": "0.85em"
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:0dkHBqAIUU7IMBOh": {
+        "name": "g",
+        "group": "edition",
+        "controls": {},
+        "editing": {
+          "extent": "zeroPoint",
+          "representation": "inline"
+        },
+        "appearance": {
+          "marker": {
+            "kind": "icon",
+            "icon": {
+              "kind": "url",
+              "url": "data:image/svg+xml,%3Csvg fill='%2362d232' viewBox='-6.5 0 32 32' version='1.1' xmlns='http://www.w3.org/2000/svg' stroke='%2362d232' stroke-width='2.176' transform='matrix(-1, 0, 0, -1, 0, 0)'%3E%3Cg id='SVGRepo_bgCarrier' stroke-width='0'%3E%3C/g%3E%3Cg id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'%3E%3C/g%3E%3Cg id='SVGRepo_iconCarrier'%3E%3Ctitle%3Ehyphen%3C/title%3E%3Cpath d='M13.875 12.906v2.281h-8.563v-2.281h8.563z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E"
+            }
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:M2f5Y3M2806t17cK": {
+        "name": "gap",
+        "group": "edition",
+        "controls": {},
+        "editing": {
+          "extent": "zeroPoint",
+          "representation": "inline"
+        },
+        "appearance": {
+          "marker": {
+            "kind": "icon",
+            "icon": {
+              "kind": "url",
+              "url": "data:image/svg+xml,%3Csvg viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' aria-hidden='true' role='img' class='iconify iconify--emojione' preserveAspectRatio='xMidYMid meet' fill='%23000000'%3E%3Cg id='SVGRepo_bgCarrier' stroke-width='0'%3E%3C/g%3E%3Cg id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'%3E%3C/g%3E%3Cg id='SVGRepo_iconCarrier'%3E%3Cg fill='%23d7092f'%3E%3Cpath d='M30.2 2.1C18.6 2.8 12.5 9.4 12 21.3h11.7c.1-4.1 2.5-7.2 6.7-7.7c4.2-.4 8.2.6 9.4 3.4c1.3 3.1-1.6 6.7-3 8.2c-2.6 2.8-6.8 4.9-9 7.9c-2.1 3-2.5 6.9-2.7 11.7h10.3c.1-3.1.3-6 1.7-7.9c2.3-3.1 5.7-4.5 8.5-7c2.7-2.3 5.6-5.1 6-9.5C53.3 7.5 42.7 1.3 30.2 2.1'%3E%3C/path%3E%3Cellipse cx='30.5' cy='55.6' rx='6.5' ry='6.4'%3E%3C/ellipse%3E%3C/g%3E%3C/g%3E%3C/svg%3E"
+            }
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:vBTnbRfbRvkWGpjv": {
+        "name": "head",
+        "group": "structure",
+        "controls": {}
+      },
+      "oyxmqT5a5yiuoig3:SoTZLBwzRLAlK8r5": {
+        "name": "hi",
+        "group": "edition",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "inline"
+        },
+        "appearance": {
+          "highlight": {
+            "kind": "properties",
+            "fontWeight": "bold"
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:ztDtgBveeJpnyYUK": {
+        "name": "l",
+        "group": "structure",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "blockClassification"
+        }
+      },
+      "oyxmqT5a5yiuoig3:3taiT49TCwnsYWF8": {
+        "name": "lb",
+        "group": "structure",
+        "controls": {}
+      },
+      "oyxmqT5a5yiuoig3:Ww0vt19GkgvTnAMK": {
+        "name": "lg",
+        "group": "structure",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "blockClassification"
+        }
+      },
+      "oyxmqT5a5yiuoig3:C6aJUKEE7tPFdzSm": {
+        "name": "lg-poem",
+        "group": "structure",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "blockClassification"
+        }
+      },
+      "oyxmqT5a5yiuoig3:4KqbqUeGa6J78bZU": {
+        "name": "metamark",
+        "group": "edition",
+        "controls": {},
+        "editing": {
+          "extent": "zeroPoint",
+          "representation": "inline"
+        },
+        "appearance": {
+          "marker": {
+            "kind": "icon",
+            "icon": {
+              "kind": "url",
+              "url": "data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='SVGRepo_bgCarrier' stroke-width='0'%3E%3C/g%3E%3Cg id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'%3E%3C/g%3E%3Cg id='SVGRepo_iconCarrier'%3E%3Cpath d='M15.4998 5.49994L18.3282 8.32837M3 20.9997L3.04745 20.6675C3.21536 19.4922 3.29932 18.9045 3.49029 18.3558C3.65975 17.8689 3.89124 17.4059 4.17906 16.9783C4.50341 16.4963 4.92319 16.0765 5.76274 15.237L17.4107 3.58896C18.1918 2.80791 19.4581 2.80791 20.2392 3.58896C21.0202 4.37001 21.0202 5.63634 20.2392 6.41739L8.37744 18.2791C7.61579 19.0408 7.23497 19.4216 6.8012 19.7244C6.41618 19.9932 6.00093 20.2159 5.56398 20.3879C5.07171 20.5817 4.54375 20.6882 3.48793 20.9012L3 20.9997Z' stroke='%23828282' stroke-width='2.208' stroke-linecap='round' stroke-linejoin='round'%3E%3C/path%3E%3C/g%3E%3C/svg%3E"
+            }
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:Ema6BLy4lkKk9EED": {
+        "name": "note",
+        "group": "project",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "inline"
+        },
+        "appearance": {
+          "highlight": {
+            "kind": "properties",
+            "backgroundColor": "hsla(55, 100%, 70%, 0.35)"
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:pxLTUlxOttOZE3Wo": {
+        "name": "opener",
+        "group": "structure",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "blockClassification"
+        }
+      },
+      "oyxmqT5a5yiuoig3:fFyTC1vaPDiimuSb": {
+        "name": "orgName",
+        "group": "entities",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "inline"
+        },
+        "appearance": {
+          "icon": {
+            "kind": "url",
+            "url": "data:image/svg+xml,%3Csvg width='197px' height='197px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg' stroke='%2345924e' stroke-width='0.00024000000000000003'%3E%3Cg id='SVGRepo_bgCarrier' stroke-width='0'%3E%3C/g%3E%3Cg id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'%3E%3C/g%3E%3Cg id='SVGRepo_iconCarrier'%3E%3Cpath d='M17 15H19V17H17V15Z' fill='%23589254'%3E%3C/path%3E%3Cpath d='M19 11H17V13H19V11Z' fill='%23589254'%3E%3C/path%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M13 7H23V21H1V3H13V7ZM8 5H11V7H8V5ZM11 19V17H8V19H11ZM11 15V13H8V15H11ZM11 11V9H8V11H11ZM21 19V9H13V11H15V13H13V15H15V17H13V19H21ZM3 19V17H6V19H3ZM3 15H6V13H3V15ZM6 11V9H3V11H6ZM3 7H6V5H3V7Z' fill='%23589254'%3E%3C/path%3E%3C/g%3E%3C/svg%3E"
+          },
+          "highlight": {
+            "kind": "properties",
+            "textDecorationLine": "underline",
+            "textDecorationColor": "hsl(166, 62%, 40%)",
+            "textDecorationThickness": "2px"
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:dlqXKUPumIoHbyWC": {
+        "name": "p",
+        "group": "structure",
+        "controls": {}
+      },
+      "oyxmqT5a5yiuoig3:8Y1mADj66h0PsN6u": {
+        "name": "pb",
+        "group": "layout",
+        "controls": {},
+        "editing": {
+          "extent": "zeroPoint",
+          "representation": "inline"
+        },
+        "appearance": {
+          "marker": {
+            "kind": "icon",
+            "icon": {
+              "kind": "url",
+              "url": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3C!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools --%3E%3Csvg fill='%23000000' width='800px' height='800px' viewBox='-3.5 0 19 19' xmlns='http://www.w3.org/2000/svg' class='cf-icon-svg'%3E%3Cpath d='M11.16 16.153a.477.477 0 0 1-.476.475H1.316a.477.477 0 0 1-.475-.475V3.046a.477.477 0 0 1 .475-.475h6.95l2.893 2.893zm-1.11-9.924H8.059a.575.575 0 0 1-.574-.574V3.679H1.95v11.84h8.102zM3.907 4.92a1.03 1.03 0 1 0 1.029 1.03 1.03 1.03 0 0 0-1.03-1.03zm4.958 3.253h-5.87v1.108h5.87zm0 2.354h-5.87v1.109h5.87zm0 2.354h-5.87v1.109h5.87z'/%3E%3C/svg%3E"
+            }
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:SyCYIpDROKhKajXy": {
+        "name": "persName",
+        "group": "entities",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "inline"
+        },
+        "appearance": {
+          "icon": {
+            "kind": "url",
+            "url": "https://raw.githubusercontent.com/THM-Graphs/atag-editor/refs/heads/main/client/public/icons/person.svg"
+          },
+          "highlight": {
+            "kind": "properties",
+            "textDecorationLine": "underline",
+            "textDecorationColor": "hsl(358, 83%, 68%)",
+            "textDecorationThickness": "2px"
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:gT00b2MoDFczqEia": {
+        "name": "placeName",
+        "group": "entities",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "inline"
+        },
+        "appearance": {
+          "icon": {
+            "kind": "url",
+            "url": "https://raw.githubusercontent.com/THM-Graphs/atag-editor/refs/heads/main/client/public/icons/place.svg"
+          },
+          "highlight": {
+            "kind": "properties",
+            "textDecorationLine": "underline",
+            "textDecorationColor": "hsl(212, 93%, 54%)",
+            "textDecorationThickness": "2px"
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:cRTJf55JfBzA5qv7": {
+        "name": "postscript",
+        "group": "structure",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "blockClassification"
+        }
+      },
+      "oyxmqT5a5yiuoig3:aOxIjwvoffB8fD2H": {
+        "name": "ptr",
+        "group": "sources",
+        "controls": {},
+        "editing": {
+          "extent": "zeroPoint",
+          "representation": "inline"
+        },
+        "appearance": {
+          "marker": {
+            "kind": "icon",
+            "icon": {
+              "kind": "url",
+              "url": "data:image/svg+xml,%3Csvg viewBox='0 0 24.00 24.00' fill='none' xmlns='http://www.w3.org/2000/svg' stroke='%23305be8'%3E%3Cg id='SVGRepo_bgCarrier' stroke-width='0'%3E%3C/g%3E%3Cg id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'%3E%3C/g%3E%3Cg id='SVGRepo_iconCarrier'%3E%3Cpath d='M15.197 3.35462C16.8703 1.67483 19.4476 1.53865 20.9536 3.05046C22.4596 4.56228 22.3239 7.14956 20.6506 8.82935L18.2268 11.2626M10.0464 14C8.54044 12.4882 8.67609 9.90087 10.3494 8.22108L12.5 6.06212' stroke='%23305be8' stroke-width='2.4' stroke-linecap='round'%3E%3C/path%3E%3Cpath d='M13.9536 10C15.4596 11.5118 15.3239 14.0991 13.6506 15.7789L11.2268 18.2121L8.80299 20.6454C7.12969 22.3252 4.55237 22.4613 3.0464 20.9495C1.54043 19.4377 1.67609 16.8504 3.34939 15.1706L5.77323 12.7373' stroke='%23305be8' stroke-width='2.4' stroke-linecap='round'%3E%3C/path%3E%3C/g%3E%3C/svg%3E"
+            }
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:bXmVWQFkC09njHF9": {
+        "name": "ref",
+        "group": "other",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "inline"
+        }
+      },
+      "oyxmqT5a5yiuoig3:5z1YZIwxubTH3g3Z": {
+        "name": "reg",
+        "group": "edition",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "inline"
+        },
+        "appearance": {
+          "highlight": {
+            "kind": "properties",
+            "color": "hsl(201, 22%, 50%)",
+            "fontStyle": "italic"
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:jh7OR7phIfpwnlom": {
+        "name": "rs-bible",
+        "group": "sources",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "inline"
+        },
+        "appearance": {
+          "highlight": {
+            "kind": "properties",
+            "textDecorationLine": "underline",
+            "textDecorationColor": "hsl(37, 61%, 51%)",
+            "textDecorationThickness": "2px"
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:sCZ3W6gIXpi2TyVF": {
+        "name": "rs-comment",
+        "group": "sources",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "inline"
+        },
+        "appearance": {
+          "highlight": {
+            "kind": "properties",
+            "textDecorationLine": "underline",
+            "textDecorationStyle": "dashed",
+            "textDecorationColor": "hsl(200, 50%, 50%)",
+            "textDecorationThickness": "2px"
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:fA2WNiqrTH8S6lmv": {
+        "name": "rs-term",
+        "group": "entities",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "inline"
+        },
+        "appearance": {
+          "icon": {
+            "kind": "url",
+            "url": "data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='SVGRepo_bgCarrier' stroke-width='0'%3E%3C/g%3E%3Cg id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'%3E%3C/g%3E%3Cg id='SVGRepo_iconCarrier'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M16 8L8 0H0V8L8 16L16 8ZM4.5 6C5.32843 6 6 5.32843 6 4.5C6 3.67157 5.32843 3 4.5 3C3.67157 3 3 3.67157 3 4.5C3 5.32843 3.67157 6 4.5 6Z' fill='%23e8a530'%3E%3C/path%3E%3C/g%3E%3C/svg%3E"
+          },
+          "highlight": {
+            "kind": "properties",
+            "textDecorationLine": "underline",
+            "textDecorationColor": "hsl(45, 90%, 50%)",
+            "textDecorationThickness": "2px"
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:y59qYK76BwvCknHh": {
+        "name": "salute",
+        "group": "structure",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "blockClassification"
+        }
+      },
+      "oyxmqT5a5yiuoig3:C4mzvS3SUbpcJTp9": {
+        "name": "seg-comment",
+        "group": "project",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "inline"
+        },
+        "appearance": {
+          "highlight": {
+            "kind": "properties",
+            "backgroundColor": "hsla(200, 60%, 85%, 0.6)"
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:9t6FNbutCosS3g6z": {
+        "name": "sic",
+        "group": "edition",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "inline"
+        },
+        "appearance": {
+          "highlight": {
+            "kind": "properties",
+            "color": "hsl(130, 99%, 29%)"
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:mb1sUBoSjxq2oS92": {
+        "name": "signed",
+        "group": "structure",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "blockClassification"
+        }
+      },
+      "oyxmqT5a5yiuoig3:3W1jqCHFLJw7Xorp": {
+        "name": "subst",
+        "group": "edition",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "inline"
+        },
+        "appearance": {
+          "highlight": {
+            "kind": "properties",
+            "backgroundColor": "hsla(36, 85%, 76%, 0.3)"
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:YDYu7K0fpzx93vc8": {
+        "name": "supplied",
+        "group": "edition",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "inline"
+        },
+        "appearance": {
+          "highlight": {
+            "kind": "properties",
+            "color": "hsl(217, 60%, 45%)",
+            "fontStyle": "italic"
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:xGNLdNkfDQX78ZP1": {
+        "name": "unclear",
+        "group": "edition",
+        "controls": {},
+        "editing": {
+          "extent": "range",
+          "representation": "inline"
+        },
+        "appearance": {
+          "highlight": {
+            "kind": "properties",
+            "color": "hsl(328, 98%, 47%)"
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:biqz7bmx9jUMuGyh": {
+        "name": "table",
+        "group": "structure",
+        "controls": {}
+      },
+      "oyxmqT5a5yiuoig3:chWla2y2fuhYgQzo": {
+        "name": "row",
+        "group": "structure",
+        "controls": {},
+        "attributes": {
+          "oyxmqT5a5yiuoig3:u6xg33LO45IPeJHS": {
+            "name": "rows",
+            "editable": false
+          },
+          "oyxmqT5a5yiuoig3:PMzS5StaAHdozsD2": {
+            "name": "cols",
+            "editable": false
+          },
+          "oyxmqT5a5yiuoig3:qghMfypsFAJhhKka": {
+            "name": "role",
+            "editable": false
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:Vikkk0dtsQU1Z1Bb": {
+        "name": "cell",
+        "group": "structure",
+        "controls": {},
+        "attributes": {
+          "oyxmqT5a5yiuoig3:9dwAhSh0knMRuIZy": {
+            "name": "role",
+            "editable": false
+          }
+        }
+      },
+      "oyxmqT5a5yiuoig3:zO1J3IgcV7k6I8zJ": {
+        "name": "list",
+        "group": "structure",
+        "controls": {}
+      },
+      "oyxmqT5a5yiuoig3:TjrQtl4w7ZfYGA57": {
+        "name": "item",
+        "group": "structure",
+        "controls": {}
+      }
+    }
+  },
+  "editors": {
+    "text": {
+      "mappings": [
         {
-          "name": "type",
-          "type": "string",
-          "required": true,
-          "editable": false,
-          "visible": false
+          "native": "paragraph",
+          "annotation": "oyxmqT5a5yiuoig3:dlqXKUPumIoHbyWC",
+          "type": "p"
         },
         {
-          "name": "text",
-          "type": "string",
-          "required": true,
-          "editable": false,
-          "visible": false
+          "native": "heading",
+          "annotation": "oyxmqT5a5yiuoig3:vBTnbRfbRvkWGpjv",
+          "type": "head"
+        },
+        {
+          "native": "hardBreak",
+          "annotation": "oyxmqT5a5yiuoig3:3taiT49TCwnsYWF8",
+          "type": "lb"
+        },
+        {
+          "native": "table",
+          "annotation": "oyxmqT5a5yiuoig3:biqz7bmx9jUMuGyh",
+          "type": "table"
+        },
+        {
+          "native": "tableRow",
+          "annotation": "oyxmqT5a5yiuoig3:chWla2y2fuhYgQzo",
+          "type": "row",
+          "attributes": {
+            "colspan": "oyxmqT5a5yiuoig3:PMzS5StaAHdozsD2",
+            "rowspan": "oyxmqT5a5yiuoig3:u6xg33LO45IPeJHS",
+            "role": "oyxmqT5a5yiuoig3:qghMfypsFAJhhKka"
+          }
+        },
+        {
+          "native": "tableCell",
+          "annotation": "oyxmqT5a5yiuoig3:Vikkk0dtsQU1Z1Bb",
+          "type": "cell",
+          "attributes": {
+            "colspan": "oyxmqT5a5yiuoig3:t90qzcZb8DkJ9z81",
+            "rowspan": "oyxmqT5a5yiuoig3:QJIm7M4UnLi05XwK",
+            "role": "oyxmqT5a5yiuoig3:9dwAhSh0knMRuIZy"
+          }
+        },
+        {
+          "native": "bulletList",
+          "annotation": "oyxmqT5a5yiuoig3:zO1J3IgcV7k6I8zJ",
+          "type": "list"
+        },
+        {
+          "native": "listItem",
+          "annotation": "oyxmqT5a5yiuoig3:TjrQtl4w7ZfYGA57",
+          "type": "item"
         }
-      ],
-      "base": []
-    },
-    "entities": [
-      {
-        "category": "persons",
-        "nodeLabel": "Person"
-      },
-      {
-        "category": "places",
-        "nodeLabel": "Place"
-      },
-      {
-        "category": "organisations",
-        "nodeLabel": "Organisation"
-      },
-      {
-        "category": "terms",
-        "nodeLabel": "Term"
-      },
-      {
-        "category": "bibleVerses",
-        "nodeLabel": "BibleVerse"
-      }
-    ],
-    "additionalTexts": []
+      ]
+    }
   }
 }
