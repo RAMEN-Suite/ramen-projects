@@ -88,3 +88,23 @@ CALL (
 } IN TRANSACTIONS OF 1000 ROWS
 
 RETURN count(*) AS updatedListAnnotations;
+
+// [STEP F05a] Convert startIndex/endIndex to selector
+:auto
+MATCH (a:Annotation)
+WHERE a.startIndex IS NOT NULL AND a.endIndex IS NOT NULL
+
+CALL (a) {
+  WITH 
+    a, 
+    toInteger(a.startIndex) AS s, 
+    toInteger(a.endIndex) AS e
+  SET a.selector = '{"type":"TextPositionSelector","start":' + toString(s) + ',"end":' + toString(e) + '}'
+  REMOVE a.startIndex, a.endIndex
+} IN TRANSACTIONS OF 10000 ROWS;
+
+// [STEP F05b] Check: Any remaining Annotations with startIndex/endIndex? Should be 0.
+:auto
+MATCH (a:Annotation)
+WHERE a.startIndex IS NOT NULL OR a.endIndex IS NOT NULL
+RETURN count(a) AS remainingWithIndices;
