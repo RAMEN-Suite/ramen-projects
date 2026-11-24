@@ -171,6 +171,54 @@
           }
         },
         {
+          "type": "attributes",
+          "properties": {
+            "title": "entity.metadata.title",
+            "items": [
+              {
+                "kind": "node",
+                "label": "entity.person.metadata.altLabel",
+                "value": {
+                  "path": "annotation[altLabel].*"
+                },
+                "property": "label",
+                "isLinked": false,
+                "isEmptyVisible": false
+              },
+              {
+                "kind": "node",
+                "label": "entity.metadata.normdata",
+                "value": {
+                  "path": "annotation[normdata].*"
+                },
+                "property": "identifier",
+                "isLinked": false,
+                "isEmptyVisible": false
+              },
+              {
+                "kind": "node",
+                "label": "entity.metadata.normdataUrl",
+                "value": {
+                  "path": "annotation[normdata].*"
+                },
+                "property": "url",
+                "isLinked": false,
+                "isEmptyVisible": false
+              },
+              {
+                "kind": "node",
+                "label": "entity.metadata.seeAlso",
+                "value": {
+                  "path": "annotation[seeAlso].refers[Entity].*"
+                },
+                "property": "label",
+                "isLinked": true,
+                "isEmptyVisible": false
+              }
+            ]
+          }
+        },
+        {
           "type": "text",
           "properties": {
             "title": "entity.description",
@@ -192,9 +240,58 @@
           }
         },
         {
+          "type": "attributes",
+          "properties": {
+            "title": "entity.metadata.title",
+            "items": [
+              {
+                "kind": "node",
+                "label": "entity.metadata.altLabel",
+                "value": {
+                  "path": "annotation[altLabel].*"
+                },
+                "property": "label",
+                "isLinked": false,
+                "isEmptyVisible": false
+              },
+              {
+                "kind": "node",
+                "label": "entity.metadata.normdata",
+                "value": {
+                  "path": "annotation[normdata].*"
+                },
+                "property": "identifier",
+                "isLinked": false,
+                "isEmptyVisible": false
+              },
+              {
+                "kind": "node",
+                "label": "entity.metadata.normdataUrl",
+                "value": {
+                  "path": "annotation[normdata].*"
+                },
+                "property": "url",
+                "isLinked": false,
+                "isEmptyVisible": false
+              },
+              {
+                "kind": "node",
+                "label": "entity.metadata.seeAlso",
+                "value": {
+                  "path": "annotation[seeAlso].refers[Entity].*"
+                },
+                "property": "label",
+                "isLinked": true,
+                "isEmptyVisible": false
+              }
+            ]
+          }
+        },
+        {
           "type": "text",
           "properties": {
             "title": "entity.description",
+            "annotations": { "path": "annotation[description].refers[Text].annotation.*" },
             "text": { "path": "annotation[description].refers.text" }
           }
         }
