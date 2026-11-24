@@ -17,6 +17,19 @@ YIELD node
 RETURN count(node) AS importedEntities;
 
 
+// [STEP E01b] Format person labels as surname, forename
+MATCH (person:Person:Entity)
+WITH
+  person,
+  trim(coalesce(toString(person.surname), '')) AS surname,
+  trim(coalesce(toString(person.forename), '')) AS forename
+WHERE surname <> '' AND forename <> ''
+
+SET person.label = surname + ', ' + forename
+
+RETURN count(person) AS formattedPersonLabels;
+
+
 // [STEP E02] Move entity descriptions to Annotation and Text nodes
 MATCH (entity:Entity)
 WHERE entity.description IS NOT NULL
