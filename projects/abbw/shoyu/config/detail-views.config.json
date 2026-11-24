@@ -202,6 +202,7 @@
                   "path": "annotation[normdata].*"
                 },
                 "property": "url",
+                "externalLinkProperty": "url",
                 "isLinked": false,
                 "isEmptyVisible": false
               },
@@ -271,6 +272,7 @@
                   "path": "annotation[normdata].*"
                 },
                 "property": "url",
+                "externalLinkProperty": "url",
                 "isLinked": false,
                 "isEmptyVisible": false
               },
