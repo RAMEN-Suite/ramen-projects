@@ -102,7 +102,7 @@
       },
       "citation": {
         "title": "Citation",
-        "template": "{{#if title}}» **{{title}}** «, edited by Isabel Schnieder{{#if author}}, transliterated by {{author}}{{/if}}, in: {{/if}}{{edition}}.",
+        "template": "{{#if title}}» **{{title}}** «, edited by Isabel Schnieder{{#if author}}, transcribed by {{author}}{{/if}}, in: {{/if}}{{edition}}.",
         "edition": "The Struggle for Integration and Self-Assertion – The Correspondence of the East Frisian Mennonite Antje Brons, née Cremer ten Doornkaat (1810–1902), edited by Klaas-Dieter Voß and Andreas Kuczera, with DH contributions by Sebastian Enns, Julian Jarosch, and Stefan Armbruster",
         "license": "The edition and research data are licensed under a <u>[Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/)</u> license. Free use is permitted provided that the citation information and permalink are supplied and any changes are indicated."
       }
@@ -117,10 +117,18 @@
         "birth": "Birth",
         "death": "Death",
         "floruitNotAfter": "Floruit before",
-        "floruitNotBefore": "Floruit after"
+        "floruitNotBefore": "Floruit after",
+        "altLabel": "Alternative Names"
       }
     },
-    "description": "Additional Description"
+    "description": "Additional Description",
+    "metadata": {
+      "title": "Additional Information",
+      "altLabel": "Alternative Labels",
+      "normdata": "Authority ID",
+      "normdataUrl": "Authority URLs",
+      "seeAlso": "See Also"
+    }
   },
   "annotations": {
     "add": "Addition",
@@ -216,5 +224,12 @@
     "3john": "The Third Letter of John",
     "jude": "The Letter of Jude",
     "revelation": "The Revelation of John"
+  },
+  "app": {
+    "screens": {
+      "collections": {
+        "available": "{{ count }} letters available"
+      }
+    }
   }
 }

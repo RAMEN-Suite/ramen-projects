@@ -102,7 +102,7 @@
       },
       "citation": {
         "title": "Zitierhinweis",
-        "template": "{{#if title}}» **{{title}}** «, bearbeitet von Isabel Schnieder{{#if author}}, transliteriert von {{author}}{{/if}}, in: {{/if}}{{edition}}.",
+        "template": "{{#if title}}» **{{title}}** «, bearbeitet von Isabel Schnieder{{#if author}}, transkribiert von {{author}}{{/if}}, in: {{/if}}{{edition}}.",
         "edition": "Das Ringen um Integration und Selbstbehauptung – Der Briefwechsel der ostfriesischen Mennonitin Antje Brons, geb. Cremer ten Doornkaat (1810–1902), hg. von Klaas-Dieter Voß und Andreas Kuczera unter DH-Mitarbeit von Sebastian Enns, Julian Jarosch und Stefan Armbruster",
         "license": "Edition und Forschungsdaten stehen unter einer <u>[Creative Commons Attribution 4.0 International (CC-BY 4.0)](https://creativecommons.org/licenses/by/4.0/)</u> Lizenz. Freie Verwendung unter Angabe von Zitierhinweis, Permalink und Kenntlichmachung von Änderungen."
       }
@@ -116,11 +116,19 @@
         "surname": "Nachname",
         "birth": "Geboren",
         "death": "Verstorben",
-        "floruitNotAfter": "Blütezeit vor",
-        "floruitNotBefore": "Blütezeit nach"
+        "floruitNotAfter": "Wirkzeit bis spätestens",
+        "floruitNotBefore": "Wirkzeit ab frühestens",
+        "altLabel": "Alternative Namen"
       }
     },
-    "description": "Ergänzende Beschreibung"
+    "description": "Ergänzende Beschreibung",
+    "metadata": {
+      "title": "Weitere Angaben",
+      "altLabel": "Alternative Bezeichnungen",
+      "normdata": "Norm-ID",
+      "normdataUrl": "Normdaten-URLs",
+      "seeAlso": "Siehe auch"
+    }
   },
   "annotations": {
     "add": "Hinzufügung",
@@ -216,5 +224,12 @@
     "3john": "Der dritte Brief des Johannes",
     "jude": "Der Brief des Judas",
     "revelation": "Die Offenbarung des Johannes"
+  },
+  "app": {
+    "screens": {
+      "collections": {
+        "available": "Insgesamt {{ count }} Briefe verfügbar"
+      }
+    }
   }
 }
